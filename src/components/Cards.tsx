@@ -9,7 +9,7 @@ const Cards = () => {
 
         
         <Row>
-            <Col>    
+            <Col xs={3}>    
                 <Card className='my-card-gray'>
                     <Card.Body>
                 <Row> 
@@ -17,14 +17,14 @@ const Cards = () => {
                 </Row>
                 <Row>   
                     <Col><Card.Text className='card-text-style' style={{color:'#FF9E18'}}>
-                        28   <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover' style={{ marginLeft: '10px' }}/>
+                        28   <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover' />
                     </Card.Text>
                     </Col>
                 </Row>
                 </Card.Body>
                 </Card>
             </Col>
-            <Col>    
+            <Col xs={3}>    
                 <Card className='my-card-orange '>
                     <Card.Body>
                 <Row> 
@@ -32,41 +32,41 @@ const Cards = () => {
                 </Row>
                 <Row>   
                     <Col><Card.Text className='card-text-style' style={{color:'#FFFF'}}>
-                        28   <FontAwesomeIcon icon={faCheckDouble} className='icon-style-fa' style={{ marginLeft: '10px',color:'#FFFF' }}/>
+                        28   <FontAwesomeIcon icon={faCheckDouble} className='icon-style-fa' style={{ color:'#FFFF' }}/>
                     </Card.Text>
                     </Col>
                 </Row>
                 </Card.Body>
                 </Card>
             </Col>
-            <Col>    
+            <Col xs={3}>    
                 <Card className='my-card-gray'>
                     <Card.Body>
-                <Row> 
-                    <Card.Title className='card-title-dark'>Inactive Workers</Card.Title>
-                </Row>
-                <Row>   
-                    <Col><Card.Text className='card-text-style' style={{color:'#FF9E18'}}>
-                        5   <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' style={{ marginLeft: '10px' }}/>
-                    </Card.Text>
-                    </Col>
-                </Row>
-                </Card.Body>
+                    <Row> 
+                        <Card.Title className='card-title-dark'>Inactive Workers</Card.Title>
+                    </Row>
+                    <Row>   
+                        <Col><Card.Text className='card-text-style' style={{color:'#FF9E18'}}>
+                            5   <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
+                        </Card.Text>
+                        </Col>
+                    </Row>
+                    </Card.Body>
                 </Card>
             </Col>
-            <Col>    
+            <Col xs={3}>    
                 <Card className='my-card-orange '>
                     <Card.Body>
-                <Row> 
-                    <Card.Title className='card-title-light'>Workers risk</Card.Title>
-                </Row>
-                <Row>   
-                    <Col><Card.Text className='card-text-style' style={{color:'#FFFF'}}>
-                        3   <FontAwesomeIcon icon={faScrewdriverWrench} className='icon-style-fa' style={{ marginLeft: '10px',color:'#FFFF' }}/>
-                    </Card.Text>
-                    </Col>
-                </Row>
-                </Card.Body>
+                        <Row> 
+                            <Card.Title className='card-title-light'>Workers risk</Card.Title>
+                        </Row>
+                        <Row>   
+                            <Col><Card.Text className='card-text-style' style={{color:'#FFFF'}}>
+                                3   <FontAwesomeIcon icon={faScrewdriverWrench} className='icon-style-fa' style={{color:'#FFFF' }}/>
+                            </Card.Text>
+                            </Col>
+                        </Row>
+                    </Card.Body>
                 </Card>
             </Col>
         </Row>

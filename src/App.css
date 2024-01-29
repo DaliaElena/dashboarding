@@ -293,13 +293,13 @@ h2  {
 
 .my-card-gray {
   width: 10vw; /* 20% del ancho de la ventana */
-  height: 11vh; /* 15% de la altura de la ventana */
+  height: 13vh; /* 15% de la altura de la ventana */
   background-color: #F8F8F8; /* Fondo gris claro */
 }
 
 .my-card-orange {
   width: 10vw; /* 20% del ancho de la ventana */
-  height: 11vh; /* 15% de la altura de la ventana */
+  height: 13vh; /* 15% de la altura de la ventana */
   background-color: #FFBB4F; /* Fondo naranja claro */
 }
 
