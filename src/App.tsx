@@ -7,12 +7,6 @@ import MenuLatLeft from './components/MenuLatLeft';
 import MenuTop from './components/MenuTop';
 import MenuLatRight from './components/MenuLatRight';
 
-import  AddNewWorker from './pages/AddNewWorker';
-import  AddNewDataOrigin from './pages/AddNewDataOrigin';
-import  DataOriginHistory from './pages/DataOriginHistory';
-import  WorkersHistory from './pages/WorkersHistory';
-import  MyDashboards from './pages/MyDashboards';
-
 
 function App() {
   return (
@@ -34,11 +28,7 @@ function App() {
             <Routes>
               
               <Route path="/" element={<Home />} />
-              <Route path="/AddNewWorker" element={<AddNewWorker />} />
-              <Route path="/AddNewDataOrigin" element={<AddNewDataOrigin />} />
-              <Route path="/DataOriginHistory" element={<DataOriginHistory />} />
-              <Route path="/WorkersHistory" element={<WorkersHistory />} />
-              <Route path="/MyDashboards" element={<MyDashboards />} />
+
             </Routes>
         </Col>
         
