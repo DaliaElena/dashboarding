@@ -1,7 +1,7 @@
 import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut} from '@fortawesome/free-solid-svg-icons'
-import Logo from '.../assets/Logo.png';
+import Logo from '../assets/Logo.png';
 
 const MenuLatLeft = () => {
   return (
