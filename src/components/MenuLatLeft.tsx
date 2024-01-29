@@ -1,6 +1,6 @@
 import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut} from '@fortawesome/free-solid-svg-icons'
+import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut,faChartLine} from '@fortawesome/free-solid-svg-icons'
 import Logo from '../assets/Logo.png';
 
 const MenuLatLeft = () => {
@@ -41,6 +41,7 @@ const MenuLatLeft = () => {
                 </Dropdown>
               </ListGroup.Item>
               <ListGroup.Item> <a href=""><FontAwesomeIcon icon={faTable} /> My Dashboards</a></ListGroup.Item> 
+              <ListGroup.Item> <a href=""><FontAwesomeIcon icon={faChartLine} />Anomaly Detection</a></ListGroup.Item> 
             
           </ListGroup>
         </div>
