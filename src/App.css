@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +6,220 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/*Chat bell*/
+.custom-background {
+  background-color: #FFBB4F !important; /* Cambia #ff0000 por el color que desees */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.rounded-chat-counter{
+padding-left: 7px;
+padding-right: 7px;
+padding-top: 4px;
+padding-bottom: 4px;
+margin-left: 5px;}
+
+/*STYLES TEXT*/
+
+h2  {
+  font-size: 16px;
+  color: #58595B;
+  font-weight: bold;
+}
+
+.three-gray{
+  color: #828282;
+  font-weight: 600;
+  transition: color 0.3s;
+
+}
+
+.three-gray:hover {
+  color: #5A6ACF; /* Cambia #000 por el color que desees cuando esté en hover */
+}
+
+.four-gray{
+  color: #BDBDBD;
+  font-weight: 600;
+
+}
+
+.four-gray:hover {
+  color: #5A6ACF; /* Cambia #000 por el color que desees cuando esté en hover */
+}
+
+.nj-gray-dark{
+  color: #58595B;
+  font-weight: 600;
+}
+
+.nj-gray-light{
+  color: #A7A9AC;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center!important;
+  margin-left: -10vh;
+}
+
+/*LATERAL MENU LEFT*/
+
+/*LOGO*/
+.generated-image {
+  max-width: 200px;
+  height: auto; 
   }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.top-menu {
+  margin-top: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.color-text-menu {
+  color: #58595B;
 }
 
-.card {
-  padding: 2em;
+.color-text-menu a,
+.color-text-menu button {
+  color: #58595B;
+  text-decoration: none;
 }
 
-.read-the-docs {
-  color: #888;
+.color-text-menu .list-group-item:hover {
+  background-color: #f1f2fc;
+}
+
+.color-text-menu #dropdown-basic {
+  color: #58595b;
+  transition: background-color 0.3s;
+}
+
+.color-text-menu a:hover,
+.color-text-menu button:hover,
+.color-text-menu #dropdown-basic:hover {
+  color: #5A6ACF;
+  text-decoration: none;
+}
+
+.svg-inline--fa {
+  color: #58595B;
+  transition: color 0.3s;
+}
+
+.svg-inline--fa:hover {
+  color: #f28006;
+  text-decoration: none;
+}
+
+.no-list-borders .list-group-item {
+  border: none;
+  border-radius: 0;
+}
+
+#dropdown-basic {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #58595B;
+  cursor: pointer;
+}
+
+.LeftMenu {
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  position: relative; /* Agrega esta línea */
+}
+
+.others-menu {
+  position: absolute;
+  bottom: 0;
+  align-self: flex-end;
+}
+
+
+
+
+
+
+
+
+/* Agregado para el hover de los iconos */
+.svg-inline--fa:hover {
+  color: #f28006;
+}
+
+.hover-effect {
+  color: #58595B;
+  cursor: pointer;
+  transition: color 0.3s, fill 0.3s;
+}
+
+.hover-effect:hover {
+  color: #5A6ACF;
+  fill: #f28006;
+}
+
+.color-text-menu .list-group-item {
+  color: #58595B;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.color-text-menu .list-group-item:hover {
+  color: #5A6ACF; /* Cambia el color del texto al hacer hover */
+  text-decoration: none;
+}
+
+.color-text-menu .list-group-item .svg-inline--fa {
+  color: #58595B;
+  transition: color 0.3s;
+}
+
+.color-text-menu .list-group-item:hover .svg-inline--fa  {
+  color: #f28006; /* Cambia el color del ícono al hacer hover sobre el elemento de la lista */
+}
+
+.top-space-charts h2{
+  text-align: left;
+  margin-top:5vh;
+  margin-bottom: 5vh;
+ color: #58595B;
+}
+
+/*LATERAL MENU RIGHT*/
+
+.top-name{
+ 
+  margin-top: 3vh;
+}
+
+
+.profile-picture {
+  width: 80px; /* Ajusta el tamaño según tus necesidades */
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra si lo deseas */
+}
+
+.profile-picture-chat {
+  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra si lo deseas */
+}
+
+/* .col-chat-picture {
+  margin-bottom: 10px;
+}*/
+
+.rounded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }

@@ -1,14 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
-      alias: [
-      {
-        find: './runtimeConfig',
-        replacement: './runtimeConfig.browser', // ensures browser compatible version of AWS JS SDK is used
-      },
-    ]
-  }
-})
+    alias: {
+      './runtimeConfig': './runtimeConfig.browser',
+      '@components': new URL('src/components', import.meta.url).pathname,
+      '@pages': new URL('src/pages', import.meta.url).pathname,
+    },
+  },
+});

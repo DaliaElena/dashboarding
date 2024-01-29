@@ -1,37 +1,59 @@
-import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
+import {  Col, Row,  } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import  Home from './pages/Home';
+import MenuLatLeft from './components/MenuLatLeft';
+import MenuTop from './components/MenuTop';
+import MenuLatRight from './components/MenuLatRight';
+
+import  AddNewWorker from './pages/AddNewWorker';
+import  AddNewDataOrigin from './pages/AddNewDataOrigin';
+import  DataOriginHistory from './pages/DataOriginHistory';
+import  WorkersHistory from './pages/WorkersHistory';
+import  MyDashboards from './pages/MyDashboards';
+
 
 function App() {
   return (
-    <Flex
-      direction={{ base: 'column', large: 'row' }}
-      maxWidth="32rem"
-      padding="1rem"
-      width="100%"
-    >
-      <Image
-        alt="Abstract art"
-        height="21rem"
-        objectFit="cover"
-        src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987"
-      />
-      <Flex justifyContent="space-between" direction="column">
-        <Heading level={3}>Abstract art</Heading>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat
-          sed cras ornare arcu dui. Duis aute irure dolor in reprehenderit in
-          voluptate velit esse.
-        </Text>
-        <Button
-          variation="primary"
-          onClick={() => alert('Added item to cart!')}
-        >
-          Add to Cart
-        </Button>
-      </Flex>
-    </Flex>
-  );
+   <Router>
+    <>
+    <div style={{ fontFamily: 'Roboto', fontSize: '16px' }}>
+
+      <Row className='justify-content-start'>
+
+        <Col xs={3} style={{ textAlign: 'left' }} >
+          <MenuLatLeft/>
+
+        </Col>
+
+        <Col xs={6}>
+
+          <MenuTop/>
+
+            <Routes>
+              
+              <Route path="/" element={<Home />} />
+              <Route path="/AddNewWorker" element={<AddNewWorker />} />
+              <Route path="/AddNewDataOrigin" element={<AddNewDataOrigin />} />
+              <Route path="/DataOriginHistory" element={<DataOriginHistory />} />
+              <Route path="/WorkersHistory" element={<WorkersHistory />} />
+              <Route path="/MyDashboards" element={<MyDashboards />} />
+            </Routes>
+        </Col>
+        
+        <Col xs={3}>
+          <MenuLatRight/>
+        </Col>
+
+      </Row>
+
+      </div>
+
+   </>
+  </Router>
+
+  )
 }
 
-export default App;
+export default App
