@@ -1,9 +1,19 @@
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  background-color: #F9F9F9;
   text-align: center;
+}
+
+/*General*/
+
+.background-gray-pages{
+  padding: 2%;
+}
+
+.background-white-pages{
+  background-color: #FFFF;
 }
 
 /*Chat bell*/
@@ -127,20 +137,21 @@ h2  {
 .LeftMenu {
   display: flex;
   flex-direction: column;
-  height: 99%;
-  position: relative; /* Agrega esta línea */
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  padding: 0px; /* Ajusta este valor según sea necesario */
+  box-sizing: border-box; /* Esto asegura que el padding no afecte el ancho total */
 }
+
+
 
 .others-menu {
   position: absolute;
   bottom: 0;
   align-self: flex-end;
 }
-
-
-
-
-
 
 
 
@@ -201,25 +212,131 @@ h2  {
   overflow: hidden;
   border-radius: 50%;
   margin: 20px auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra si lo deseas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 0 7px #FF9E18; /* Opcional: Agrega una sombra si lo deseas */
 }
 
 .profile-picture-chat {
   width: 40px; /* Ajusta el tamaño según tus necesidades */
   height: 40px;
   overflow: hidden;
-  border-radius: 50%;
-  margin: 20px auto;
+  border-radius: 10px; /* Puedes ajustar este valor según tu preferencia */
+  margin: 10px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra si lo deseas */
+  margin-left: 20px;
 }
-
-/* .col-chat-picture {
-  margin-bottom: 10px;
-}*/
 
 .rounded-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 10px; /* Ajusta este valor según tu preferencia */
 }
+
+
+
+/* BUBLES STYLES */
+
+.container-bubbles {
+  display: flex;
+  align-items: center; /* vertically center items */
+  justify-content: center; /* horizontally center items */
+}
+
+.text-bubbles {
+  text-align: center; /* center text horizontally */
+}
+.bubbles-icon {
+  text-align: center; /* center text horizontally */
+}
+.bubbles-message {
+  text-align: left; /* center text horizontally */
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #A7A9AC;
+  font-size: 14px;
+}
+.bubbles-username {
+  text-align: left; /* center text horizontally */
+  font-family: 'Roboto';
+  font-weight: 700;
+  color: #58595B;
+  font-size: 16px;
+}
+.bubbles-dateprofile {
+  text-align: center; /* center text horizontally */
+  font-family: 'Roboto';
+  font-weight: 500;
+  color: #A7A9AC;
+  font-size: 12px;
+}
+
+.text-al-left {
+  text-align: left;
+}
+
+/*Data Origin Table*/
+
+.icon-color{
+  color: #58595B;
+  transition: color 0.3s;
+}
+
+.icon-color:hover{
+  color: #f28006; 
+}
+
+.normal-cell {
+  color: #aa00ff; /* Color de texto blanco, ajusta según tus necesidades */
+}
+
+/*CARDS*/
+
+.my-card-gray {
+  width: 10vw; /* 20% del ancho de la ventana */
+  height: 11vh; /* 15% de la altura de la ventana */
+  background-color: #F8F8F8; /* Fondo gris claro */
+}
+
+.my-card-orange {
+  width: 10vw; /* 20% del ancho de la ventana */
+  height: 11vh; /* 15% de la altura de la ventana */
+  background-color: #FFBB4F; /* Fondo naranja claro */
+}
+
+.card-title-dark{
+  font-size: 15px;
+  color: #58595B;
+  font-family: 'Roboto';
+  font-weight: 500;
+  text-align: left;
+}
+
+.card-title-light{
+  font-size: 15px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-weight: 500;
+  text-align: left;
+}
+
+.card-text-style{
+  font-size: 35px;
+  font-family: 'Roboto';
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 1.5px 1.5px 2px rgba(40, 33, 33, 0.5);
+}
+
+.icon-style-fa{
+  font-size: 34px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajusta los valores según tus preferencias */
+}
+
+.nohover:hover{
+color: orange;
+}
+
+.nohover{
+  color: orange;
+  }

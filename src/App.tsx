@@ -2,11 +2,15 @@ import {  Col, Row,  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import  Home from './pages/Home';
 import MenuLatLeft from './components/MenuLatLeft';
 import MenuTop from './components/MenuTop';
 import MenuLatRight from './components/MenuLatRight';
-
+import  Home from './pages/Home';
+import  AddNewWorker from './pages/AddNewWorker';
+import  AddNewDataOrigin from './pages/AddNewDataOrigin';
+import  DataOriginHistory from './pages/DataOriginHistory';
+import  WorkersHistory from './pages/WorkersHistory';
+import  MyDashboards from './pages/MyDashboards';
 
 function App() {
   return (

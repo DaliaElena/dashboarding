@@ -12,24 +12,36 @@ interface ChatBubbleProps {
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({ username, message, profileimage, dateprofile }) => {
   return (
+    <>
     <Row>
-      <Col>
-        <div className="profile-picture-chat">
-          <Image className="rounded-image" src={profileimage} alt="Profile" />
+        <div className='container-bubbles'>
+        <Col>
+            <div className="profile-picture-chat">
+                <Image className="rounded-image" src={profileimage} alt="Profile" />
+            </div>
+        </Col>
+        <Col>
+            <div className="text-bubbles ">
+                <p className="bubbles-dateprofile">{dateprofile}</p>
+            </div>
+        </Col>
         </div>
-      </Col>
-      <Col>
-        <p>{username}</p>
-        <br />
-        <p>{message}</p>
-      </Col>
-      <Col>
-        <FontAwesomeIcon icon={faAngleRight} />
-      </Col>
-      <Col>
-        <p>{dateprofile}</p>
-      </Col>
     </Row>
+    <Row>
+        <div className="container-bubbles">
+                <Col className='text-al-left'>
+                    <p className='bubbles-username'>{username}</p>
+                    <p className='bubbles-message'>{message}</p>
+                </Col>
+                <Col>
+                    <div className="text-bubbles">
+                       <p className='bubbles-icon'><FontAwesomeIcon icon={faAngleRight} /></p> 
+                    </div>
+                </Col>
+        </div>
+    </Row>
+    </>
+
   );
 };
 

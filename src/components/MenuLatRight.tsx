@@ -1,5 +1,8 @@
 import { Image, Col, Row} from 'react-bootstrap';
 import ChatBubble from './ChatBubble.tsx';
+import Profilepicture from ".../assets/closeup-retrato-profesor-feliz-caucasico-vasos.jpg";
+import Profileimage from ".../src/assets/retrato-hombre-reir.jpg";
+
 
 const MenuLatRight= () => {
   return (
@@ -8,7 +11,7 @@ const MenuLatRight= () => {
         <Row>
           <Col>
           <div className = "profile-picture"> 
-            <Image className = "rounded-image"  src="src/assets/closeup-retrato-profesor-feliz-caucasico-vasos.jpg"  />
+            <Image className = "rounded-image"  src={Profilepicture}  />
           </div>
           </Col>
 
@@ -28,10 +31,9 @@ const MenuLatRight= () => {
           </Col>
         </Row>
 
-        <ChatBubble dateprofile="Dec, 3, 12:31 pm" profileimage="src/assets/retrato-hombre-reir.jpg" username="James Robinson" message="I need some maintenance" />
-        <ChatBubble dateprofile="Jan, 2, 12:31 pm" profileimage="src/assets/retrato-hombre-reir.jpg" username="James Robinson" message="I need some maintenance" />
-        <ChatBubble dateprofile="Jan, 2, 12:31 pm" profileimage="src/assets/retrato-hombre-reir.jpg" username="James Robinson" message="I need some maintenance" />
-        <ChatBubble dateprofile="Jan, 2, 12:31 pm" profileimage="src/assets/retrato-hombre-reir.jpg" username="James Robinson" message="I need some maintenance" />
+        <ChatBubble dateprofile="Dec, 3, 12:31 pm" profileimage={Profileimage} username="James Robinson" message="I got your email and ..." />
+        <ChatBubble dateprofile="Jan, 2, 12:31 pm" profileimage={Profileimage} username="James Robinson" message="I need some maintenance" />
+        <ChatBubble dateprofile="Jan, 2, 12:31 pm" profileimage={Profileimage} username="James Robinson" message="The data origin was change..." />
     
     </div>
   );

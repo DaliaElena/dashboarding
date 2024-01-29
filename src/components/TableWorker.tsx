@@ -110,48 +110,108 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
       </div>
 
       <StyledTableContainer as={Paper}>
-        <Table>
+      <Table>
           <TableHead>
             <TableRow>
-              <StyledTableCell onClick={() => handleSort('Name')}>
+              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+
+                onClick={() => handleSort('Name')}>
                 Name{' '}
                 {sortConfig.key === 'Name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </StyledTableCell>
-              <StyledTableCell onClick={() => handleSort('status')}>
+              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+                
+                onClick={() => handleSort('status')}>
                 Status{' '}
                 {sortConfig.key === 'status' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </StyledTableCell>
-              <StyledTableCell onClick={() => handleSort('lastConnection')}>
+              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+                
+                onClick={() => handleSort('lastConnection')}>
                 Last Connection{' '}
                 {sortConfig.key === 'lastConnection' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </StyledTableCell>
-              <StyledTableCell onClick={() => handleSort('origin')}>
+              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+                
+                onClick={() => handleSort('origin')}>
                 Origin{' '}
                 {sortConfig.key === 'origin' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </StyledTableCell>
-              <StyledTableCell>Actions</StyledTableCell>
+              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                
+                Actions
+                
+                </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {sortedAndFilteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
               <TableRow key={index}>
-                <TableCell>{row.Name}</TableCell>
-                <TableCell>{row.status}</TableCell>
-                <TableCell>{row.lastConnection}</TableCell>
-                <TableCell>{row.origin}</TableCell>
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#5A6ACF',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.Name}
+                </TableCell>
+
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#58595B',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.status}
+                </TableCell>
+
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#58595B',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.lastConnection}
+                </TableCell>
+
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#58595B',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.origin}
+                </TableCell>
+
                 <ActionsCell>
-                  <IconButton color="primary">
+                  <IconButton className='icon-color'>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color="secondary">
+                  <IconButton className='icon-color'>
                     <DeleteIcon />
                   </IconButton>
                 </ActionsCell>

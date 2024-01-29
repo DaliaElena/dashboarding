@@ -1,6 +1,7 @@
 import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut} from '@fortawesome/free-solid-svg-icons'
+import Logo from '.../assets/Logo.png';
 
 const MenuLatLeft = () => {
   return (
@@ -8,7 +9,7 @@ const MenuLatLeft = () => {
       <div className="color-text-menu text-left">
         {/*Logo*/}
         <div className="text-center">
-          <img src="src/assets/Logo.png" alt="DBOSlabLogo" className="generated-image"></img>
+          <img src={Logo} alt="DBOSlabLogo" className="generated-image"></img>
         </div>
         {/*menu*/}
 

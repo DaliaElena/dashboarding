@@ -10,7 +10,6 @@ interface TableDataOriginsProps {
     Name: string;
     lastConnection: string;
     origin: string;
-    // ... other properties
   }[];
 }
 
@@ -74,7 +73,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
           style={{ marginRight: '8px' }}
         />
         <TablePagination
-          rowsPerPageOptions={[10, 50, 100, -1]} // Replace 'All' with -1 or any other number that suits your needs
+          rowsPerPageOptions={[10, 50, 100, -1]} 
           component="div"
           count={sortedAndFilteredData.length}
           rowsPerPage={rowsPerPage}
@@ -87,40 +86,95 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
       </div>
       <TableContainer component={Paper}>
         <Table>
-          <TableHead>
+        <TableHead>
             <TableRow>
-              <TableCell onClick={() => handleSort('Name')}>
+              <TableCell 
+                style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+
+                onClick={() => handleSort('Name')}>
                 Name{' '}
                 {sortConfig.key === 'Name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
-              <TableCell onClick={() => handleSort('lastConnection')}>
-                Last Modification{' '}
+              
+              <TableCell 
+                style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+                
+                onClick={() => handleSort('lastConnection')}>
+                Last Connection{' '}
                 {sortConfig.key === 'lastConnection' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
-              <TableCell onClick={() => handleSort('origin')}>
+
+              <TableCell 
+                style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}
+
+                onClick={() => handleSort('origin')}>
                 Origin{' '}
                 {sortConfig.key === 'origin' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
-              <TableCell>Actions</TableCell>
+
+              <TableCell 
+                style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                  
+                  Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {sortedAndFilteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
               <TableRow key={index}>
-                <TableCell>{row.Name}</TableCell>
-                <TableCell>{row.lastConnection}</TableCell>
-                <TableCell>{row.origin}</TableCell>
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#5A6ACF',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.Name}
+                </TableCell>
+
+
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#58595B',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.lastConnection}
+                </TableCell> 
+
+
+                <TableCell style={{fontFamily: 'Roboto, sans-serif',
+                color: '#58595B',
+                fontWeight: 400,
+                fontSize: '16px',
+                textAlign:'left',}}>
+                {row.origin}
+                </TableCell>
+
+                
                 <TableCell>
-                  <IconButton color="primary">
+                  <IconButton className='icon-color'>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color="secondary">
+                  <IconButton className='icon-color'>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
