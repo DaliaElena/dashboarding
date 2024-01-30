@@ -1,7 +1,7 @@
 import {Row} from 'react-bootstrap';
 import TableWorker from '../components/TableWorker';
 import TableDataOrigins from '../components/TableDataOrigins.tsx';
-import ChartWorkers from '../components/ChartWorker.tsx';
+import ChartWorker from '../components/ChartWorker.tsx';
 
 const workerData = [
   { Name: 'Worker 1', status: 'ON', lastConnection: '2023-01-01', origin: 'Lambda' },
@@ -59,7 +59,7 @@ const Home = () => {
 
       <Row>
         <h2>Workers History</h2>
-        <ChartWorkers dataPoints={chartData} />
+        <ChartWorker dataPoints={chartData} />
       </Row>
       <Row>
         <h2>Data Origin Abstract </h2>

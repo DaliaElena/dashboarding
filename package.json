@@ -21,11 +21,11 @@
     "aws-amplify": "^6.0.13",
     "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.3.2",
-    "canvasjs-react-charts": "^1.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
+    "recharts": "^2.11.0",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
