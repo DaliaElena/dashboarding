@@ -1,74 +1,20 @@
-import React from 'react';
-import { useRef, useEffect } from 'react';
-import {CanvasJSChart} from 'canvasjs-react-charts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-// Add type declarations for props and chart reference
-interface ChartWorkersProps {
-  dataPoints: Array<{ x: number, y: number, color?: string }>;
+interface ChartWorkerProps {
+  dataPoints: { x: string; y: number }[];
 }
 
-interface ChartRef {
-  render: () => void;
-  // Add other methods or properties if needed
-}
-
-const ChartWorkers: React.FC<ChartWorkersProps> = ({ dataPoints }) => {
-  const chartRef = useRef<ChartRef | null>(null);
-
-  // Assign colors based on the range of values
-  const blueShades = ['#FFBB4F', '#FF9E18'];
-  dataPoints.forEach((dataPoint, index) => {
-    dataPoint.color = blueShades[index % blueShades.length];
-  });
-
-  const generateStripLines = () => {
-    const lines = [];
-    for (let i = 5; i <= 100; i += 5) {
-      lines.push({
-        value: i,
-        thickness: 1,
-        color: '#E0E0E0',
-      });
-    }
-    return lines;
-  };
-
-  const options = {
-    animationEnabled: true,
-    theme: 'light2',
-    axisY: {
-      title: 'Success Events',
-      titleFontColor: '#969696',
-      lineColor: '#E0E0E0',
-      stripLines: generateStripLines(),
-      labelPlacement: 'outside',
-    },
-    axisX: {
-      title: 'Workers',
-      titleFontColor: '#969696',
-      interval: 1,
-    },
-    data: [
-      {
-        type: 'column',
-        dataPoints: dataPoints,
-        indexLabel: '{y}',
-        indexLabelFontColor: '',
-      },
-    ],
-  };
-
-  useEffect(() => {
-    if (chartRef.current) {
-      chartRef.current.render();
-    }
-  }, [dataPoints]);
-
+const ChartWorker: React.FC<ChartWorkerProps> = ({ dataPoints }) => {
   return (
-   <div style={{ maxWidth: '90vw', margin: 'auto', maxHeight: '50vh' }}>
-      <CanvasJSChart options={options} onRef={(ref: ChartRef | null) => (chartRef.current = ref)} />
-    </div>
+    <BarChart width={600} height={300} data={dataPoints} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <XAxis dataKey="x" />
+      <YAxis />
+      <CartesianGrid stroke="lightgray" strokeDasharray="2 5" />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="y" fill="orange" />
+    </BarChart>
   );
 };
 
-export default ChartWorkers;
+export default ChartWorker;

@@ -1,10 +1,11 @@
-import {  Col, Row,  } from 'react-bootstrap';
+import {  Col, Row  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MenuLatLeft from './components/MenuLatLeft';
 import MenuTop from './components/MenuTop';
 import MenuLatRight from './components/MenuLatRight';
+
 import  Home from './pages/Home';
 import  AddNewWorker from './pages/AddNewWorker';
 import  AddNewDataOrigin from './pages/AddNewDataOrigin';
@@ -28,7 +29,6 @@ function App() {
         <Col xs={6}>
 
           <MenuTop/>
-
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/AddNewWorker" element={<AddNewWorker />} />
