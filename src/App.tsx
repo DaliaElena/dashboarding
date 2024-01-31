@@ -20,7 +20,7 @@ import  DataOriginHistory from './pages/DataOriginHistory';
 import  WorkersHistory from './pages/WorkersHistory';
 import  MyDashboards from './pages/MyDashboards';
 
-export function App({ signOut, user }: WithAuthenticatorProps) {
+export function App({ signOut}: WithAuthenticatorProps) {
   return (
 
   <>
@@ -53,4 +53,4 @@ export function App({ signOut, user }: WithAuthenticatorProps) {
   )
 }
 
-export default withAuthenticator(App, { hideSignUp: { hidden: true } });
+export default withAuthenticator(App, { hideSignUp: true });

@@ -1,9 +1,10 @@
+import  { FC } from 'react';
 import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut,faChartLine} from '@fortawesome/free-solid-svg-icons'
 import Logo from '../assets/Logo.png';
 
-const MenuLatLeft = (props) => {
+const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
   return (
     <div className='LeftMenu'>
       <div className="color-text-menu text-left">
