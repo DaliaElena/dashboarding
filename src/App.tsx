@@ -1,3 +1,10 @@
+import { Amplify } from 'aws-amplify';
+import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import config from './amplifyconfiguration.json';
+Amplify.configure(config);
+
 import {  Col, Row  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -13,14 +20,16 @@ import  DataOriginHistory from './pages/DataOriginHistory';
 import  WorkersHistory from './pages/WorkersHistory';
 import  MyDashboards from './pages/MyDashboards';
 
-function App() {
+export function App({ signOut, user }: WithAuthenticatorProps) {
   return (
-   <Router>
-    <>
+
+  <>
+    <Router>
+
     <div style={{ fontFamily: 'Roboto', fontSize: '16px' }}>
       <Row className='justify-content-start'>
         <Col xs={3} style={{ textAlign: 'left' }} >
-          <MenuLatLeft/>
+          <MenuLatLeft signOut={signOut} />
         </Col>
         <Col xs={6}>
           <MenuTop/>
@@ -38,9 +47,10 @@ function App() {
         </Col>
       </Row>
       </div>
+    </Router>
    </>
-  </Router>
+
   )
 }
 
-export default App
+export default withAuthenticator(App, { hideSignUp: { hidden: true } });

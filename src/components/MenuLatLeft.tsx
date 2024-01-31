@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut,faChartLine} from '@fortawesome/free-solid-svg-icons'
 import Logo from '../assets/Logo.png';
 
-const MenuLatLeft = () => {
+const MenuLatLeft = (props) => {
   return (
     <div className='LeftMenu'>
       <div className="color-text-menu text-left">
@@ -52,7 +52,7 @@ const MenuLatLeft = () => {
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faGear} /> Settings</a></ListGroup.Item>
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faUser} /> Account</a></ListGroup.Item>
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faCircleInfo} /> Help</a></ListGroup.Item>
-            <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faSignOut} /> Sign Out</a></ListGroup.Item>
+            <ListGroup.Item  className='hover-effect' onClick={props.signOut}><a href=""><FontAwesomeIcon icon={faSignOut} /> Sign Out</a></ListGroup.Item>
           </ListGroup>
         </div>
       </div>
