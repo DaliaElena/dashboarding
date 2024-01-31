@@ -1,6 +1,6 @@
 const Settings = () => {
     return (
-      <div>
+      <div className="column-dbos-center">
         <h1>Settings</h1>
         <p>Contenido de la página...</p>
       </div>

@@ -25,9 +25,6 @@ import Account from './pages/Account';
 import Help from './pages/Help';
 
 
-
-
-
 export function App({ signOut}: WithAuthenticatorProps) {
   return (
 
@@ -53,11 +50,6 @@ export function App({ signOut}: WithAuthenticatorProps) {
               <Route path="/Settings" element={<Settings />} />
               <Route path="/Account" element={<Account />} />
               <Route path="/Help" element={<Help />} />
-
-
-
-
-
             </Routes>
         </Col>
         <Col xs={3}>

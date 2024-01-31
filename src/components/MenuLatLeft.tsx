@@ -10,14 +10,13 @@ interface MenuLatLeftProps {
 
 const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
   return (
-    <div className='LeftMenu'>
+    <div className='LeftMenu column-dbos-left'>
       <div className="color-text-menu text-left">
         {/*Logo*/}
         <div className="text-center">
           <img src={Logo} alt="DBOSlabLogo" className="generated-image"></img>
         </div>
         {/*menu*/}
-
         <div className="principal-menu">
           <span>MENU</span>
             <ListGroup  className="no-list-borders">
@@ -31,9 +30,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
                     <Dropdown.Item href="/DataOriginHistory"><FontAwesomeIcon icon={faClockRotateLeft} /> Data Origin History</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -47,7 +44,6 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
               </ListGroup.Item>
               <ListGroup.Item> <a href="/MyDashboards"><FontAwesomeIcon icon={faTable} /> My Dashboards</a></ListGroup.Item> 
               <ListGroup.Item> <a href="/AnomalyDetection"><FontAwesomeIcon icon={faChartLine} />Anomaly Detection</a></ListGroup.Item> 
-            
           </ListGroup>
         </div>
           {/*OthersMenu*/}

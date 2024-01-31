@@ -7,7 +7,7 @@ import Profileimage from "../assets/retrato-hombre-reir.jpg";
 const MenuLatRight= () => {
   return (
 
-    <div className= 'col-chat-picture'>
+    <div className= 'col-chat-picture column-dbos-right'>
         <Row>
           <Col>
           <div className = "profile-picture"> 

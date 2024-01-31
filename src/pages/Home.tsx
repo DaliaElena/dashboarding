@@ -56,7 +56,7 @@ const chartData = [
 
 const Home = () => {
   return (
-    <div className='top-space-charts'>
+    <div className='top-space-charts column-dbos-center'>
 
       <Row>
         <h2>Workers History</h2>
@@ -71,7 +71,7 @@ const Home = () => {
         <Row><Cards/></Row>
       <TableWorker dataPoints={workerData} />
       </Row>
-      </div>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ const notificationCount = 1;
 
 const MenuTop = () => {
   return (
-    <div>
+    <div className='column-dbos-center'>
               <Row>
         <Col>
         <Form className="d-flex">

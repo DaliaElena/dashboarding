@@ -12,9 +12,9 @@ const originsData = [
 
 const DataOriginHistory = () => {
   return (
-    <div>
+    <div className='column-dbos-center'>
+      <br />
       <h1>Data Origin History</h1>
-      <p>Contenido de la página...</p>
       <TableDataOrigins  dataPoints={originsData}/>
 
     </div>

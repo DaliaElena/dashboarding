@@ -1,7 +1,7 @@
 
 const AddNewWorker = () => {
   return (
-    <div>
+    <div className="column-dbos-center">
       <h1>Add New Worker</h1>
       <p>Contenido de la página...</p>
     </div>
