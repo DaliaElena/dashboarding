@@ -1,8 +1,14 @@
-import  { FC } from 'react';
+import React, { FC } from 'react';
 import { Dropdown, ListGroup } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouseChimney,faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut,faChartLine} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouseChimney, faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
+
+// Define the MenuLatLeftProps interface
+interface MenuLatLeftProps {
+  // Define your props here
+  signOut: () => void; // Example: If signOut is a function prop
+}
 
 const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
   return (
