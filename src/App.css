@@ -340,3 +340,86 @@ color: orange;
 .nohover{
   color: orange;
   }
+
+  /*FORM DATA ORIGIN*/
+
+  .title-form-style{
+    color: #58595B;
+    font-family: 'Roboto';
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .text-form-style{
+    color: #58595B;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .card-footer {
+    background-color: white;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .custom-button-secondary
+    {color: #A7A9AC; /* Color del texto */
+    background-color: white; /* Color de fondo del botón */
+    border: 1px solid #A7A9AC;
+  }
+  
+  .custom-button-secondary:hover {
+    background-color: #A7A9AC; /* Cambia el color de fondo al pasar el mouse */
+    border: 1px solid #A7A9AC;
+
+  }
+
+  .custom-button-primary
+    {color: #ffffff; /* Color del texto */
+    background-color: #FF9E18; /* Color de fondo del botón */
+    border: 1px solid #FF9E18;
+  }
+  
+  .custom-button-primary:hover {
+    background-color: #FF9E18; /* Cambia el color de fondo al pasar el mouse */
+    border: 2px solid #ffea00;
+
+  }
+
+  .custom-placeholder::placeholder {
+    font-style: italic;
+    color: #A7A9AC;
+    font-size: 13px;
+  }
+  .button-toggle #tbg-btn-z #tbg-btn-2 #tbg-btn-2{
+    margin: 14px;
+    color: #A7A9AC; /* Color del texto */
+    background-color: white; /* Color de fondo del botón */
+    border: 1px solid #A7A9AC;
+    border-radius: 10px;
+  }
+  
+
+  .dropdown-item:active {
+    background-color: #A6ABC8; /* Reemplaza esto con tu color personalizado */
+    color: white; /* Puedes ajustar el color del texto según sea necesario */
+  }
+
+  .custom-dropdown-toggle {
+    background-color: #BDBDBD; /* Color de fondo base */
+    color: white; /* Color de texto base */
+    border-color: #BDBDBD; /* Color de borde base */
+  }
+  
+  /* Estilo para el hover */
+  .custom-dropdown-toggle:hover {
+    background-color: #A6ABC8; /* Reemplaza 'tu_color_hover' con el color deseado al hacer hover */
+    color: white; /* Reemplaza 'tu_color_texto_hover' con el color del texto deseado al hacer hover */
+    border-color: #A6ABC8; /* Puedes ajustar el color del borde al hacer hover si es necesario */
+  }

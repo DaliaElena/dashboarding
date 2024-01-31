@@ -1,7 +1,7 @@
 import {  Col, Row,  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css'
 import MenuLatLeft from './components/MenuLatLeft';
 import MenuTop from './components/MenuTop';
 import MenuLatRight from './components/MenuLatRight';
@@ -11,6 +11,14 @@ import  AddNewDataOrigin from './pages/AddNewDataOrigin';
 import  DataOriginHistory from './pages/DataOriginHistory';
 import  WorkersHistory from './pages/WorkersHistory';
 import  MyDashboards from './pages/MyDashboards';
+import AnomalyDetection from './pages/AnomalyDetection';
+import Settings from './pages/Settings';
+import Account from './pages/Account';
+import Help from './pages/Help';
+
+
+
+
 
 function App() {
   return (
@@ -36,6 +44,15 @@ function App() {
               <Route path="/DataOriginHistory" element={<DataOriginHistory />} />
               <Route path="/WorkersHistory" element={<WorkersHistory />} />
               <Route path="/MyDashboards" element={<MyDashboards />} />
+              <Route path="/AnomalyDetection" element={<AnomalyDetection />} />
+              <Route path="/Settings" element={<Settings />} />
+              <Route path="/Account" element={<Account />} />
+              <Route path="/Help" element={<Help />} />
+
+
+
+
+
             </Routes>
         </Col>
         
