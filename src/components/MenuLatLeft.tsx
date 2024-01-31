@@ -16,7 +16,7 @@ const MenuLatLeft = (props) => {
         <div className="principal-menu">
           <span>MENU</span>
             <ListGroup  className="no-list-borders">
-              <ListGroup.Item ><a href=""><FontAwesomeIcon icon={faHouseChimney} /> Home</a> </ListGroup.Item>
+              <ListGroup.Item ><a href="/Home"><FontAwesomeIcon icon={faHouseChimney} /> Home</a> </ListGroup.Item>
               <ListGroup.Item ><Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     <FontAwesomeIcon icon={faDatabase} /> Data Origin

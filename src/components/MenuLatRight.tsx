@@ -3,7 +3,6 @@ import ChatBubble from './ChatBubble.tsx';
 import Profilepicture from "../assets/closeup-retrato-profesor-feliz-caucasico-vasos.jpg";
 import Profileimage from "../assets/retrato-hombre-reir.jpg";
 
-
 const MenuLatRight= () => {
   return (
 
