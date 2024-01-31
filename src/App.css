@@ -362,7 +362,7 @@ color: orange;
 
   .card-footer {
     background-color: white;
-    border-top: 1px solid #ddd;
+    border-top: 0px solid #ddd;
     margin-top: 10px;
     display: flex;
     justify-content: flex-end;
