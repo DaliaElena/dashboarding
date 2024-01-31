@@ -1,14 +1,13 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney, faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
 
-// Define the MenuLatLeftProps interface
 interface MenuLatLeftProps {
-  // Define your props here
-  signOut: () => void; // Example: If signOut is a function prop
+  signOut?: (() => void) | undefined;
 }
+
 
 const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
   return (
@@ -59,7 +58,8 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faGear} /> Settings</a></ListGroup.Item>
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faUser} /> Account</a></ListGroup.Item>
             <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faCircleInfo} /> Help</a></ListGroup.Item>
-            <ListGroup.Item  className='hover-effect' onClick={props.signOut}><a href=""><FontAwesomeIcon icon={faSignOut} /> Sign Out</a></ListGroup.Item>
+            <ListGroup.Item className='hover-effect' onClick={props.signOut}><a href=""><FontAwesomeIcon icon={faSignOut} /> Sign Out</a></ListGroup.Item>
+
           </ListGroup>
         </div>
       </div>

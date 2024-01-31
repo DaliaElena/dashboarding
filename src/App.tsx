@@ -30,6 +30,7 @@ export function App({ signOut}: WithAuthenticatorProps) {
       <Row className='justify-content-start'>
         <Col xs={3} style={{ textAlign: 'left' }} >
           <MenuLatLeft signOut={signOut} />
+          
         </Col>
         <Col xs={6}>
           <MenuTop/>
