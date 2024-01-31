@@ -135,9 +135,9 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
-                textAlign:'left',}}>
-                  
-                  Actions</TableCell>
+                textAlign:'left',}}>  
+                Actions</TableCell>
+                
             </TableRow>
           </TableHead>
           <TableBody>
@@ -151,7 +151,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 {row.Name}
                 </TableCell>
 
-
                 <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#58595B',
                 fontWeight: 400,
@@ -159,7 +158,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 textAlign:'left',}}>
                 {row.lastConnection}
                 </TableCell> 
-
 
                 <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#58595B',
@@ -169,7 +167,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 {row.origin}
                 </TableCell>
 
-                
                 <TableCell>
                   <IconButton className='icon-color'>
                     <EditIcon />

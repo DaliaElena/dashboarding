@@ -89,6 +89,7 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+
         <TextField
           label="Search"
           variant="outlined"
@@ -108,6 +109,7 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
         />
 
       </div>
+      <div style={{ overflowX: 'auto' }}>
 
       <StyledTableContainer as={Paper}>
       <Table>
@@ -220,6 +222,8 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
           </TableBody>
         </Table>
       </StyledTableContainer>
+      </div>
+
     </div>
   );
 };

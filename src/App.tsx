@@ -18,16 +18,11 @@ function App() {
    <Router>
     <>
     <div style={{ fontFamily: 'Roboto', fontSize: '16px' }}>
-
       <Row className='justify-content-start'>
-
         <Col xs={3} style={{ textAlign: 'left' }} >
           <MenuLatLeft/>
-
         </Col>
-
         <Col xs={6}>
-
           <MenuTop/>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -38,18 +33,13 @@ function App() {
               <Route path="/MyDashboards" element={<MyDashboards />} />
             </Routes>
         </Col>
-        
         <Col xs={3}>
           <MenuLatRight/>
         </Col>
-
       </Row>
-
       </div>
-
    </>
   </Router>
-
   )
 }
 

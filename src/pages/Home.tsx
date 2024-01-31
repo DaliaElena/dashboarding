@@ -60,19 +60,16 @@ const Home = () => {
 
       <Row>
         <h2>Workers History</h2>
-
         <ChartWorker dataPoints={chartData} />
       </Row>
       <Row>
         <h2>Data Origin Abstract </h2>
         <TableDataOrigins dataPoints={originsData} />
       </Row>
-
       <Row>
         <h2>Workers Abstract</h2>
         <Row><Cards/></Row>
       <TableWorker dataPoints={workerData} />
-
       </Row>
       </div>
   );
