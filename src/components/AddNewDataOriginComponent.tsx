@@ -65,13 +65,13 @@ const AddNewDataOriginComponent = () => {
             <Form.Label style={{ marginBottom: '20px' }}>Source Type</Form.Label>
             <Dropdown onSelect={handleSelect}>
               <Dropdown.Toggle variant="light"  className='custom-dropdown-toggle'>
-                {selectedOption ? `Option ${selectedOption}` : 'Select an option'}
+                {selectedOption ? `${selectedOption}` : 'Select an option'}
               </Dropdown.Toggle>
 
               <Dropdown.Menu style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white' }}>
-                <Dropdown.Item eventKey={1}>Dynatrace</Dropdown.Item>
-                <Dropdown.Item eventKey={2}>Option 2</Dropdown.Item>
-                <Dropdown.Item eventKey={3}>Option 3</Dropdown.Item>
+                <Dropdown.Item eventKey={"Dynatrace"} >Dynatrace</Dropdown.Item>
+                <Dropdown.Item eventKey={"Option 2"}>Option 2</Dropdown.Item>
+                <Dropdown.Item eventKey={"Option 3"}>Option 3</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Form.Group>
