@@ -1,9 +1,17 @@
 
+
+
 #root {
   margin: 0 auto;
   padding: 2rem;
   background-color: #F9F9F9;
   text-align: center;
+}
+
+/*Login*/
+
+#root .login-container  {
+  background-color: #175500; /* Cambia este color según tus preferencias */
 }
 
 /*General*/

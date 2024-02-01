@@ -3,6 +3,9 @@ import TableWorker from '../components/TableWorker';
 import TableDataOrigins from '../components/TableDataOrigins.tsx';
 import ChartWorker from '../components/ChartWorker.tsx'
 import Cards from '../components/Cards.tsx'
+import './App.css';
+
+
 
 const workerData = [
   { Name: 'Worker 1', status: 'ON', lastConnection: '2023-01-01', origin: 'Lambda' },

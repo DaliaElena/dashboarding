@@ -1,76 +1,111 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { Button, Form, Row, Col } from 'react-bootstrap';
-import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import './Login.css';
+import LoginPhoto from '../assets/LoginPhoto.png';
+import { blue } from '@mui/material/colors';
 
 const Login = () => {
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        if (user) {
-          // Si el usuario está autenticado, redirige a la página de inicio
-          window.location.href = '/home';
-        }
-      } catch (error) {
-        // El usuario no está autenticado, no se realiza ninguna acción
-      }
-    };
-
-    checkUser();
-  }, []);
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-
-    // Aquí puedes agregar la lógica para autenticar al usuario con Amplify
-    // Ejemplo de autenticación (cambia esto según tus necesidades):
-    try {
-      await Auth.signIn('username', 'password');
-      window.location.href = '/home'; // Redirige después de iniciar sesión correctamente
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      // Manejar el error de inicio de sesión, como mostrar un mensaje al usuario
-    }
-  };
-
   return (
     <>
-      <Row>
+    <div style={{marginTop: '20vh', backgroundColor: 'blue' }}>
+      <Row
+        style={{
+          background: 'white',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          width: '50vw',
+          height: '30vw',
+          
+        }}
+      >
         <Col>
-          <h1>Welcome</h1>
-          <p>Please, enter your username and password</p>
-          <Form onSubmit={handleLogin}>
-            <Form.Group as={Row} className="mb-4">
-              <Form.Label column xs="1">
-                <FontAwesomeIcon icon={faUser} />
-              </Form.Label>
-              <Col xs="10">
-                <Form.Control type="text" placeholder="Username" />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-4">
-              <Form.Label column xs="1">
-                <FontAwesomeIcon icon={faLock} />
-              </Form.Label>
-              <Col xs="10">
-                <Form.Control type="password" placeholder="Password" />
-              </Col>
-            </Form.Group>
-            <Button type="submit" style={{ background: 'linear-gradient(to bottom, #FFA500, #FFFFFF)', border: 'none' }}>
-              Login
-            </Button>
-          </Form>
-          <br />
-          <span>¿No tienes cuenta?<a href="">Registrate</a></span><br />
-          <a href="">¿Olvidaste tu contraseña?</a>
+          <div style={{ textAlign: 'center' }}>
+            <h2>WELCOME</h2>
+            <p>Please, enter your username and password</p>
+            <Form>
+              <Form.Group as={Row} className="mb-4" style={{ alignItems: 'center', display: 'flex' }}>
+                <Col xs="1">
+                  <FontAwesomeIcon icon={faUser} style={{color: '#58595B'}}/>
+                </Col>
+                <Col xs="11">
+                  <Form.Control
+                    type="text"
+                    placeholder="Username"
+                    id="username-input"
+                    style={{
+                      width: '100%',
+                      height: '30px',
+                      backgroundColor: '#F0EDFF',
+                      fontFamily: 'Roboto, sans-serif',
+                      fontSize: '9px',
+                    }}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-4" style={{ alignItems: 'center', display: 'flex' }}>
+                <Col xs="1">
+                  <FontAwesomeIcon icon={faLock} style={{color: '#58595B'}} />
+                </Col>
+                <Col xs="11">
+                  <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    className="custom-form-control"  
+                    id="username-input"
+                    style={{
+                      width: '100%',
+                      height: '30px',
+                      backgroundColor: '#F0EDFF',
+                      fontFamily: 'Roboto, sans-serif',
+                      fontSize: '9px',
+                    }}
+                  />
+                </Col>
+              </Form.Group>
+              <Button
+                type="submit"
+                style={{
+                  background: 'linear-gradient(to bottom, #FFA500, rgba(255, 158, 24, 0.55))',
+                  border: 'none',
+                  width: '30%', // Puedes ajustar el porcentaje o usar un valor en píxeles
+                  marginTop: '30px',
+                  marginBottom: '30px',
+                }}
+              >
+                Login
+              </Button>
+            </Form>
+
+
+            <br />
+            <span>
+              ¿No tienes cuenta?<a href="">Registrate</a>
+            </span>
+            <br />
+            <a href="">¿Olvidaste tu contraseña?</a>
+          </div>
         </Col>
         <Col>
-          <img src="https://picsum.photos/seed/picsum/200/300" alt="" />
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f0f0f0',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundImage: `url(${LoginPhoto})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
         </Col>
       </Row>
+      </div>
     </>
   );
 };
