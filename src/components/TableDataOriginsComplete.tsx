@@ -100,7 +100,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
   const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        backgroundColor: '#BDBDBD',
+        backgroundColor: '#E0E0E0',
         borderColor: '#A7A9AC', // Cambia el color del borde aquí
         borderWidth: '1px', // Cambia el ancho del borde aquí
         width: '275px',
