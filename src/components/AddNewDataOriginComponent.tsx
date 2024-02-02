@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Card, Row, Dropdown, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 const NonEditableForm = ({ formData, onEditClick }) => {
   const [show, setShow] = useState(false);
@@ -66,7 +68,6 @@ const NonEditableForm = ({ formData, onEditClick }) => {
       </Form.Group>
       <Card.Footer className='card-footer'>
         <Button
-          variant="secondary"
           style={{ marginRight: '10px' }}
           className='custom-button-secondary'
           onClick={onEditClick}  // Llama a la función proporcionada al hacer clic
@@ -74,7 +75,7 @@ const NonEditableForm = ({ formData, onEditClick }) => {
           Return
         </Button>
 
-        <Button variant="primary" className='custom-button-primary' onClick={handleShow}>
+        <Button className='custom-button-primary' onClick={handleShow}>
         Add New
       </Button>
         <Modal show={show} onHide={handleClose}>
@@ -83,7 +84,7 @@ const NonEditableForm = ({ formData, onEditClick }) => {
         <Modal.Body style={{textAlign:'center'}}>Your data origin has been successfully created</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            <Link to="/DataOriginHistory" style={{textDecoration: 'none' , color:'inherit'}}> Close </Link>
           </Button>
         </Modal.Footer>
       </Modal>
