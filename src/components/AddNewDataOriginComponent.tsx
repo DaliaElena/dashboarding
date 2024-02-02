@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Button, Card, Row, Dropdown } from 'react-bootstrap';
+import { Form, Button, Card, Row, Dropdown, Modal } from 'react-bootstrap';
 
-const NonEditableForm = ({ formData }) => {
+const NonEditableForm = ({ formData, onEditClick }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <Form>
       <Form.Group controlId="formSource" className='text-form-style'>
@@ -61,9 +64,35 @@ const NonEditableForm = ({ formData }) => {
           style={{ backgroundColor: '#f0f0f0' }}
         />
       </Form.Group>
+      <Card.Footer className='card-footer'>
+        <Button
+          variant="secondary"
+          style={{ marginRight: '10px' }}
+          className='custom-button-secondary'
+          onClick={onEditClick}  // Llama a la función proporcionada al hacer clic
+        >
+          Return
+        </Button>
+
+        <Button variant="primary" className='custom-button-primary' onClick={handleShow}>
+        Add New
+      </Button>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>Your data origin has been successfully created</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </Card.Footer>
     </Form>
   );
 };
+
+
 
 const AddNewDataOriginComponent = () => {
   const [formData, setFormData] = useState({
@@ -75,12 +104,10 @@ const AddNewDataOriginComponent = () => {
   });
 
   const [showEditableForm, setShowEditableForm] = useState(true);
-
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = (eventKey) => {
     setSelectedOption(eventKey);
-    // Puedes realizar cualquier otra acción que necesites con el valor seleccionado
   };
 
   const handleChange = (event) => {
@@ -90,13 +117,18 @@ const AddNewDataOriginComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes manejar la lógica para enviar los datos del formulario
     console.log('Datos del formulario:', formData);
     setShowEditableForm(false);
   };
 
+  const handleReturnClick = () => {
+    setShowEditableForm(true);
+  };
+
+
+
   return (
-    <Card style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+    <Card style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', maxWidth: '500px', margin: '0 auto' }}>
       <Card.Header className='title-form-style' style={{ backgroundColor: 'white', marginBottom: 0 }}>
         <Card.Title style={{ marginBottom: 0 }}>Add New Data Origin</Card.Title>
       </Card.Header>
@@ -170,17 +202,21 @@ const AddNewDataOriginComponent = () => {
             </Form.Group>
 
             <Card.Footer className='card-footer'>
-              <Button variant="secondary" style={{ marginRight: '10px' }} className='custom-button-secondary'>
+              <Button
+                variant="secondary"
+                style={{ marginRight: '10px' }}
+                className='custom-button-secondary'
+                onClick={handleReturnClick}
+              >
                 Cancel
               </Button>
               <Button variant="danger" className='custom-button-primary' type='submit'>
                 Continue
               </Button>
             </Card.Footer>
-
           </Form>
         ) : (
-          <NonEditableForm formData={formData} />
+          <NonEditableForm formData={formData} onEditClick={handleReturnClick} />
         )}
       </Card.Body>
 

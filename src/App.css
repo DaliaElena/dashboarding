@@ -1,9 +1,9 @@
 
-.column-dbos-left ,.column-dbos-right{
+.column-dbos-left, .column-dbos-right {
   width: 30vw;
   position: inherit;
 }
-.column-dbos-center{
+.column-dbos-center {
   background-color: #F9F9F9;
   padding: 20px;
   padding-left: 2vw;
@@ -12,7 +12,15 @@
   position: inherit;
 
 }
+.column-dbos-right {
+  padding-right: 200px;
+  padding-left: 60px;
+}
 
+.column-dbos-left{
+  margin-right: 10px;
+  margin-left: 40px;
+}
 
 /*General*/
 
@@ -298,6 +306,8 @@ h2  {
 }
 
 /*CARDS*/
+
+
 
 .my-card-gray {
   width: auto; /* 20% del ancho de la ventana */
