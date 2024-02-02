@@ -20,7 +20,7 @@ const DataOriginHistory = () => {
   return (
     <div className='column-dbos-center'>
       <br />
-      <h1>Data Origin History</h1>
+      <h2 style={{marginBottom: '60px' }}>Data Origin History</h2>
       <TableDataOriginsComplete  dataPoints={originsData}/>
 
     </div>

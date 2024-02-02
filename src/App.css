@@ -290,7 +290,7 @@ h2  {
   text-align: left;
 }
 
-/*Data Origin Table*/
+/*DATA ORIGIN TABLE*/
 
 .icon-color{
   color: #58595B;
@@ -304,6 +304,13 @@ h2  {
 .normal-cell {
   color: #aa00ff; /* Color de texto blanco, ajusta según tus necesidades */
 }
+
+
+.p-remove-style p {
+  margin-bottom: 0rem;
+}
+
+
 
 /*CARDS*/
 

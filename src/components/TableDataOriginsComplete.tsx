@@ -1,9 +1,16 @@
 import { useState } from 'react';
-import { TextField, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, TablePagination } from '@mui/material';
+import { TextField, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, TablePagination, Button } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Checkbox from '@mui/material/Checkbox';
+import { styled } from '@mui/system';
+
+
+
+import {Col, Row} from 'react-bootstrap';
+
 
 interface TableDataOriginsProps {
   dataPoints: {
@@ -62,28 +69,82 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
     setPage(0);
   };
 
+  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+
+  const handleRowSelect = (index: number) => {
+    const newSelectedRows = new Set(selectedRows);
+  
+    if (newSelectedRows.has(index)) {
+      newSelectedRows.delete(index);
+    } else {
+      newSelectedRows.add(index);
+    }
+  
+    setSelectedRows(newSelectedRows);
+  };
+  
+  const handleDeleteSelected = () => {
+    // Obtén las filas seleccionadas
+    const selectedRowsArray = Array.from(selectedRows);
+  
+    // Filtra las filas seleccionadas de tus datos
+    const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
+  
+    // Actualiza los datos y restablece las selecciones
+    setDataPoints(newDataPoints);
+    setSelectedRows(new Set());
+  };
+
+// Para modificar el search
+
+  const CustomTextField = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        backgroundColor: '#BDBDBD',
+        borderColor: '#A7A9AC', // Cambia el color del borde aquí
+        borderWidth: '1px', // Cambia el ancho del borde aquí
+        width: '275px',
+        height: '60px'
+      },
+      '&:hover fieldset': {
+        borderColor: '#828282', // Cambia el color del borde en hover aquí
+      },
+    },
+  });
+  
+
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ marginRight: '8px' }}
-        />
-        <TablePagination
-          rowsPerPageOptions={[10, 50, 100, -1]} 
-          component="div"
-          count={sortedAndFilteredData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ flex: 1 }}
-        />
+      <Row className="align-items-center" style={{marginBottom:'50px'}}>
+            <Col xs={2} style={{ textAlign: 'center' }}>
+              <CustomTextField
+                label="Search"
+                variant="outlined"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </Col>
 
-      </div>
+            <Col xs={8} style={{ textAlign: 'center' }}>
+              <TablePagination
+                className="p-remove-style"
+                rowsPerPageOptions={[10, 50, 100, -1]}
+                component="div"
+                count={sortedAndFilteredData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Col>
+
+            <Col xs={2} style={{ textAlign: 'center' }}>
+              <IconButton className='icon-color' onClick={handleDeleteSelected}>
+                <DeleteIcon />
+              </IconButton>
+            </Col>
+          </Row>
+
       <TableContainer component={Paper}>
         <Table>
         <TableHead>
@@ -139,13 +200,15 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 Actions
               </TableCell>
 
+
+{/* SELECT  */} 
               <TableCell 
                 style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
                 textAlign:'left',}}>  
-                Actions
+                Select
               </TableCell>
                 
             </TableRow>
@@ -184,6 +247,12 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                   <IconButton className='icon-color'>
                     <DeleteIcon />
                   </IconButton>
+                </TableCell>
+                <TableCell>
+                  <Checkbox
+                    checked={selectedRows.has(index)}
+                    onChange={() => handleRowSelect(index)}
+                  />
                 </TableCell>
               </TableRow>
             ))}
