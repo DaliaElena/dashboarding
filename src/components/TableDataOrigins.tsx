@@ -64,26 +64,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ marginRight: '8px' }}
-        />
-        <TablePagination
-          rowsPerPageOptions={[10, 50, 100, -1]} 
-          component="div"
-          count={sortedAndFilteredData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ flex: 1 }}
-        />
 
-      </div>
       <TableContainer component={Paper}>
         <Table>
         <TableHead>

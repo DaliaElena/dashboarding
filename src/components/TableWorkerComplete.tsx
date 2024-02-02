@@ -88,7 +88,27 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
 
   return (
     <div>
-      
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+
+        <TextField
+          label="Search"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ marginRight: '8px' }}
+        />
+        <TablePagination
+          rowsPerPageOptions={[10, dataPoints.length]} // Replace 'All' with dataPoints.length
+          component="div"
+          count={sortedAndFilteredData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          style={{ flex: 1 }}
+        />
+
+      </div>
       <div style={{ overflowX: 'auto' }}>
 
       <StyledTableContainer as={Paper}>
