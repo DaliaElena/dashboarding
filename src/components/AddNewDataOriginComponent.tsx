@@ -80,7 +80,7 @@ const NonEditableForm = ({ formData, onEditClick }) => {
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body>Your data origin has been successfully created</Modal.Body>
+        <Modal.Body style={{textAlign:'center'}}>Your data origin has been successfully created</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
