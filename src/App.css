@@ -47,7 +47,7 @@ margin-left: 5px;}
 /*STYLES TEXT*/
 
 h2  {
-  font-size: 16px;
+  font-size: 22px;
   color: #58595B;
   font-weight: bold;
 }
@@ -448,3 +448,5 @@ color: orange;
     color: white; /* Reemplaza 'tu_color_texto_hover' con el color del texto deseado al hacer hover */
     border-color: #A6ABC8; /* Puedes ajustar el color del borde al hacer hover si es necesario */
   }
+
+
