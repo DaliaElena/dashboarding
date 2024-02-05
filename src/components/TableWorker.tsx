@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination, TextField } from '@mui/material';
+import  { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import styled from 'styled-components';
-
-
 
 interface TableWorkerProps {
   dataPoints: {
@@ -32,8 +30,8 @@ const ActionsCell = styled(TableCell)`
 
 const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [rowsPerPage] = useState(5);
+  const [searchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: string | null }>({
     key: null,
     direction: null,
@@ -69,22 +67,7 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
     setPage(0);
   };
 
-  const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    setPage(newPage);
-  };
-  
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setRowsPerPage(value === 'All' ? dataPoints.length : parseInt(value, 10));
-    setPage(0);
-  };
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.toLowerCase();
-    setSearchTerm(value);
-    setPage(0);
-  };
 
   return (
     <div>

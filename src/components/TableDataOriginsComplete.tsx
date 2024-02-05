@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, TablePagination, Button } from '@mui/material';
+import { TextField, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, TablePagination } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EditIcon from '@mui/icons-material/Edit';
@@ -20,8 +20,9 @@ interface TableDataOriginsProps {
   }[];
 }
 
-const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
+const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initialDataPoints }) => {
   const [page, setPage] = useState(0);
+  const [dataPoints, setDataPoints] = useState<TableDataOriginsProps['dataPoints']>(initialDataPoints);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
@@ -94,6 +95,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
     setDataPoints(newDataPoints);
     setSelectedRows(new Set());
   };
+  
 
 // Para modificar el search
 
@@ -262,5 +264,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
     </div>
   );
 };
+
 
 export default TableDataOrigins;

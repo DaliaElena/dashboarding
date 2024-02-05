@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Form, Button, Card, Row, Dropdown, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-const NonEditableForm = ({ formData, onEditClick }) => {
+const NonEditableForm = ({ formData, onEditClick }: { formData: any, onEditClick: () => void }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -107,16 +107,16 @@ const AddNewDataOriginComponent = () => {
   const [showEditableForm, setShowEditableForm] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleSelect = (eventKey) => {
+  const handleSelect = (eventKey: any) => {
     setSelectedOption(eventKey);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Datos del formulario:', formData);
     setShowEditableForm(false);
