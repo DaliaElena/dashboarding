@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import { useState, FormEvent } from 'react'; // Import FormEvent type
 import { Card, Form, Button, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-
-
-
 
 const AddNewWorker = () => {
 
@@ -13,10 +10,10 @@ const AddNewWorker = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => { // Specify type for event
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const textFieldValue = formData.get('textField');
+    const formData = new FormData(event.currentTarget);
+    const textFieldValue = formData.get('textField') as string; // Assuming 'textField' is a string
     
     // Lógica para manejar los datos del formulario
     console.log('Text Field Value:', textFieldValue);
