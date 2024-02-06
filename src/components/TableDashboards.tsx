@@ -62,9 +62,11 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     setPage(0);
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
+  
+  
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
