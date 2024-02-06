@@ -70,12 +70,13 @@ const NonEditableForm = ({ formData, onEditClick }: { formData: any, onEditClick
         <Button
           style={{ marginRight: '10px' }}
           className='custom-button-secondary'
+          variant='secondary'
           onClick={onEditClick}  // Llama a la función proporcionada al hacer clic
         >
           Return
         </Button>
 
-        <Button className='custom-button-primary' onClick={handleShow}>
+        <Button className='custom-button-primary' variant="dark" onClick={handleShow}>
         Add New
       </Button>
         <Modal show={show} onHide={handleClose}>
@@ -207,11 +208,10 @@ const AddNewDataOriginComponent = () => {
                 variant="secondary"
                 style={{ marginRight: '10px' }}
                 className='custom-button-secondary'
-                onClick={handleReturnClick}
-              >
+                onClick={handleReturnClick}>
                 Cancel
               </Button>
-              <Button variant="danger" className='custom-button-primary' type='submit'>
+              <Button className='custom-button-primary' variant="dark" type='submit'>
                 Continue
               </Button>
             </Card.Footer>

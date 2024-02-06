@@ -68,7 +68,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
-              
+
               <TableCell 
                 style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',

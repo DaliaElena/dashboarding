@@ -13,7 +13,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
     <div className='LeftMenu column-dbos-left'>
       <div className="color-text-menu text-left">
         {/*Logo*/}
-        <div className="text-center">
+        <div className="text-center-menu">
           <img src={Logo} alt="DBOSlabLogo" className="generated-image"></img>
         </div>
         {/*menu*/}
