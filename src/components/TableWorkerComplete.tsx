@@ -30,7 +30,7 @@ const ActionsCell = styled(TableCell)`
   justify-content: space-between;
 `;
 
-const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
+const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState('');
@@ -121,7 +121,7 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 fontSize: '16px',
                 textAlign:'left',}}
 
-                onClick={() => handleSort('Name')}>
+                 onClick={() => handleSort('Name')}>
                 Name{' '}
                 {sortConfig.key === 'Name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
@@ -228,4 +228,4 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   );
 };
 
-export default TableWorker;
+export default TableWorkerComplete;
