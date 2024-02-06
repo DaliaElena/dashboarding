@@ -6,9 +6,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
-
-
-
 import {Col, Row} from 'react-bootstrap';
 
 
@@ -20,11 +17,32 @@ interface TableDataOriginsProps {
   }[];
 }
 
+// Para cambiar estilos de botones
+
+
+
 const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
+
+  const CustomButtonShare = styled(Button)({
+    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
+    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+    },
+  });
+
+  const CustomButtonExport = styled(Button)({
+    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
+    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+    },
+  });
+
 
   const sortedAndFilteredData = [...dataPoints]
     .filter(
@@ -112,6 +130,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
     },
   });
   
+  
 
   return (
     <div>
@@ -144,6 +163,18 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
               </IconButton>
             </Col>
           </Row>
+
+      <div>
+
+{/* Prueba de button */}
+
+        <CustomButtonShare variant="contained">
+          Share
+        </CustomButtonShare>
+        <CustomButtonExport variant="contained">
+          Export
+        </CustomButtonExport>
+      </div>
 
       <TableContainer component={Paper}>
         <Table>

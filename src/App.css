@@ -83,9 +83,9 @@ h2  {
   font-weight: 600;
 }
 
-.text-center {
+.text-center-menu {
   text-align: center!important;
-  margin-left: -10vh;
+  margin-left: -3vh;
 }
 
 /*LATERAL MENU LEFT*/
@@ -410,12 +410,14 @@ color: orange;
     background-color: #FF9E18; /* Color de fondo del botón */
     border: 1px solid #FF9E18;
   }
-  
+ 
+
   .custom-button-primary:hover {
     background-color: #FF9E18; /* Cambia el color de fondo al pasar el mouse */
     border: 2px solid #ffea00;
 
   }
+
 
   .custom-placeholder::placeholder {
     font-style: italic;

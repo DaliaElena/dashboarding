@@ -7,7 +7,7 @@ const notificationCount = 1;
 const MenuTop = () => {
   return (
     <div className='column-dbos-center'>
-              <Row>
+      <Row>
         <Col>
         <Form className="d-flex">
         <Form.Control
@@ -15,14 +15,15 @@ const MenuTop = () => {
           placeholder="Search"
           className="me-2"
           aria-label="Search"
+          style={{ width: '450px' }} 
         />
-        <Button variant="outline-success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+        <Button variant="link"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
         </Form>
         </Col>
         
         <Col>
-        <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ marginTop: '5px' }}>
               Spanish
             </Dropdown.Toggle>
 
@@ -32,7 +33,7 @@ const MenuTop = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Button variant="outline-secondary">
+          <Button variant="light" style={{ borderColor: '#A7A9AC', borderWidth: '1px', borderStyle: 'solid' }}>
             <FontAwesomeIcon icon={faBell} />
             {notificationCount > 0 && (
               <Badge pill  className='custom-background rounded-chat-counter' >
