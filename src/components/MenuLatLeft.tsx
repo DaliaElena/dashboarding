@@ -50,9 +50,9 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
         <div  className="others-menu"> 
           <span>OTHERS</span>
           <ListGroup  className="no-list-borders">
-            <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faGear} /> Settings</a></ListGroup.Item>
-            <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faUser} /> Account</a></ListGroup.Item>
-            <ListGroup.Item  className='hover-effect'><a href=""><FontAwesomeIcon icon={faCircleInfo} /> Help</a></ListGroup.Item>
+            <ListGroup.Item  className='hover-effect'><a href="/Settings"><FontAwesomeIcon icon={faGear} /> Settings</a></ListGroup.Item>
+            <ListGroup.Item  className='hover-effect'><a href="/Account"><FontAwesomeIcon icon={faUser} /> Account</a></ListGroup.Item>
+            <ListGroup.Item  className='hover-effect'><a href="/Help"><FontAwesomeIcon icon={faCircleInfo} /> Help</a></ListGroup.Item>
             <ListGroup.Item className='hover-effect' onClick={props.signOut}><a href=""><FontAwesomeIcon icon={faSignOut} /> Sign Out</a></ListGroup.Item>
           </ListGroup>
         </div>
