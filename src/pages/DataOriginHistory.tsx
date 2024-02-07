@@ -18,7 +18,7 @@ const originsData = [
 
 const DataOriginHistory = () => {
   return (
-    <div className='column-dbos-center'>
+    <div className='column-dbos-center' style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
       <br />
       <h2 style={{marginBottom: '60px' }}>Data Origin History</h2>
       <TableDataOriginsComplete  dataPoints={originsData}/>

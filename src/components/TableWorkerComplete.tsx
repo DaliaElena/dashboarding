@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination, TextField } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination, TextField, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import styled from 'styled-components';
+import { styled } from '@mui/system';
+import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
+import Checkbox from '@mui/material/Checkbox';
 
 
 
-interface TableWorkerProps {
+interface TableWorkerCompleteProps {
   dataPoints: {
     Name: string;
     status: string;
@@ -17,26 +19,73 @@ interface TableWorkerProps {
   }[];
 }
 
-const StyledTableContainer = styled(TableContainer)`
-  margin-top: 20px;
-`;
 
-const StyledTableCell = styled(TableCell)`
-  cursor: pointer;
-`;
 
-const ActionsCell = styled(TableCell)`
-  display: flex;
-  justify-content: space-between;
-`;
 
-const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
+const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints:initialDataPoints }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dataPoints, setDataPoints] = useState<TableWorkerCompleteProps['dataPoints']>(initialDataPoints);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: string | null }>({
     key: null,
     direction: null,
+  });
+
+  const CustomButtonShare = styled(Button)({
+    backgroundColor: '#FFFFFF', // Cambia el color de fondo del botón aquí
+    color: 'gray', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FFFFFF', // Cambia el color de fondo en hover aquí
+    },
+  });
+
+  //Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+   //Checkbox
+  
+   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+
+   const handleRowSelect = (index: number) => {
+     const newSelectedRows = new Set(selectedRows);
+   
+     if (newSelectedRows.has(index)) {
+       newSelectedRows.delete(index);
+     } else {
+       newSelectedRows.add(index);
+     }
+   
+     setSelectedRows(newSelectedRows);
+   };
+   
+   const handleDeleteSelected = () => {
+     // Obtén las filas seleccionadas
+     const selectedRowsArray = Array.from(selectedRows);
+   
+     // Filtra las filas seleccionadas de tus datos
+     const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
+   
+     // Actualiza los datos y restablece las selecciones
+     setDataPoints(newDataPoints);
+     setSelectedRows(new Set());
+     setShow(true);
+   };
+
+
+  const handleExport = () => {
+    // Aquí puedes crear el archivo que deseas exportar, por ejemplo, un archivo CSV
+    // Luego, puedes crear una URL para el archivo y enlazarla en el botón de exportación
+  };
+
+  const CustomButtonExport = styled(Button)({
+    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
+    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+    },
   });
 
   const sortData = (a: any, b: any, config: { key: string | null; direction: string | null }) => {
@@ -86,36 +135,80 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
     setPage(0);
   };
 
-  return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+// Para modificar el search
 
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ marginRight: '8px' }}
-        />
-        <TablePagination
-          rowsPerPageOptions={[10, dataPoints.length]} // Replace 'All' with dataPoints.length
-          component="div"
-          count={sortedAndFilteredData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ flex: 1 }}
-        />
+const CustomTextField = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      backgroundColor: '#FFFFFF',
+      borderColor: '#BDBDBD', // Cambia el color del borde aquí
+      borderWidth: '0.5px', // Cambia el ancho del borde aquí
+      width: '130px',
+      height: '60px',
+      fontSize: '15px', 
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+    },
+    '&:hover fieldset': {
+      borderColor: '#BDBDBD', // Cambia el color del borde en hover aquí
+    },
+  },
+});
+
+
+  return (
+    <div style={{ overflowX:'hidden'}}>
+      <Row className="align-items-center" style={{marginBottom:'50px'}}>
+            <Col xs={2} style={{ textAlign: 'center' }}>
+              <CustomTextField
+                label="Search"
+                variant="outlined"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </Col>
+
+            <Col xs={8} style={{ textAlign: 'center' }}>
+              <TablePagination
+                className="p-remove-style"
+                rowsPerPageOptions={[10, 50, 100, -1]}
+                component="div"
+                count={sortedAndFilteredData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Col>
+
+            <Col xs={2} style={{ textAlign: 'center' }}>
+              <IconButton className='icon-color' onClick={handleDeleteSelected}>
+                <DeleteIcon />
+              </IconButton>
+            </Col>
+
+
+          </Row>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px'}}>
+        <CustomButtonShare variant="contained">
+          Share
+        </CustomButtonShare>
+
+        <a href="#" download="dataOrigin.csv" onClick={handleExport}>
+        <CustomButtonExport variant="contained">
+          Export
+        </CustomButtonExport>
+        </a>
 
       </div>
+
       <div style={{ overflowX: 'auto' }}>
 
-      <StyledTableContainer as={Paper}>
+      <TableContainer component={Paper}>
       <Table>
           <TableHead>
             <TableRow>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+              <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
@@ -126,8 +219,8 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 {sortConfig.key === 'Name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
-              </StyledTableCell>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+              </TableCell>
+              <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
@@ -138,8 +231,8 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 {sortConfig.key === 'status' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
-              </StyledTableCell>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+              </TableCell>
+              <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
@@ -150,8 +243,8 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 {sortConfig.key === 'lastConnection' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
-              </StyledTableCell>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+              </TableCell>
+              <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
@@ -162,16 +255,24 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 {sortConfig.key === 'origin' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
-              </StyledTableCell>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
+              </TableCell>
+              
+              <TableCell style={{fontFamily: 'Roboto, sans-serif',
                 color: '#A7A9AC',
                 fontWeight: 600,
                 fontSize: '16px',
                 textAlign:'left',}}>
-                
                 Actions
-                
-                </StyledTableCell>
+                </TableCell>
+
+                <TableCell 
+                style={{fontFamily: 'Roboto, sans-serif',
+                color: '#A7A9AC',
+                fontWeight: 600,
+                fontSize: '16px',
+                textAlign:'left',}}>  
+                Select
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -209,19 +310,50 @@ const TableWorkerComplete: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 {row.origin}
                 </TableCell>
 
-                <ActionsCell>
+                <TableCell>
+                <a href="/AddNewDataOrigin">
                   <IconButton className='icon-color'>
                     <EditIcon />
                   </IconButton>
-                  <IconButton className='icon-color'>
+                  </a>
+                  <IconButton className='icon-color' onClick={handleShow}>
                     <DeleteIcon />
                   </IconButton>
-                </ActionsCell>
+                </TableCell>
+
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                  </Modal.Header>
+                  <Modal.Body style={{textAlign:'center'}}>Are you sure you want to delete your Data Origin?
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <ButtonBootstrap type="button" className="btn btn-danger">
+                        <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Cancel </a>                  
+                      </ButtonBootstrap>
+                      <ButtonBootstrap type="button" className="btn btn-secondary">
+                        <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Yes </a>                  
+                      </ButtonBootstrap>
+                  </Modal.Footer>
+                </Modal>
+
+                <TableCell>
+                  <Checkbox
+                    checked={selectedRows.has(index)}
+                    onChange={() => handleRowSelect(index)}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </StyledTableContainer>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px', marginTop: '20px', marginRight: '20px'}}>
+              <a href="/AddNewWorker">
+              <CustomButtonExport variant="contained">
+              Add New
+              </CustomButtonExport>
+              </a>
+            </div>
+      </TableContainer>
       </div>
 
     </div>

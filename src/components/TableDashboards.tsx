@@ -10,13 +10,15 @@ import {
   IconButton,
   TablePagination,
   TextField,
+  Button
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import styled from 'styled-components';
-import {  Col, Row} from 'react-bootstrap';
+import Checkbox from '@mui/material/Checkbox';
+import { styled } from '@mui/system';
+import {  Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 
 
 
@@ -29,26 +31,34 @@ interface TableDashboardsProps {
   }[];
 }
 
-const StyledTableContainer = styled(TableContainer)`
-  margin-top: 20px;
-`;
-
-const StyledTableCell = styled(TableCell)`
-  cursor: pointer;
-`;
-
-const ActionsCell = styled(TableCell)`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: string | null }>({
     key: null,
     direction: null,
+  });
+
+  //Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const CustomButtonShare = styled(Button)({
+    backgroundColor: '#FFFFFF', // Cambia el color de fondo del botón aquí
+    color: 'gray', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FFFFFF', // Cambia el color de fondo en hover aquí
+    },
+  });
+
+  const CustomButtonExport = styled(Button)({
+    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
+    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    '&:hover': {
+      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+    },
   });
 
   const handleSort = (key: string) => {
@@ -95,41 +105,102 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     )
     .sort((a, b) => sortData(a, b, sortConfig));
 
+    const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+
+  const handleRowSelect = (index: number) => {
+    const newSelectedRows = new Set(selectedRows);
+  
+    if (newSelectedRows.has(index)) {
+      newSelectedRows.delete(index);
+    } else {
+      newSelectedRows.add(index);
+    }
+  
+    setSelectedRows(newSelectedRows);
+  };
+
+  const handleDeleteSelected = () => {
+    // Obtén las filas seleccionadas
+    const selectedRowsArray = Array.from(selectedRows);
+  
+    // Filtra las filas seleccionadas de tus datos
+    const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
+  
+    // Actualiza los datos y restablece las selecciones
+    setDataPoints(newDataPoints);
+    setSelectedRows(new Set());
+    setShow(true);
+  };
+
+
+    //Para Modificar el Search
+
+    const CustomTextField = styled(TextField)({
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          backgroundColor: '#FFFFFF',
+          borderColor: '#BDBDBD', // Cambia el color del borde aquí
+          borderWidth: '0.5px', // Cambia el ancho del borde aquí
+          width: '130px',
+          height: '60px',
+          fontSize: '15px', 
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        },
+        '&:hover fieldset': {
+          borderColor: '#BDBDBD', // Cambia el color del borde en hover aquí
+        },
+      },
+    });
 
 
   return (
     <div>
-      <div style={{ overflowX: 'auto' }}>
+      <div style={{ overflowX: 'hidden' }}>
 
-<Row>
-  <Col xs={4}>
-  <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ margin: '10px 0' }}
-        />
+      <Row>
+      <Col xs={2} style={{ textAlign: 'center' }}>
+          <CustomTextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+      </Col>
 
-  </Col>
-  <Col xs={8}>
-  <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={sortedAndFilteredData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-  </Col>
-</Row>
+      <Col xs={8} style={{ textAlign: 'center' }}>
+      <TablePagination
+              className="p-remove-style"
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={sortedAndFilteredData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+      </Col>
+      <Col xs={2} style={{ textAlign: 'center' }}>
+                  <IconButton className='icon-color' onClick={handleShow}>
+                    <DeleteIcon />
+                  </IconButton>
+      </Col>
+    </Row>
 
-        <StyledTableContainer as={Paper}>
+    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px'}}>
+        <CustomButtonShare variant="contained">
+          Share
+        </CustomButtonShare>
+        <CustomButtonExport variant="contained">
+          Export
+        </CustomButtonExport>
+      </div>
+
+
+      <TableContainer as={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <StyledTableCell
+                <TableCell
                   style={{
                     fontFamily: 'Roboto, sans-serif',
                     color: '#A7A9AC',
@@ -143,8 +214,8 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   {sortConfig.key === 'Name' && (
                     sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                   )}
-                </StyledTableCell>
-                <StyledTableCell
+                </TableCell>
+                <TableCell
                   style={{
                     fontFamily: 'Roboto, sans-serif',
                     color: '#A7A9AC',
@@ -158,8 +229,8 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   {sortConfig.key === 'status' && (
                     sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                   )}
-                </StyledTableCell>
-                <StyledTableCell
+                </TableCell>
+                <TableCell
                   style={{
                     fontFamily: 'Roboto, sans-serif',
                     color: '#A7A9AC',
@@ -173,29 +244,28 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   {sortConfig.key === 'lastConnection' && (
                     sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                   )}
-                </StyledTableCell>
-                <StyledTableCell
+                </TableCell>
+     
+                <TableCell
                   style={{
                     fontFamily: 'Roboto, sans-serif',
                     color: '#A7A9AC',
                     fontWeight: 600,
                     fontSize: '16px',
                     textAlign: 'left',
-                  }}
-                >
-                  Url
-                </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    fontFamily: 'Roboto, sans-serif',
-                    color: '#A7A9AC',
-                    fontWeight: 600,
-                    fontSize: '16px',
-                    textAlign: 'left',
-                  }}
-                >
+                  }}>
                   Actions
-                </StyledTableCell>
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    color: '#A7A9AC',
+                    fontWeight: 600,
+                    fontSize: '16px',
+                    textAlign: 'left',
+                  }}>
+                  Select
+                </TableCell>                
               </TableRow>
             </TableHead>
             <TableBody>
@@ -210,7 +280,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                       textAlign: 'left',
                     }}
                   >
-                    {row.Name}
+                  <a href={row.url}>{row.Name}</a>
                   </TableCell>
                   <TableCell
                     style={{
@@ -234,30 +304,50 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   >
                     {row.lastConnection}
                   </TableCell>
-                  <TableCell
-                    style={{
-                      fontFamily: 'Roboto, sans-serif',
-                      color: '#58595B',
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      textAlign: 'left',
-                    }}
-                  >
-                    {row.url}
-                  </TableCell> 
-                  <ActionsCell>
+
+                  
+                  <TableCell>
                     <IconButton className='icon-color'>
                       <EditIcon />
                     </IconButton>
-                    <IconButton className='icon-color'>
-                      <DeleteIcon />
+                    <IconButton className='icon-color' onClick={handleShow}>
+                    <DeleteIcon />
                     </IconButton>
-                  </ActionsCell>
+                  </TableCell>
+
+                  <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                  </Modal.Header>
+                  <Modal.Body style={{textAlign:'center'}}>Are you sure you want to delete your Data Origin?
+                  </Modal.Body>
+                  <Modal.Footer>
+                  <ButtonBootstrap type="button" className="btn btn-danger">
+                        <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Cancel </a>                  
+                      </ButtonBootstrap>
+                      <ButtonBootstrap type="button" className="btn btn-secondary">
+                        <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Yes </a>                  
+                      </ButtonBootstrap>
+                    </Modal.Footer>
+                  </Modal>
+
+                  <TableCell>
+                  <Checkbox
+                    checked={selectedRows.has(index)}
+                    onChange={() => handleRowSelect(index)}
+                  />
+                </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-        </StyledTableContainer>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '40px', marginTop: '20px', marginRight: '20px'}}>
+              <a href="/AddNewWorker">
+              <CustomButtonExport variant="contained">
+              Add New
+              </CustomButtonExport>
+              </a>
+            </div>
+        </TableContainer>
 
       </div>
     </div>

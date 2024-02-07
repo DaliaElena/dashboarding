@@ -33,11 +33,14 @@ const workerData = [
   { Name: 'Worker 29', status: 'ON', lastConnection: '2025-05-17', origin: 'Kappa' },
   { Name: 'Worker 30', status: 'OFF', lastConnection: '2025-06-04', origin: 'Zeta' },
   { Name: 'Worker 31', status: 'ON', lastConnection: '2025-07-19', origin: 'Epsilon' },
+  { Name: 'Worker 31', status: 'ON', lastConnection: '2025-07-19', origin: 'Epsilon' },
+  { Name: 'Worker 31', status: 'ON', lastConnection: '2025-07-19', origin: 'Epsilon' },
+
 ];
 
 const WorkersHistory = () => {
   return (
-    <div className="column-dbos-center">
+    <div className="column-dbos-center" style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
       <br/>
       <h2 style={{marginBottom: '60px' }}>Workers History</h2>
       <TableWorkerComplete dataPoints={workerData}/>

@@ -126,15 +126,7 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </StyledTableCell>
-              <StyledTableCell style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}>
-                
-                Actions
-                
-                </StyledTableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -171,15 +163,6 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
                 textAlign:'left',}}>
                 {row.origin}
                 </TableCell>
-
-                <ActionsCell>
-                  <IconButton className='icon-color'>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton className='icon-color'>
-                    <DeleteIcon />
-                  </IconButton>
-                </ActionsCell>
               </TableRow>
             ))}
           </TableBody>

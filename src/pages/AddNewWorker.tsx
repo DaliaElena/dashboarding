@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const AddNewWorker = () => {
 
+  //Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,7 +21,7 @@ const AddNewWorker = () => {
   };
 
   return (
-    <div className="column-dbos-center" >
+    <div className="column-dbos-center" style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }} >
       <h2 style={{textAlign:'left', marginTop:'40px', marginBottom:'40px'}}>Add New Worker</h2>
       <Card className="text-center" style={{ width: '18rem', margin: 'auto' }}>
 
@@ -55,7 +56,7 @@ const AddNewWorker = () => {
           
         </Card.Body>
       </Card>
-    </div>
+  </div>
   );
 };
 

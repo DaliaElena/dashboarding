@@ -96,14 +96,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
-
-              <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}>  
-                Actions</TableCell>
                 
             </TableRow>
           </TableHead>
@@ -134,14 +126,6 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
                 {row.origin}
                 </TableCell>
 
-                <TableCell>
-                  <IconButton className='icon-color'>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton className='icon-color'>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

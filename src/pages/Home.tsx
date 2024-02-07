@@ -56,20 +56,20 @@ const chartData = [
 
 const Home = () => {
   return (
-    <div className='top-space-charts column-dbos-center'>
+    <div className='top-space-charts column-dbos-center'style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
 
       <Row>
         <h2>Workers History</h2>
         <ChartWorker dataPoints={chartData} />
       </Row>
       <Row>
-        <h2>Data Origin Abstract </h2>
-        <TableDataOrigins dataPoints={originsData} />
-      </Row>
-      <Row>
         <h2>Workers Abstract</h2>
         <Row><Cards/></Row>
       <TableWorker dataPoints={workerData} />
+      </Row>
+      <Row>
+        <h2>Data Origin Abstract </h2>
+        <TableDataOrigins dataPoints={originsData} />
       </Row>
     </div>
   );

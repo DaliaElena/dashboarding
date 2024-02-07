@@ -6,10 +6,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
-import {Col, Row} from 'react-bootstrap';
+import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 
 
-interface TableDataOriginsProps {
+interface TableDataOriginsCompleteProps {
   dataPoints: {
     Name: string;
     lastConnection: string;
@@ -17,18 +17,24 @@ interface TableDataOriginsProps {
   }[];
 }
 
-const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initialDataPoints }) => {
+const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dataPoints: initialDataPoints }) => {
   const [page, setPage] = useState(0);
-  const [dataPoints, setDataPoints] = useState<TableDataOriginsProps['dataPoints']>(initialDataPoints);
+  const [dataPoints, setDataPoints] = useState<TableDataOriginsCompleteProps['dataPoints']>(initialDataPoints);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
 
+  //Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
-    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    backgroundColor: '#FFFFFF', // Cambia el color de fondo del botón aquí
+    color: 'gray', // Cambia el color del texto del botón aquí
     '&:hover': {
-      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+      backgroundColor: '#FFFFFF', // Cambia el color de fondo en hover aquí
     },
   });
 
@@ -84,6 +90,8 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
     setPage(0);
   };
 
+  //Checkbox
+
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
 
   const handleRowSelect = (index: number) => {
@@ -108,22 +116,31 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
     // Actualiza los datos y restablece las selecciones
     setDataPoints(newDataPoints);
     setSelectedRows(new Set());
+    setShow(true);
+
   };
   
+  const handleExport = () => {
+    // Aquí puedes crear el archivo que deseas exportar, por ejemplo, un archivo CSV
+    // Luego, puedes crear una URL para el archivo y enlazarla en el botón de exportación
+  };
+
 
 // Para modificar el search
 
   const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        backgroundColor: '#E0E0E0',
-        borderColor: '#A7A9AC', // Cambia el color del borde aquí
-        borderWidth: '1px', // Cambia el ancho del borde aquí
-        width: '275px',
-        height: '60px'
+        backgroundColor: '#FFFFFF',
+        borderColor: '#BDBDBD', // Cambia el color del borde aquí
+        borderWidth: '0.5px', // Cambia el ancho del borde aquí
+        width: '130px',
+        height: '60px',
+        fontSize: '15px', 
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
       },
       '&:hover fieldset': {
-        borderColor: '#828282', // Cambia el color del borde en hover aquí
+        borderColor: '#BDBDBD', // Cambia el color del borde en hover aquí
       },
     },
   });
@@ -131,7 +148,7 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
   
 
   return (
-    <div>
+    <div style={{ overflowX: 'hidden'}}>
       <Row className="align-items-center" style={{marginBottom:'50px'}}>
             <Col xs={2} style={{ textAlign: 'center' }}>
               <CustomTextField
@@ -159,19 +176,21 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
               <IconButton className='icon-color' onClick={handleDeleteSelected}>
                 <DeleteIcon />
               </IconButton>
+
             </Col>
+                
           </Row>
 
-      <div>
-
-{/* Prueba de button */}
-
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px'}}>
         <CustomButtonShare variant="contained">
           Share
         </CustomButtonShare>
+        <a href="#" download="dataOrigin.csv" onClick={handleExport}>
         <CustomButtonExport variant="contained">
           Export
         </CustomButtonExport>
+        </a>
+
       </div>
 
       <TableContainer component={Paper}>
@@ -270,13 +289,32 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
                 </TableCell>
 
                 <TableCell>
+                  <a href="/AddNewDataOrigin">
                   <IconButton className='icon-color'>
                     <EditIcon />
                   </IconButton>
-                  <IconButton className='icon-color'>
+                  </a>
+
+                  <IconButton className='icon-color' onClick={handleShow}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
+
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                  </Modal.Header>
+                  <Modal.Body style={{textAlign:'center'}}>Are you sure you want to delete your Data Origin?
+                  </Modal.Body>
+                  <Modal.Footer>
+                  <ButtonBootstrap type="button" className="btn btn-danger">
+                      <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Cancel </a>                  
+                    </ButtonBootstrap>
+                    <ButtonBootstrap type="button" className="btn btn-secondary">
+                      <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Yes </a>                  
+                    </ButtonBootstrap>
+                  </Modal.Footer>
+                </Modal>
+
                 <TableCell>
                   <Checkbox
                     checked={selectedRows.has(index)}
@@ -287,10 +325,17 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints: initial
             ))}
           </TableBody>
         </Table>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px', marginTop: '20px', marginRight: '20px'}}>
+              <a href="/AddNewDataOrigin">
+              <CustomButtonExport variant="contained">
+              Add New
+              </CustomButtonExport>
+              </a>
+            </div>
       </TableContainer>
     </div>
   );
 };
 
 
-export default TableDataOrigins;
+export default TableDataOriginsComplete;
