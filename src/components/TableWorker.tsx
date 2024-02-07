@@ -1,7 +1,5 @@
 import  { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import styled from 'styled-components';
@@ -23,10 +21,6 @@ const StyledTableCell = styled(TableCell)`
   cursor: pointer;
 `;
 
-const ActionsCell = styled(TableCell)`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   const [page, setPage] = useState(0);

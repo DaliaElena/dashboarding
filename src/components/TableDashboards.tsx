@@ -121,13 +121,13 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
 
   const handleDeleteSelected = () => {
     // Obtén las filas seleccionadas
-    const selectedRowsArray = Array.from(selectedRows);
+      //  const selectedRowsArray = Array.from(selectedRows);
   
     // Filtra las filas seleccionadas de tus datos
-    const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
+      //  const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
   
     // Actualiza los datos y restablece las selecciones
-    setDataPoints(newDataPoints);
+      //  setDataPoints(newDataPoints);
     setSelectedRows(new Set());
     setShow(true);
   };
@@ -180,9 +180,10 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
             />
       </Col>
       <Col xs={2} style={{ textAlign: 'center' }}>
-                  <IconButton className='icon-color' onClick={handleShow}>
+                  <IconButton className='icon-color' onClick={handleDeleteSelected}>
                     <DeleteIcon />
                   </IconButton>
+
       </Col>
     </Row>
 
@@ -196,7 +197,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
       </div>
 
 
-      <TableContainer as={Paper}>
+      <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
