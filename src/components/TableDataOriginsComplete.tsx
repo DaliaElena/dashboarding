@@ -11,7 +11,7 @@ import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 
 interface TableDataOriginsCompleteProps {
   dataPoints: {
-    Name: string;
+    name: string;
     lastConnection: string;
     origin: string;
   }[];
@@ -50,7 +50,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const sortedAndFilteredData = [...dataPoints]
     .filter(
       (row) =>
-        row.Name.toLowerCase().includes(searchTerm) ||
+        row.name.toLowerCase().includes(searchTerm) ||
         row.origin.toLowerCase().includes(searchTerm) ||
         row.lastConnection.toLowerCase().includes(searchTerm)
     )
@@ -204,9 +204,9 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                 fontSize: '16px',
                 textAlign:'left',}}
 
-                onClick={() => handleSort('Name')}>
+                onClick={() => handleSort('name')}>
                 Name{' '}
-                {sortConfig.key === 'Name' && (
+                {sortConfig.key === 'name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
@@ -269,7 +269,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                 fontWeight: 400,
                 fontSize: '16px',
                 textAlign:'left',}}>
-                {row.Name}
+                {row.name}
                 </TableCell>
 
                 <TableCell style={{fontFamily: 'Roboto, sans-serif',

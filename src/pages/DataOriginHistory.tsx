@@ -1,28 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import TableDataOriginsComplete from '../components/TableDataOriginsComplete';
+import { API_URL_DATA } from '../config'; 
 
-const originsData = [
-  { Name: 'Dynatrace_first', lastConnection: '2023-01-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_1', lastConnection: '2023-02-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_test', lastConnection: '2023-03-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_second', lastConnection: '2023-04-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_2', lastConnection: '2023-05-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_3', lastConnection: '2023-06-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_first', lastConnection: '2023-01-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_1', lastConnection: '2023-02-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_test', lastConnection: '2023-03-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_second', lastConnection: '2023-04-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_2', lastConnection: '2023-05-01', origin: 'Dynatrace' },
-  { Name: 'Dynatrace_3', lastConnection: '2023-06-01', origin: 'Dynatrace' },
-];
+interface OriginData {
+  name: string;
+  lastConnection: string;
+  origin: string;
+}
 
+const DataOriginHistory: React.FC = () => {
+  const [originsData, setOriginsData] = useState<OriginData[]>([]);
 
-const DataOriginHistory = () => {
+  useEffect(() => {
+    const fetchOriginsData = async () => {
+      try {
+        const response = await axios.get(API_URL_DATA, {
+          headers: {
+            'accept': 'application/json'
+          }
+        });
+        setOriginsData(response.data);
+        console.log(response.data); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchOriginsData();
+  }, []);
+
   return (
     <div className='column-dbos-center' style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
       <br />
       <h2 style={{marginBottom: '60px' }}>Data Origin History</h2>
-      <TableDataOriginsComplete  dataPoints={originsData}/>
-
+      {originsData.length > 0 ? (
+        <TableDataOriginsComplete dataPoints={originsData} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
