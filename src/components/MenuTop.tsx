@@ -15,7 +15,7 @@ const MenuTop = () => {
           placeholder="Search"
           className="me-2"
           aria-label="Search"
-          style={{ width: '450px' }} 
+          style={{ width: '20vw' }} 
         />
         <Button variant="link"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
         </Form>

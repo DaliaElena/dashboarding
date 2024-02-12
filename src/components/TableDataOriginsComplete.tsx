@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
 import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
+import { API_URL_DATA } from '../config'; 
 
 
 interface TableDataOriginsCompleteProps {
@@ -23,6 +24,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
+  const [rowToDelete, setRowToDelete] = useState<{ name: string; origin: string } | null>(null);
 
   //Modal
   const [show, setShow] = useState(false);
@@ -144,6 +146,26 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
       },
     },
   });
+  const handleDeleteConfirmed = (rowToDelete: { name: string; origin: string } | null) => {
+    if (!rowToDelete) return;
+  
+    fetch(API_URL_DATA+`?origin=${rowToDelete.origin}&name=${rowToDelete.name}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const updatedDataPoints = dataPoints.filter(item => !(item.origin === rowToDelete.origin && item.name === rowToDelete.name));
+      setDataPoints(updatedDataPoints);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  };
   
   
 
@@ -295,9 +317,10 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                   </IconButton>
                   </a>
 
-                  <IconButton className='icon-color' onClick={handleShow}>
+                  <IconButton className='icon-color' onClick={() => { setRowToDelete({ name: row.name, origin: row.origin }); handleShow(); }}>
                     <DeleteIcon />
                   </IconButton>
+
                 </TableCell>
 
                 <Modal show={show} onHide={handleClose}>
@@ -306,11 +329,11 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                   <Modal.Body style={{textAlign:'center'}}>Are you sure you want to delete your Data Origin?
                   </Modal.Body>
                   <Modal.Footer>
-                  <ButtonBootstrap type="button" className="btn btn-danger">
-                      <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Cancel </a>                  
+                    <ButtonBootstrap type="button" className="btn btn-danger" onClick={handleClose}>
+                      Cancel
                     </ButtonBootstrap>
-                    <ButtonBootstrap type="button" className="btn btn-secondary">
-                      <a href="/DataOriginHistory" style={{textDecoration: "none", color: "inherit"}}> Yes </a>                  
+                    <ButtonBootstrap type="button" className="btn btn-secondary" onClick={() => { handleDeleteConfirmed(rowToDelete); handleClose(); }}>
+                      Yes
                     </ButtonBootstrap>
                   </Modal.Footer>
                 </Modal>
