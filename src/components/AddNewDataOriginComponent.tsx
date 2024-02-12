@@ -1,98 +1,6 @@
 import  { useState } from 'react';
-import { Form, Button, Card, Row, Dropdown, Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
-
-const NonEditableForm = ({ formData, onEditClick }: { formData: any, onEditClick: () => void }) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  return (
-    <Form>
-      <Form.Group controlId="formSource" className='text-form-style'>
-        <Form.Label>Source name</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter your source name"
-          name="source"
-          value={formData.source}
-          readOnly
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="formDetails" className='text-form-style'>
-        <Form.Label>Additional source details</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Some details of your source"
-          name="details"
-          value={formData.details}
-          readOnly
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="formDropdown" className='text-form-style'>
-        <Form.Label style={{ marginBottom: '20px' }}>Source Type</Form.Label>
-        <Form.Control
-          type="text"
-          value={formData.selectedOption}
-          readOnly
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="formToken" className='text-form-style'>
-        <Form.Label>Token</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Token"
-          name="token"
-          value={formData.token}
-          readOnly
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="formApiToken" className='text-form-style'>
-        <Form.Label>API token</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="API Token"
-          name="apiToken"
-          value={formData.apiToken}
-          readOnly
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Form.Group>
-      <Card.Footer className='card-footer'>
-        <Button
-          style={{ marginRight: '10px' }}
-          className='custom-button-secondary'
-          variant='secondary'
-          onClick={onEditClick}  // Llama a la función proporcionada al hacer clic
-        >
-          Return
-        </Button>
-
-        <Button className='custom-button-primary' variant="dark" onClick={handleShow}>
-        Add New
-      </Button>
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-        </Modal.Header>
-        <Modal.Body style={{textAlign:'center'}}>Your data origin has been successfully created</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            <Link to="/DataOriginHistory" style={{textDecoration: 'none' , color:'inherit'}}> Close </Link>
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      </Card.Footer>
-    </Form>
-  );
-};
+import { Form, Button, Card, Row, Dropdown } from 'react-bootstrap';
+import AddNewDataOriginComponentNonEditableForm from '../components/AddNewDataOriginComponentNonEditableForm.tsx'
 
 
 
@@ -100,7 +8,7 @@ const AddNewDataOriginComponent = () => {
   const [formData, setFormData] = useState({
     source: '',
     details: '',
-    token: '',
+    dynatraceUrl: '',
     apiToken: '',
     selectedOption: '',
   });
@@ -108,9 +16,12 @@ const AddNewDataOriginComponent = () => {
   const [showEditableForm, setShowEditableForm] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
+
   const handleSelect = (eventKey: any) => {
     setSelectedOption(eventKey);
+    setFormData({ ...formData, selectedOption: eventKey }); // Update formData with selected option
   };
+  
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -173,19 +84,19 @@ const AddNewDataOriginComponent = () => {
 
                 <Dropdown.Menu style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white' }}>
                   <Dropdown.Item eventKey={"Dynatrace"}>Dynatrace</Dropdown.Item>
-                  <Dropdown.Item eventKey={"Option 2"}>Option 2</Dropdown.Item>
-                  <Dropdown.Item eventKey={"Option 3"}>Option 3</Dropdown.Item>
+                  {/* <Dropdown.Item eventKey={"Mysql"}>Mysql</Dropdown.Item>
+                  <Dropdown.Item eventKey={"Jira"}>Jira</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
 
             <Form.Group controlId="formToken" className='text-form-style'>
-              <Form.Label>Token</Form.Label>
+              <Form.Label>Dynatrace url</Form.Label>
               <Form.Control
-                type="password"
-                placeholder="Token"
-                name="token"
-                value={formData.token}
+                type="text"
+                placeholder="dynatraceUrl"
+                name="dynatraceUrl"
+                value={formData.dynatraceUrl}
                 onChange={handleChange}
                 className="custom-placeholder"
               />
@@ -217,7 +128,7 @@ const AddNewDataOriginComponent = () => {
             </Card.Footer>
           </Form>
         ) : (
-          <NonEditableForm formData={formData} onEditClick={handleReturnClick} />
+          <AddNewDataOriginComponentNonEditableForm formData={{ ...formData, selectedOption }} onEditClick={handleReturnClick} />
         )}
       </Card.Body>
 
