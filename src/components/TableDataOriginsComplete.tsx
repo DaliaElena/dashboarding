@@ -6,7 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
-import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
+import {Col, Row, Modal, Button as ButtonBootstrap, Form, Badge} from 'react-bootstrap';
+
 
 
 interface TableDataOriginsCompleteProps {
@@ -23,20 +24,31 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
+  const [emails, setEmails] = useState<string[]>([]);  //ParaCorreosEnShare
 
   //Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+   // Modal share
+   const [showLargeModal, setShowLargeModal] = useState(false);
+   const handleCloseLargeModal = () => setShowLargeModal(false);
+   const handleShowLargeModal = () => setShowLargeModal(true);
 
-  const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FFFFFF', // Cambia el color de fondo del botón aquí
-    color: 'gray', // Cambia el color del texto del botón aquí
-    '&:hover': {
-      backgroundColor: '#FFFFFF', // Cambia el color de fondo en hover aquí
-    },
-  });
+// Para modificar el Botón share
+
+const CustomButtonShare = styled(Button)({
+  backgroundColor: '#FFFFFF',
+  color: 'gray',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Agregar sombra
+  transition: 'box-shadow 0.3s ease', // Transición para hover
+  '&:hover': {
+    backgroundColor: '#FFFFFF',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Aumentar la sombra al hacer hover
+  },
+});
+
 
   const CustomButtonExport = styled(Button)({
     backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
@@ -46,6 +58,31 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     },
   });
 
+  //Para gestion de correos en share
+
+  const handleEmailKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Tab' || event.key === ',' || event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      const value = event.currentTarget.value.trim();
+  
+      // Expresión regular para validar el formato del correo electrónico
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+      if (emailRegex.test(value)) {
+        setEmails([...emails, value]);
+        event.currentTarget.value = ''; // Limpiar el campo de entrada
+      } else {
+        // Mostrar un mensaje de error o realizar otra acción en caso de que el formato del correo electrónico no sea válido
+        console.log('Por favor, ingresa un correo electrónico válido.');
+      }
+    }
+  };
+
+  const handleRemoveEmail = (index: number) => {
+    const newEmails = [...emails];
+    newEmails.splice(index, 1); // Eliminar el correo electrónico del índice especificado
+    setEmails(newEmails);
+  };
 
   const sortedAndFilteredData = [...dataPoints]
     .filter(
@@ -145,7 +182,6 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     },
   });
   
-  
 
   return (
     <div style={{ overflowX: 'hidden'}}>
@@ -182,9 +218,64 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
           </Row>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px'}}>
-        <CustomButtonShare variant="contained">
-          Share
-        </CustomButtonShare>
+            <CustomButtonShare onClick={handleShowLargeModal}>
+              Share
+            </CustomButtonShare>
+            {/* Modal grande */}
+
+        <Modal show={showLargeModal} onHide={handleCloseLargeModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Share Data</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Row>
+          <Col xs={8}>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <div style={{ position: 'relative' }}>
+                  <Form.Label>Share with</Form.Label>
+                  <Form.Control type="text" placeholder="Enter email" onKeyDown={handleEmailKeyDown} />
+                  {emails.map((email, index) => (
+                    <Badge key={index} className="custom-badge">
+                      {email}
+                    <ButtonBootstrap onClick={() => handleRemoveEmail(index)} className="custom-close-button">
+                      <span aria-hidden="true">&times;</span>
+                  </ButtonBootstrap>
+                </Badge>
+              ))}
+            </div>
+          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicMessage">
+              <Form.Label>Message (optional)</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Add a message" />
+            </Form.Group>
+          </Form>
+         </Col>
+         <Col xs={4}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlSelect1">
+              <Form.Label>Permissions</Form.Label>
+              <Form.Select aria-label="Select Permission">
+                <option>Select...</option>
+                <option>Read Only</option>
+                <option>Read/Write</option>
+                <option>Editor</option>
+              </Form.Select>
+          </Form.Group>
+
+         </Col>
+        </Row>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <ButtonBootstrap variant="secondary" onClick={handleCloseLargeModal}>
+            Cancel
+          </ButtonBootstrap>
+          <ButtonBootstrap className="custom-button-primary" variant='warning' type="submit" style={{marginTop: '20px', marginBottom: '20px'}}>
+              Continue
+        </ButtonBootstrap>
+        </Modal.Footer>
+      </Modal>
         <a href="#" download="dataOrigin.csv" onClick={handleExport}>
         <CustomButtonExport variant="contained">
           Export

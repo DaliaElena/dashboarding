@@ -37,7 +37,7 @@ const AddNewWorker = () => {
                 <FontAwesomeIcon icon={faCopy} style={{ marginLeft: '10px', marginTop: '25px'}} />
                 <FontAwesomeIcon icon={faEye} style={{ marginLeft: '10px', marginTop: '25px'}}/> 
               </Form.Group>
-            <Button className="custom-button-primary" variant='dark' type="submit" style={{marginTop: '20px', marginBottom: '20px'}} onClick={handleShow}>
+            <Button className="custom-button-primary" variant='warning' type="submit" style={{marginTop: '20px', marginBottom: '20px'}} onClick={handleShow}>
               Confirm
             </Button>
 
@@ -47,7 +47,7 @@ const AddNewWorker = () => {
               <Modal.Body style={{textAlign:'center'}}>Reenter or paste the password you previously copied directly into your laboratory.
               </Modal.Body>
               <Modal.Footer>
-                <Button className='custom-button-primary' variant="dark" onClick={handleClose}>
+                <Button className='custom-button-primary' variant="warning" onClick={handleClose}>
                   <Link to="http://notebook.netjerdbos.cloud/tree" style={{textDecoration: 'none' , color:'inherit'}}> Go to lab </Link>
                 </Button>
               </Modal.Footer>

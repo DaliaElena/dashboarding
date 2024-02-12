@@ -451,3 +451,39 @@ color: orange;
     border-color: #A6ABC8; /* Puedes ajustar el color del borde al hacer hover si es necesario */
   }
 
+/* Para modificar los badge (etiquetas dentro de share) */
+
+.custom-badge {
+  background-color: #FAF2FF !important;
+  color: #000;
+  font-weight: 500;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.custom-close-button {
+  background-color: #FAF2FF; /* Cambia el color de fondo según sea necesario */
+  color: rgb(0, 0, 0); /* Cambia el color del texto según sea necesario */
+  border: none; /* O quita el borde si no lo necesitas */
+  /* Agrega cualquier otro estilo que desees */
+}
+
+.custom-close-button:hover {
+  background-color: transparent; /* Mantener el fondo transparente en hover */
+  color: gray; /* Mantener el texto transparente en hover */
+}
+
+.custom-close-button:hover {
+  background-color: transparent; /* Mantener el fondo transparente en hover */
+  color: gray; /* Cambiar el color del texto a gris en hover */
+}
+
+.custom-close-button:active {
+  background-color: transparent; /* Mantener el fondo transparente cuando se hace clic */
+  color: gray!important; /* Cambiar el color del texto a gris cuando se hace clic */
+  --bs-btn-active-bg: transparent;
+}
+
+
+
