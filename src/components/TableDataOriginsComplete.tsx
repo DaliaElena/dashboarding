@@ -36,6 +36,37 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
    const handleCloseLargeModal = () => setShowLargeModal(false);
    const handleShowLargeModal = () => setShowLargeModal(true);
 
+
+   //Para que al hacer clic fuera del campo, se agregue el correo
+
+   const handleEmailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value.trim();
+  
+    // Expresión regular para validar el formato del correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    if (emailRegex.test(value)) {
+      setEmails([...emails, value]);
+      event.currentTarget.value = ''; // Limpiar el campo de entrada
+    } else {
+      // Mostrar un mensaje de error o realizar otra acción en caso de que el formato del correo electrónico no sea válido
+      console.log('Please enter a valid email');
+    }
+  };
+
+   // Tercer Modal 
+   const [showTercerModal, setShowTercerModal] = useState(false);
+   const handleCloseTercerModal = () => setShowTercerModal(false);
+   const handleShowTercerModal = () => setShowTercerModal(true);
+
+  // Función para continuar y mostrar el tercer modal
+  const handleContinue = () => {
+  handleCloseLargeModal(); // Cierra el LargeModal
+  handleShowTercerModal(); // Muestra el TercerModal
+}
+
+
+
 // Para modificar el Botón share
 
 const CustomButtonShare = styled(Button)({
@@ -61,7 +92,7 @@ const CustomButtonShare = styled(Button)({
   //Para gestion de correos en share
 
   const handleEmailKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Tab' || event.key === ',' || event.key === ' ' || event.key === 'Enter') {
+    if (event.key === 'Tab' || event.key === ',' || event.key === ' ' || event.key === 'Enter' || event.key === 'click') {
       event.preventDefault();
       const value = event.currentTarget.value.trim();
   
@@ -73,10 +104,12 @@ const CustomButtonShare = styled(Button)({
         event.currentTarget.value = ''; // Limpiar el campo de entrada
       } else {
         // Mostrar un mensaje de error o realizar otra acción en caso de que el formato del correo electrónico no sea válido
-        console.log('Por favor, ingresa un correo electrónico válido.');
+        console.log('Please enter a valid email');
       }
     }
   };
+
+
 
   const handleRemoveEmail = (index: number) => {
     const newEmails = [...emails];
@@ -235,7 +268,7 @@ const CustomButtonShare = styled(Button)({
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <div style={{ position: 'relative' }}>
                   <Form.Label>Share with</Form.Label>
-                  <Form.Control type="text" placeholder="Enter email" onKeyDown={handleEmailKeyDown} />
+                  <Form.Control required type="text" placeholder="Enter email" onKeyDown={handleEmailKeyDown} onBlur={handleEmailBlur} />
                   {emails.map((email, index) => (
                     <Badge key={index} className="custom-badge">
                       {email}
@@ -256,7 +289,6 @@ const CustomButtonShare = styled(Button)({
           <Form.Group className="mb-3" controlId="exampleForm.ControlSelect1">
               <Form.Label>Permissions</Form.Label>
               <Form.Select aria-label="Select Permission">
-                <option>Select...</option>
                 <option>Read Only</option>
                 <option>Read/Write</option>
                 <option>Editor</option>
@@ -271,11 +303,32 @@ const CustomButtonShare = styled(Button)({
           <ButtonBootstrap variant="secondary" onClick={handleCloseLargeModal}>
             Cancel
           </ButtonBootstrap>
-          <ButtonBootstrap className="custom-button-primary" variant='warning' type="submit" style={{marginTop: '20px', marginBottom: '20px'}}>
+          <ButtonBootstrap className="custom-button-primary" variant='warning' type="submit" onClick={handleContinue} style={{marginTop: '20px', marginBottom: '20px'}}  disabled={emails.length === 0} // Deshabilitar el botón si no hay correos electrónicos
+          >
               Continue
         </ButtonBootstrap>
         </Modal.Footer>
-      </Modal>
+        </Modal>
+
+        <Modal show={showTercerModal} onHide={handleCloseTercerModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Sharing data origin</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div style={{marginLeft: '60px'}}>
+            <p style={{fontWeight:'600', marginTop:'20px',marginBottom: '20px'}}>Collaborators</p>
+            <ul style={{listStyleType: 'none', paddingLeft: '20px'}}>
+            {emails.map((email, index) => (
+            <li key={index} style={{marginBottom: '20px'}}>{email}</li>
+           ))}
+            </ul>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+       {/* Botones del segundo modal */}
+        </Modal.Footer>
+        </Modal>
+
         <a href="#" download="dataOrigin.csv" onClick={handleExport}>
         <CustomButtonExport variant="contained">
           Export
