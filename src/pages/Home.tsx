@@ -5,7 +5,6 @@ import ChartWorker from '../components/ChartWorker.tsx';
 import Cards from '../components/Cards.tsx';
 import useAPIGET from '../hooks/getAPI.tsx';
 import { API_URL_CHART, API_URL_WORKERS, API_URL_DATA } from '../config.tsx';
-import { useEffect, useState } from 'react';
 
 const Home = () => {
   const chartData = useAPIGET(API_URL_CHART);
