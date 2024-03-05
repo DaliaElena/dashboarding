@@ -18,13 +18,11 @@ const TableDataOrigins: React.FC<TableDataOriginsProps> = ({ dataPoints }) => {
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
 
   const sortedAndFilteredData = [...dataPoints]
-    .filter(
-      (row) =>
-        row.Name.toLowerCase().includes(searchTerm) ||
-        row.origin.toLowerCase().includes(searchTerm) ||
-        row.lastConnection.toLowerCase().includes(searchTerm)
-    )
-    .sort((a, b) => {
+  .filter(row => 
+    row.Name && row.Name.toLowerCase().includes(searchTerm) ||
+    row.lastConnection && row.lastConnection.toLowerCase().includes(searchTerm) ||
+    row.origin && row.origin.toLowerCase().includes(searchTerm)
+  ).sort((a, b) => {
       if (sortConfig.direction === 'asc') {
         return a[sortConfig.key as keyof typeof a] > b[sortConfig.key as keyof typeof b] ? 1 : -1;
       } else if (sortConfig.direction === 'desc') {
