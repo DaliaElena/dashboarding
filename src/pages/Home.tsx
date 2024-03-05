@@ -1,8 +1,9 @@
 import {Row} from 'react-bootstrap';
 import TableWorker from '../components/TableWorker';
 import TableDataOrigins from '../components/TableDataOrigins.tsx';
-import ChartWorker from '../components/ChartWorker.tsx'
-import Cards from '../components/Cards.tsx'
+import ChartWorker from '../components/ChartWorker.tsx';
+import Cards from '../components/Cards.tsx';
+import useChartData from '../hooks/useChartData.tsx';
 
 const workerData = [
   { Name: 'Worker 1', status: 'ON', lastConnection: '2023-01-01', origin: 'Lambda' },
@@ -46,15 +47,11 @@ const originsData = [
   { Name: 'Dynatrace_3', lastConnection: '2023-06-01', origin: 'Dynatrace' },
 ];
 
-const chartData = [
-  { x: "1", y: 10 },
-  { x: "2", y: 15 },
-  { x: "3", y: 8 },
-  { x: "4", y: 12 },
-  { x: "5", y: 20 }
-];
+
 
 const Home = () => {
+  const chartData = useChartData();
+
   return (
     <div className='top-space-charts column-dbos-center'style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
 
