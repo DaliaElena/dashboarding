@@ -1,71 +1,15 @@
 import TableDashboards from '../components/TableDashboards';
+import useAPIGET from '../hooks/getAPI.tsx';
+import { API_URL_DASHBOARDS } from '../config.tsx';
 
-const originsData = [
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo1",
-    "status": "Conectado",
-    "lastConnection": "2023-01-01",
-    "url": "https://demo1.netjerdbos.cloud/"
-  },
-  {
-    "Name": "Demo",
-    "status": "Desconectado",
-    "lastConnection": "2023-02-01",
-    "url": "https://demo.netjerdbos.cloud/"
-  }
-];
 
-  
   
   const MyDashboards = () => {
+    const originsData = useAPIGET(API_URL_DASHBOARDS);  
+    if (!originsData) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div className='column-dbos-center' style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>
         <br />

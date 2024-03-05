@@ -12,7 +12,7 @@ import { API_URL_DATA } from '../config';
 
 interface TableDataOriginsCompleteProps {
   dataPoints: {
-    name: string;
+    Name: string;
     lastConnection: string;
     origin: string;
   }[];
@@ -52,7 +52,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const sortedAndFilteredData = [...dataPoints]
     .filter(
       (row) =>
-        row.name.toLowerCase().includes(searchTerm) ||
+        row.Name.toLowerCase().includes(searchTerm) ||
         row.origin.toLowerCase().includes(searchTerm) ||
         row.lastConnection.toLowerCase().includes(searchTerm)
     )
@@ -149,7 +149,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const handleDeleteConfirmed = (rowToDelete: { name: string; origin: string } | null) => {
     if (!rowToDelete) return;
   
-    fetch(API_URL_DATA+`?origin=${rowToDelete.origin}&name=${rowToDelete.name}`, {
+    fetch(API_URL_DATA+`?origin=${rowToDelete.origin}&name=${rowToDelete.Name}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -159,7 +159,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const updatedDataPoints = dataPoints.filter(item => !(item.origin === rowToDelete.origin && item.name === rowToDelete.name));
+      const updatedDataPoints = dataPoints.filter(item => !(item.origin === rowToDelete.origin && item.Name === rowToDelete.Name));
       setDataPoints(updatedDataPoints);
     })
     .catch(error => {
@@ -291,7 +291,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                 fontWeight: 400,
                 fontSize: '16px',
                 textAlign:'left',}}>
-                {row.name}
+                {row.Name}
                 </TableCell>
 
                 <TableCell style={{fontFamily: 'Roboto, sans-serif',
@@ -317,7 +317,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                   </IconButton>
                   </a>
 
-                  <IconButton className='icon-color' onClick={() => { setRowToDelete({ name: row.name, origin: row.origin }); handleShow(); }}>
+                  <IconButton className='icon-color' onClick={() => { setRowToDelete({ name: row.Name, origin: row.origin }); handleShow(); }}>
                     <DeleteIcon />
                   </IconButton>
 

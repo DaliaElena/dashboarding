@@ -24,10 +24,10 @@ import {  Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 
 interface TableDashboardsProps {
   dataPoints: {
-    Name: string;
-    status: string;
+    name: string;
     lastConnection: string;
     url: string;
+    status: string;
   }[];
 }
 
@@ -98,7 +98,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
   const sortedAndFilteredData = [...dataPoints]
     .filter(
       (row) =>
-        (row.Name && row.Name.toLowerCase().includes(searchTerm)) ||
+        (row.name && row.name.toLowerCase().includes(searchTerm)) ||
         (row.status && row.status.toLowerCase().includes(searchTerm)) ||
         (row.lastConnection && row.lastConnection.toLowerCase().includes(searchTerm)) ||
         (row.url && row.url.toLowerCase().includes(searchTerm))
@@ -120,14 +120,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
   };
 
   const handleDeleteSelected = () => {
-    // Obtén las filas seleccionadas
-      //  const selectedRowsArray = Array.from(selectedRows);
-  
-    // Filtra las filas seleccionadas de tus datos
-      //  const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
-  
-    // Actualiza los datos y restablece las selecciones
-      //  setDataPoints(newDataPoints);
+
     setSelectedRows(new Set());
     setShow(true);
   };
@@ -281,7 +274,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                       textAlign: 'left',
                     }}
                   >
-                  <a href={row.url}>{row.Name}</a>
+                  <a href={row.url}>{row.name}</a>
                   </TableCell>
                   <TableCell
                     style={{
@@ -292,7 +285,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                       textAlign: 'left',
                     }}
                   >
-                    {row.status}
+                    ON
                   </TableCell>
                   <TableCell
                     style={{
