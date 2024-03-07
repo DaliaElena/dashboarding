@@ -7,8 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
 import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
-import { API_URL_DATA } from '../config'; 
-
+import useDeleteAPI from '../hooks/deleteDataAPI.tsx';
+import { API_URL_DATA } from '../config.tsx';
 
 interface TableDataOriginsCompleteProps {
   dataPoints: {
@@ -24,12 +24,41 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
-  const [rowToDelete, setRowToDelete] = useState<{ name: string; origin: string } | null>(null);
 
-  //Modal
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { deleteData } = useDeleteAPI();
+
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [selectedRowIndices, setSelectedRowIndices] = useState<Set<number>>(new Set());
+
+  const handleRowSelect = (index: number) => {
+    const newSelectedRowIndices = new Set(selectedRowIndices);
+
+    if (newSelectedRowIndices.has(index)) {
+      newSelectedRowIndices.delete(index);
+    } else {
+      newSelectedRowIndices.add(index);
+    }
+
+    setSelectedRowIndices(newSelectedRowIndices);
+  };
+
+  const handleDeleteSelected = async () => {
+    const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].Name);
+    const selectedOrigins = Array.from(selectedRowIndices).map(index => dataPoints[index].origin);
+    console.log('Data to be sent for deletion:', selectedNames);
+    for (let i = 0; i < selectedNames.length; i++) {
+      const response = await deleteData(API_URL_DATA, selectedOrigins[i], selectedNames[i]);
+      console.log(`Response for deleting ${selectedNames[i]}:`, response);
+    }
+    setShowDeleteModal(false);
+  };
+  
+
+  const handleDeleteModalShow = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteModalClose = () => setShowDeleteModal(false);
 
 
   const CustomButtonShare = styled(Button)({
@@ -92,35 +121,8 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     setPage(0);
   };
 
-  //Checkbox
 
-  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
 
-  const handleRowSelect = (index: number) => {
-    const newSelectedRows = new Set(selectedRows);
-  
-    if (newSelectedRows.has(index)) {
-      newSelectedRows.delete(index);
-    } else {
-      newSelectedRows.add(index);
-    }
-  
-    setSelectedRows(newSelectedRows);
-  };
-  
-  const handleDeleteSelected = () => {
-    // Obtén las filas seleccionadas
-    const selectedRowsArray = Array.from(selectedRows);
-  
-    // Filtra las filas seleccionadas de tus datos
-    const newDataPoints = dataPoints.filter((_, index) => !selectedRowsArray.includes(index));
-  
-    // Actualiza los datos y restablece las selecciones
-    setDataPoints(newDataPoints);
-    setSelectedRows(new Set());
-    setShow(true);
-
-  };
   
   const handleExport = () => {
     // Aquí puedes crear el archivo que deseas exportar, por ejemplo, un archivo CSV
@@ -146,26 +148,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
       },
     },
   });
-  const handleDeleteConfirmed = (rowToDelete: { name: string; origin: string } | null) => {
-    if (!rowToDelete) return;
-  
-    fetch(API_URL_DATA+`?origin=${rowToDelete.origin}&name=${rowToDelete.Name}`, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-      },
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const updatedDataPoints = dataPoints.filter(item => !(item.origin === rowToDelete.origin && item.Name === rowToDelete.Name));
-      setDataPoints(updatedDataPoints);
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
-  };
+
   
   
 
@@ -195,9 +178,9 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
             </Col>
 
             <Col xs={2} style={{ textAlign: 'center' }}>
-              <IconButton className='icon-color' onClick={handleDeleteSelected}>
-                <DeleteIcon />
-              </IconButton>
+            <IconButton className='icon-color' onClick={handleDeleteModalShow}>
+              <DeleteIcon />
+            </IconButton>
 
             </Col>
                 
@@ -317,32 +300,19 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                   </IconButton>
                   </a>
 
-                  <IconButton className='icon-color' onClick={() => { setRowToDelete({ name: row.Name, origin: row.origin }); handleShow(); }}>
-                    <DeleteIcon />
-                  </IconButton>
+                  <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
+                      <DeleteIcon />
+                    </IconButton>
 
                 </TableCell>
 
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                  </Modal.Header>
-                  <Modal.Body style={{textAlign:'center'}}>Are you sure you want to delete your Data Origin?
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <ButtonBootstrap type="button" className="btn btn-danger" onClick={handleClose}>
-                      Cancel
-                    </ButtonBootstrap>
-                    <ButtonBootstrap type="button" className="btn btn-secondary" onClick={() => { handleDeleteConfirmed(rowToDelete); handleClose(); }}>
-                      Yes
-                    </ButtonBootstrap>
-                  </Modal.Footer>
-                </Modal>
+
 
                 <TableCell>
-                  <Checkbox
-                    checked={selectedRows.has(index)}
-                    onChange={() => handleRowSelect(index)}
-                  />
+                <Checkbox
+                      checked={selectedRowIndices.has(index)}
+                      onChange={() => handleRowSelect(index)}
+                    />
                 </TableCell>
               </TableRow>
             ))}
@@ -356,6 +326,20 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
               </a>
             </div>
       </TableContainer>
+      <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this item?</Modal.Body>
+        <Modal.Footer>
+          <ButtonBootstrap variant="secondary" onClick={handleDeleteModalClose}>
+            Cancel
+          </ButtonBootstrap>
+          <ButtonBootstrap variant="danger" onClick={handleDeleteSelected}>
+              Yes
+            </ButtonBootstrap>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -41,6 +41,7 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
     key: null,
     direction: null,
   });
+  
   const { deleteData } = useDeleteAPI();
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
