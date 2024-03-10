@@ -3,14 +3,9 @@ import axios from 'axios';
 import TableDataOriginsComplete from '../components/TableDataOriginsComplete';
 import { API_URL_DATA } from '../config'; 
 
-interface OriginData {
-  name: string;
-  lastConnection: string;
-  origin: string;
-}
 
 const DataOriginHistory: React.FC = () => {
-  const [originsData, setOriginsData] = useState<OriginData[]>([]);
+  const [originsData, setOriginsData] = useState<{ Name: string; origin: string; lastConnection: string; }[]>([]);
 
   useEffect(() => {
     const fetchOriginsData = async () => {

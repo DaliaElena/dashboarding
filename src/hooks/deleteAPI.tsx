@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 const useDeleteAPI = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+  const [error, setError] = useState<any>(null); 
+  
   const deleteData = async (url: string, name: string) => {
     try {
       setIsLoading(true);

@@ -60,7 +60,7 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
   };
 
   const handleDeleteSelected = async () => {
-    const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].name);
+    const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].Name);
     console.log('Data to be sent for deletion:', selectedNames); 
     for (const selectedName of selectedNames) {
       const response = await deleteData(API_URL_WORKERS, selectedName);

@@ -13,14 +13,14 @@ import { API_URL_DATA } from '../config.tsx';
 interface TableDataOriginsCompleteProps {
   dataPoints: {
     Name: string;
-    lastConnection: string;
     origin: string;
+    lastConnection: string;
   }[];
 }
 
-const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dataPoints: initialDataPoints }) => {
+const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dataPoints: propsDataPoints }) => {
+  const [dataPoints] = useState<TableDataOriginsCompleteProps['dataPoints']>(propsDataPoints);
   const [page, setPage] = useState(0);
-  const [dataPoints, setDataPoints] = useState<TableDataOriginsCompleteProps['dataPoints']>(initialDataPoints);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
@@ -53,30 +53,27 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     setShowDeleteModal(false);
   };
   
-
   const handleDeleteModalShow = () => {
     setShowDeleteModal(true);
   };
 
   const handleDeleteModalClose = () => setShowDeleteModal(false);
 
-
   const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FFFFFF', // Cambia el color de fondo del botón aquí
-    color: 'gray', // Cambia el color del texto del botón aquí
+    backgroundColor: '#FFFFFF',
+    color: 'gray',
     '&:hover': {
-      backgroundColor: '#FFFFFF', // Cambia el color de fondo en hover aquí
+      backgroundColor: '#FFFFFF',
     },
   });
 
   const CustomButtonExport = styled(Button)({
-    backgroundColor: '#FF9E18', // Cambia el color de fondo del botón aquí
-    color: '#FFFFFF', // Cambia el color del texto del botón aquí
+    backgroundColor: '#FF9E18',
+    color: '#FFFFFF',
     '&:hover': {
-      backgroundColor: '#FF9E18', // Cambia el color de fondo en hover aquí
+      backgroundColor: '#FF9E18',
     },
   });
-
 
   const sortedAndFilteredData = [...dataPoints]
     .filter(
@@ -121,109 +118,96 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     setPage(0);
   };
 
-
-
-  
-  const handleExport = () => {
-    // Aquí puedes crear el archivo que deseas exportar, por ejemplo, un archivo CSV
-    // Luego, puedes crear una URL para el archivo y enlazarla en el botón de exportación
-  };
-
-
-// Para modificar el search
-
   const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         backgroundColor: '#FFFFFF',
-        borderColor: '#BDBDBD', // Cambia el color del borde aquí
-        borderWidth: '0.5px', // Cambia el ancho del borde aquí
+        borderColor: '#BDBDBD',
+        borderWidth: '0.5px',
         width: '130px',
         height: '60px',
         fontSize: '15px', 
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
       },
       '&:hover fieldset': {
-        borderColor: '#BDBDBD', // Cambia el color del borde en hover aquí
+        borderColor: '#BDBDBD',
       },
     },
   });
-
   
-  
-
   return (
     <div style={{ overflowX: 'hidden'}}>
       <Row className="align-items-center" style={{marginBottom:'50px'}}>
-            <Col xs={2} style={{ textAlign: 'center' }}>
-              <CustomTextField
-                label="Search"
-                variant="outlined"
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-            </Col>
+        <Col xs={2} style={{ textAlign: 'center' }}>
+          <CustomTextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </Col>
 
-            <Col xs={8} style={{ textAlign: 'center' }}>
-              <TablePagination
-                className="p-remove-style"
-                rowsPerPageOptions={[10, 50, 100, -1]}
-                component="div"
-                count={sortedAndFilteredData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Col>
+        <Col xs={8} style={{ textAlign: 'center' }}>
+          <TablePagination
+            className="p-remove-style"
+            rowsPerPageOptions={[10, 50, 100, -1]}
+            component="div"
+            count={sortedAndFilteredData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Col>
 
-            <Col xs={2} style={{ textAlign: 'center' }}>
-            <IconButton className='icon-color' onClick={handleDeleteModalShow}>
-              <DeleteIcon />
-            </IconButton>
-
-            </Col>
-                
-          </Row>
+        <Col xs={2} style={{ textAlign: 'center' }}>
+          <IconButton className='icon-color' onClick={handleDeleteModalShow}>
+            <DeleteIcon />
+          </IconButton>
+        </Col>
+      </Row>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px'}}>
         <CustomButtonShare variant="contained">
           Share
         </CustomButtonShare>
-        <a href="#" download="dataOrigin.csv" onClick={handleExport}>
-        <CustomButtonExport variant="contained">
-          Export
-        </CustomButtonExport>
+        <a href="#" download="dataOrigin.csv" >
+          <CustomButtonExport variant="contained">
+            Export
+          </CustomButtonExport>
         </a>
-
       </div>
 
       <TableContainer component={Paper}>
         <Table>
-        <TableHead>
+          <TableHead>
             <TableRow>
               <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}
-
-                onClick={() => handleSort('name')}>
+                style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#A7A9AC',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}
+                onClick={() => handleSort('Name')}
+              >
                 Name{' '}
-                {sortConfig.key === 'name' && (
+                {sortConfig.key === 'Name' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                 )}
               </TableCell>
               
               <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}
-                
-                onClick={() => handleSort('lastConnection')}>
+                style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#A7A9AC',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}
+                onClick={() => handleSort('lastConnection')}
+              >
                 Last Connection{' '}
                 {sortConfig.key === 'lastConnection' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
@@ -231,13 +215,15 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
               </TableCell>
 
               <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}
-
-                onClick={() => handleSort('origin')}>
+                style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#A7A9AC',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}
+                onClick={() => handleSort('origin')}
+              >
                 Origin{' '}
                 {sortConfig.key === 'origin' && (
                   sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
@@ -245,22 +231,26 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
               </TableCell>
 
               <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}>  
+                style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#A7A9AC',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}
+              >  
                 Actions
               </TableCell>
 
-
-{/* SELECT  */} 
               <TableCell 
-                style={{fontFamily: 'Roboto, sans-serif',
-                color: '#A7A9AC',
-                fontWeight: 600,
-                fontSize: '16px',
-                textAlign:'left',}}>  
+                style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#A7A9AC',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}
+              >  
                 Select
               </TableCell>
                 
@@ -269,62 +259,65 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
           <TableBody>
             {sortedAndFilteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
               <TableRow key={index}>
-                <TableCell style={{fontFamily: 'Roboto, sans-serif',
-                color: '#5A6ACF',
-                fontWeight: 400,
-                fontSize: '16px',
-                textAlign:'left',}}>
-                {row.Name}
+                <TableCell style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#5A6ACF',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}>
+                  {row.Name}
                 </TableCell>
 
-                <TableCell style={{fontFamily: 'Roboto, sans-serif',
-                color: '#58595B',
-                fontWeight: 400,
-                fontSize: '16px',
-                textAlign:'left',}}>
-                {row.lastConnection}
+                <TableCell style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#58595B',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}>
+                  {row.lastConnection}
                 </TableCell> 
 
-                <TableCell style={{fontFamily: 'Roboto, sans-serif',
-                color: '#58595B',
-                fontWeight: 400,
-                fontSize: '16px',
-                textAlign:'left',}}>
-                {row.origin}
+                <TableCell style={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#58595B',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  textAlign:'left',
+                }}>
+                  {row.origin}
                 </TableCell>
 
                 <TableCell>
                   <a href="/AddNewDataOrigin">
-                  <IconButton className='icon-color'>
-                    <EditIcon />
-                  </IconButton>
+                    <IconButton className='icon-color'>
+                      <EditIcon />
+                    </IconButton>
                   </a>
 
                   <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
-                      <DeleteIcon />
-                    </IconButton>
-
+                    <DeleteIcon />
+                  </IconButton>
                 </TableCell>
 
-
-
                 <TableCell>
-                <Checkbox
-                      checked={selectedRowIndices.has(index)}
-                      onChange={() => handleRowSelect(index)}
-                    />
+                  <Checkbox
+                    checked={selectedRowIndices.has(index)}
+                    onChange={() => handleRowSelect(index)}
+                  />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px', marginTop: '20px', marginRight: '20px'}}>
-              <a href="/AddNewDataOrigin">
-              <CustomButtonExport variant="contained">
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' , marginBottom: '20px', marginTop: '20px', marginRight: '20px'}}>
+          <a href="/AddNewDataOrigin">
+            <CustomButtonExport variant="contained">
               Add New
-              </CustomButtonExport>
-              </a>
-            </div>
+            </CustomButtonExport>
+          </a>
+        </div>
       </TableContainer>
       <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
         <Modal.Header closeButton>
@@ -336,13 +329,12 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
             Cancel
           </ButtonBootstrap>
           <ButtonBootstrap variant="danger" onClick={handleDeleteSelected}>
-              Yes
-            </ButtonBootstrap>
+            Yes
+          </ButtonBootstrap>
         </Modal.Footer>
       </Modal>
     </div>
   );
 };
-
 
 export default TableDataOriginsComplete;

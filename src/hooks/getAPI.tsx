@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useAPIGET = (url) => {
+const useAPIGET = (url: string) => {
   const [apiData, setApiData] = useState([]);
 
   useEffect(() => {

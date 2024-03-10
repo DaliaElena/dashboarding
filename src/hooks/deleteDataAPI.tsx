@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const useDeleteAPI = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null); // Explicitly define type as any or unknown
 
   const deleteData = async (url: string, origin: string, name: string) => {
     try {
@@ -12,7 +12,7 @@ const useDeleteAPI = () => {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*' // Aquí agregamos el encabezado CORS
+          'Access-Control-Allow-Origin': '*' 
         }
       });
       if (!response.ok) {
