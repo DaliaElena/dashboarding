@@ -3,6 +3,8 @@ import { Dropdown, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney, faDatabase, faLink, faTable, faSquarePlus, faClockRotateLeft, faToolbox, faBusinessTime, faGear, faUser, faCircleInfo, faSignOut, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
+import { JUPYTER_INSTANCE } from '../config.tsx';
+
 
 interface MenuLatLeftProps {
   signOut?: (() => void) | undefined;
@@ -37,7 +39,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
                     <FontAwesomeIcon icon={faLink} /> DBOSlab Connection
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="http://notebook.netjerdbos.cloud/login?next=%2Ftree"><FontAwesomeIcon icon={faToolbox} /> Add New Worker</Dropdown.Item>
+                    <Dropdown.Item href={JUPYTER_INSTANCE}><FontAwesomeIcon icon={faToolbox} /> Add New Worker</Dropdown.Item>
                     <Dropdown.Item href="/WorkersHistory"><FontAwesomeIcon icon={faBusinessTime} /> Workers History</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

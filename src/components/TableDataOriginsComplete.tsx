@@ -25,11 +25,12 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState<{ key: string | null; direction: 'asc' | 'desc' | null }>({ key: null, direction: null });
+
   const [emails, setEmails] = useState<{ email: string; permission: string }[]>([]);
   const [showTercerModal, setShowTercerModal] = useState(false);
   const { deleteData } = useDeleteAPI();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
-  const [selectedRowIndices] = useState<Set<number>>(new Set());
+  const [selectedRowIndices, setSelectedRowIndices] = useState<Set<number>>(new Set());
 
   const handlePermissionChange = (email: string, permission: string) => {
     const updatedEmails = emails.map((item) =>
@@ -42,11 +43,11 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   // const handleShowTercerModal = () => setShowTercerModal(true);
 
   const handleDeleteSelected = async () => {
-    const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].Name);
-    const selectedOrigins = Array.from(selectedRowIndices).map(index => dataPoints[index].origin);
-    for (let i = 0; i < selectedNames.length; i++) {
-      const response = await deleteData(API_URL_DATA, selectedOrigins[i], selectedNames[i]);
-      alert(`Response for deleting ${selectedNames[i]}: ${response}`);
+    const selectedRows = Array.from(selectedRowIndices).map(index => dataPoints[index]);
+    for (const row of selectedRows) {
+      const { Name, origin } = row;
+      const response = await deleteData(API_URL_DATA, origin, Name);
+      alert(`Response for deleting ${Name}: ${response}`);
     }
     setShowDeleteModal(false);
   };
@@ -54,6 +55,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const handleDeleteModalShow = () => {
     setShowDeleteModal(true);
   };
+
 
   const handleDeleteModalClose = () => setShowDeleteModal(false);
 
@@ -87,11 +89,15 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   //   handleCloseLargeModal();
   //   handleShowTercerModal();
   // }
+
   const handleRowSelect = (index: number) => {
-    if (index != 0 ){
-      console.log("index")
+    const newSelectedRowIndices = new Set(selectedRowIndices);
+    if (newSelectedRowIndices.has(index)) {
+      newSelectedRowIndices.delete(index);
+    } else {
+      newSelectedRowIndices.add(index);
     }
-    // Handle export logic
+    setSelectedRowIndices(newSelectedRowIndices);
   }
 
   const handleExport = () => {
