@@ -100,7 +100,7 @@ const Cards = () => {
                                 <Col>
                                     <Card.Text className='card-text-style' style={{ color: '#FF9E18' }}>
                                         {inactive}
-                                        <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
+                                         <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
                                     </Card.Text>
                                 </Col>
                             </Row>
