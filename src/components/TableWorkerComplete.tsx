@@ -268,7 +268,6 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
                       <EditIcon />
                     </IconButton>
                     </a>
-
                     <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
                       <DeleteIcon />
                     </IconButton>

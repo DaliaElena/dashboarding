@@ -11,9 +11,8 @@ const useDeleteAPI = () => {
       const response = await fetch(complete_url, {
         method: 'DELETE',
         headers: {
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*' 
-        }
+          'Accept': 'application/json'
+                }
       });
       if (!response.ok) {
         throw new Error('Failed to delete data');
