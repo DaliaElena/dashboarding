@@ -1,13 +1,21 @@
-import { useState, useEffect } from 'react';
-import { Form, Button, Card, Row, Dropdown } from 'react-bootstrap';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { Form, Button, Card, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios'; // Importa axios para hacer solicitudes HTTP
+import axios from 'axios'; 
 import { API_URL_DATA } from '../config.tsx';
 
-const AddNewDataOriginComponent = ({ selectedData }: { selectedData: { Name: string; origin: string; lastConnection: string } | null }) => {
+interface SelectedData {
+  Name: string;
+  origin: string;
+  lastConnection: string;
+  dynatraceUrl: string;
+  apiToken: string;
+}
+
+const AddNewDataOriginComponent = ({ selectedData }: { selectedData: SelectedData | null }) => {
   const location = useLocation();
 
-  const [currentSelectedData, setSelectedData] = useState(selectedData);
+  const [currentSelectedData, setSelectedData] = useState<SelectedData | null>(selectedData);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -16,29 +24,37 @@ const AddNewDataOriginComponent = ({ selectedData }: { selectedData: { Name: str
     const lastConnection = searchParams.get('lastConnection');
 
     if (Name && origin && lastConnection) {
-      setSelectedData({ Name, origin, lastConnection });
+      setSelectedData({ 
+        Name, 
+        origin, 
+        lastConnection, 
+        dynatraceUrl: '', 
+        apiToken: '' 
+      });
     }
   }, [location.search]);
 
   const handleReturnClick = () => {
     window.location.href = '/DataOriginHistory';
-
   };
+
   const [dynatraceUrl, setDynatraceUrl] = useState(currentSelectedData?.dynatraceUrl || '');
   const [apiToken, setApiToken] = useState(currentSelectedData?.apiToken || '');
 
-  const handleDynatraceUrlChange = (event) => {
+  const handleDynatraceUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDynatraceUrl(event.target.value);
   };
   
-  const handleApiTokenChange = (event) => {
+  const handleApiTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
     setApiToken(event.target.value);
   };
 
   const handleEditClick = () => {
-    axios.put(API_URL_DATA + `?origin=${currentSelectedData?.origin}&name=${currentSelectedData?.Name}`, {
-      dynatraceUrl: currentSelectedData?.dynatraceUrl || '',
-      apiToken: currentSelectedData?.apiToken || ''
+    if (!currentSelectedData) return;
+    
+    axios.put(API_URL_DATA + `?origin=${currentSelectedData.origin}&name=${currentSelectedData.Name}`, {
+      dynatraceUrl,
+      apiToken
     })
     .then(response => {
       console.log('Response:', response.data);
@@ -72,26 +88,26 @@ const AddNewDataOriginComponent = ({ selectedData }: { selectedData: { Name: str
           </Form.Group>
 
           <Form.Group controlId="formToken" className='text-form-style'>
-          <Form.Label>Dynatrace url</Form.Label>
+            <Form.Label>Dynatrace url</Form.Label>
             <Form.Control
-            type="text"
-            placeholder="dynatraceUrl"
-            name="dynatraceUrl"
-            value={dynatraceUrl}
-            onChange={handleDynatraceUrlChange} // Utilizar la función de manejo de cambios
-            className="custom-placeholder"
+              type="text"
+              placeholder="dynatraceUrl"
+              name="dynatraceUrl"
+              value={dynatraceUrl}
+              onChange={handleDynatraceUrlChange}
+              className="custom-placeholder"
             />
           </Form.Group>
 
           <Form.Group controlId="formApiToken" className='text-form-style'>
-          <Form.Label>API token</Form.Label>
+            <Form.Label>API token</Form.Label>
             <Form.Control
-            type="password"
-            placeholder="API Token"
-            name="apiToken"
-            value={apiToken}
-            onChange={handleApiTokenChange} // Utilizar la función de manejo de cambios
-            className="custom-placeholder"
+              type="password"
+              placeholder="API Token"
+              name="apiToken"
+              value={apiToken}
+              onChange={handleApiTokenChange}
+              className="custom-placeholder"
             />
           </Form.Group>
 

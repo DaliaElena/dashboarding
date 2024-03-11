@@ -30,7 +30,6 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedRowIndices, setSelectedRowIndices] = useState<Set<number>>(new Set());
-  const [selectedRowData, setSelectedRowData] = useState<{ Name: string; origin: string; lastConnection: string } | null>(null);
 
   const handleRowSelect = (index: number) => {
     const newSelectedRowIndices = new Set(selectedRowIndices);
@@ -44,19 +43,17 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     setSelectedRowIndices(newSelectedRowIndices);
   };
 
-  const handleEditClick = (rowData: { Name: string; origin: string; lastConnection: string }) => {
-    setSelectedRowData(rowData);
-  };
+ 
 
   const handleDeleteSelected = async () => {
     const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].Name);
     const selectedOrigins = Array.from(selectedRowIndices).map(index => dataPoints[index].origin);
     for (let i = 0; i < selectedNames.length; i++) {
-      const response = await deleteData(API_URL_DATA, selectedOrigins[i], selectedNames[i]);
-      alert(`Response for deleting ${selectedNames[i]}:`, response);
+        const response = await deleteData(API_URL_DATA, selectedOrigins[i], selectedNames[i]);
+        alert(`Response for deleting ${selectedNames[i]}: ${response}`);
     }
     setShowDeleteModal(false);
-  };
+};
   
   const handleDeleteModalShow = () => {
     setShowDeleteModal(true);

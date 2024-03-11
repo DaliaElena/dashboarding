@@ -3,7 +3,7 @@ import AddNewDataOriginComponentEditableForm from '../components/AddNewDataOrigi
 
 const AddNewDataOriginEditable = () => {
   // Define selectedData here
-  const [selectedData, setSelectedData] = useState(null);
+  const [selectedData] = useState(null);
 
   return (
     <div className='column-dbos-center' style={{ minHeight: '100vh', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F9F9F9' }}>

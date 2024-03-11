@@ -17,7 +17,7 @@ const DataOriginHistory: React.FC = () => {
         });
         setOriginsData(response.data);
       } catch (error) {
-        alert('Error fetching data:', error);
+        alert('Error fetching data: ' + error);
       }
     };
 

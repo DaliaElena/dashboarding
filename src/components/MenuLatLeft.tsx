@@ -37,7 +37,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
                     <FontAwesomeIcon icon={faLink} /> DBOSlab Connection
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/AddNewWorker"><FontAwesomeIcon icon={faToolbox} /> Add New Worker</Dropdown.Item>
+                    <Dropdown.Item href="http://notebook.netjerdbos.cloud/login?next=%2Ftree"><FontAwesomeIcon icon={faToolbox} /> Add New Worker</Dropdown.Item>
                     <Dropdown.Item href="/WorkersHistory"><FontAwesomeIcon icon={faBusinessTime} /> Workers History</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

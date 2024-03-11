@@ -1,31 +1,57 @@
 import { Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faCheckDouble, faMugSaucer, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
-import useAPIGET from '../hooks/getAPI.tsx';
 import { API_URL_WORKERS_CARDS } from '../config.tsx';
 
-// Define a type for your data
-interface WorkersData {
+import { useEffect, useState } from 'react';
+
+interface WorkerData {
     total: number;
     active: number;
-    inactive: number;
     risk: number;
+    inactive: number;
 }
 
+const useAPIGET = (url: string) => {
+    const [apiData, setApiData] = useState<WorkerData | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setApiData(data);
+            } catch (error) {
+                console.error('Error fetching chart data:', error);
+            }
+        };
+
+        fetchData();
+
+    }, [url]); 
+
+    return apiData;
+};
+
 const Cards = () => {
-    // Fetch data from API
-    const dataWorkers = useAPIGET(API_URL_WORKERS_CARDS) as WorkersData[]; // Make sure useAPIGET returns WorkersData[] or handle appropriately
+    const dataWorkers = useAPIGET(API_URL_WORKERS_CARDS);
+    
     if (!dataWorkers) {
-      return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
-
-    // Check if dataWorkers array is empty
-    if (dataWorkers.length === 0) {
-        return <div>No data available</div>;
-    }
-
-    // Assuming you only want to display the first data element
-    const { total, active, inactive, risk } = dataWorkers[0];
+    
+    const total = dataWorkers.total || 0;
+    const active = dataWorkers.active || 0;
+    const risk = dataWorkers.risk || 0;
+    const inactive = dataWorkers.inactive || 0;
 
     return (
         <div style={{ marginTop: '10px', marginBottom: '30px' }}>
@@ -39,7 +65,8 @@ const Cards = () => {
                             <Row>
                                 <Col>
                                     <Card.Text className='card-text-style' style={{ color: '#FF9E18' }}>
-                                        {total} <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover' />
+                                        {total}
+                                        <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover' />
                                     </Card.Text>
                                 </Col>
                             </Row>
@@ -55,7 +82,8 @@ const Cards = () => {
                             <Row>
                                 <Col>
                                     <Card.Text className='card-text-style' style={{ color: '#FFFF' }}>
-                                        {active} <FontAwesomeIcon icon={faCheckDouble} className='icon-style-fa' style={{ color: '#FFFF' }} />
+                                        {active}
+                                        <FontAwesomeIcon icon={faCheckDouble} className='icon-style-fa' style={{ color: '#FFFF' }} />
                                     </Card.Text>
                                 </Col>
                             </Row>
@@ -71,7 +99,8 @@ const Cards = () => {
                             <Row>
                                 <Col>
                                     <Card.Text className='card-text-style' style={{ color: '#FF9E18' }}>
-                                        {inactive} <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
+                                        {inactive}
+                                        <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
                                     </Card.Text>
                                 </Col>
                             </Row>
@@ -87,7 +116,8 @@ const Cards = () => {
                             <Row>
                                 <Col>
                                     <Card.Text className='card-text-style' style={{ color: '#FFFF' }}>
-                                        {risk} <FontAwesomeIcon icon={faScrewdriverWrench} className='icon-style-fa' style={{ color: '#FFFF' }} />
+                                        {risk}
+                                        <FontAwesomeIcon icon={faScrewdriverWrench} className='icon-style-fa' style={{ color: '#FFFF' }} />
                                     </Card.Text>
                                 </Col>
                             </Row>

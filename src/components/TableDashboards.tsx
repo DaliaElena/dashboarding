@@ -77,15 +77,8 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
   const handleDeleteModalClose = () => setShowDeleteModal(false);
 
   // Styled components
-  const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FFFFFF',
-    color: 'gray',
-    '&:hover': {
-      backgroundColor: '#FFFFFF',
-    },
-  });
 
-  const CustomButtonExport = styled(Button)({
+  const CustomButtonNew = styled(Button)({
     backgroundColor: '#FF9E18',
     color: '#FFFFFF',
     '&:hover': {
@@ -160,14 +153,7 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
             </IconButton>
           </Col>
         </Row>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '20px' }}>
-          <CustomButtonShare variant="contained">
-            Share
-          </CustomButtonShare>
-          <CustomButtonExport variant="contained">
-            Export
-          </CustomButtonExport>
-        </div>
+
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -241,9 +227,9 @@ const TableDashboards: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
           </Table>
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '40px', marginTop: '20px', marginRight: '20px' }}>
             <a href="/AddNewWorker">
-              <CustomButtonExport variant="contained">
+              <CustomButtonNew variant="contained">
                 Add New
-              </CustomButtonExport>
+              </CustomButtonNew>
             </a>
           </div>
         </TableContainer>

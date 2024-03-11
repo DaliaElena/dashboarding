@@ -23,7 +23,7 @@ const Home = () => {
       </Row>
       <Row>
         <h2>Workers Abstract</h2>
-        <Row><Cards /></Row>
+         <Row><Cards /></Row> 
         <TableWorker dataPoints={workersData} />
       </Row>
       <Row>
