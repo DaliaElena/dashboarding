@@ -16,6 +16,7 @@ import MenuLatRight from './components/MenuLatRight';
 import  Home from './pages/Home';
 import  AddNewWorker from './pages/AddNewWorker';
 import  AddNewDataOrigin from './pages/AddNewDataOrigin';
+import  AddNewDataOriginEditable from './pages/AddNewDataOriginEditable';
 import  DataOriginHistory from './pages/DataOriginHistory';
 import  WorkersHistory from './pages/WorkersHistory';
 import  MyDashboards from './pages/MyDashboards';
@@ -43,6 +44,7 @@ export function App({ signOut}: WithAuthenticatorProps) {
               <Route path="/" element={<Home />} />
               <Route path="/AddNewWorker" element={<AddNewWorker />} />
               <Route path="/AddNewDataOrigin" element={<AddNewDataOrigin />} />
+              <Route path="/AddNewDataOriginEditable" element={<AddNewDataOriginEditable />} />
               <Route path="/DataOriginHistory" element={<DataOriginHistory />} />
               <Route path="/WorkersHistory" element={<WorkersHistory />} />
               <Route path="/MyDashboards" element={<MyDashboards />} />

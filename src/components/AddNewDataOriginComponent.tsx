@@ -84,8 +84,6 @@ const AddNewDataOriginComponent = () => {
 
                 <Dropdown.Menu style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white' }}>
                   <Dropdown.Item eventKey={"Dynatrace"}>Dynatrace</Dropdown.Item>
-                  {/* <Dropdown.Item eventKey={"Mysql"}>Mysql</Dropdown.Item>
-                  <Dropdown.Item eventKey={"Jira"}>Jira</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>

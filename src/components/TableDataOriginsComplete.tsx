@@ -9,6 +9,7 @@ import { styled } from '@mui/system';
 import {Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 import useDeleteAPI from '../hooks/deleteDataAPI.tsx';
 import { API_URL_DATA } from '../config.tsx';
+import { Link } from 'react-router-dom';
 
 interface TableDataOriginsCompleteProps {
   dataPoints: {
@@ -29,6 +30,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedRowIndices, setSelectedRowIndices] = useState<Set<number>>(new Set());
+  const [selectedRowData, setSelectedRowData] = useState<{ Name: string; origin: string; lastConnection: string } | null>(null);
 
   const handleRowSelect = (index: number) => {
     const newSelectedRowIndices = new Set(selectedRowIndices);
@@ -42,13 +44,16 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     setSelectedRowIndices(newSelectedRowIndices);
   };
 
+  const handleEditClick = (rowData: { Name: string; origin: string; lastConnection: string }) => {
+    setSelectedRowData(rowData);
+  };
+
   const handleDeleteSelected = async () => {
     const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].Name);
     const selectedOrigins = Array.from(selectedRowIndices).map(index => dataPoints[index].origin);
-    console.log('Data to be sent for deletion:', selectedNames);
     for (let i = 0; i < selectedNames.length; i++) {
       const response = await deleteData(API_URL_DATA, selectedOrigins[i], selectedNames[i]);
-      console.log(`Response for deleting ${selectedNames[i]}:`, response);
+      alert(`Response for deleting ${selectedNames[i]}:`, response);
     }
     setShowDeleteModal(false);
   };
@@ -137,6 +142,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   
   return (
     <div style={{ overflowX: 'hidden'}}>
+      
       <Row className="align-items-center" style={{marginBottom:'50px'}}>
         <Col xs={2} style={{ textAlign: 'center' }}>
           <CustomTextField
@@ -290,16 +296,15 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                 </TableCell>
 
                 <TableCell>
-                  <a href="/AddNewDataOrigin">
-                    <IconButton className='icon-color'>
-                      <EditIcon />
-                    </IconButton>
-                  </a>
-
-                  <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
-                    <DeleteIcon />
+                <Link to={`/AddNewDataOriginEditable?Name=${row.Name}&origin=${row.origin}&lastConnection=${row.lastConnection}`}>
+                  <IconButton className='icon-color'>
+                    <EditIcon />
                   </IconButton>
-                </TableCell>
+                </Link>
+                <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
 
                 <TableCell>
                   <Checkbox
