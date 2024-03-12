@@ -46,11 +46,12 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
     const selectedRows = Array.from(selectedRowIndices).map(index => dataPoints[index]);
     for (const row of selectedRows) {
       const { Name, origin } = row;
-      const response = await deleteData(API_URL_DATA, origin, Name);
-      alert(`Response for deleting ${Name}: ${response}`);
+      await deleteData(API_URL_DATA, origin, Name);
     }
     setShowDeleteModal(false);
+    window.location.reload(); // Refrescar la página
   };
+  
 
   const handleDeleteModalShow = () => {
     setShowDeleteModal(true);

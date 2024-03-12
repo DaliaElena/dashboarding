@@ -7,7 +7,7 @@ const useDeleteAPI = () => {
   const deleteData = async (url: string, origin: string, name: string) => {
     try {
       setIsLoading(true);
-      const complete_url=`${url}?origin=${origin}?name=${name}`
+      const complete_url=`${url}?origin=${origin}&name=${name}`
       const response = await fetch(complete_url, {
         method: 'DELETE',
         headers: {
