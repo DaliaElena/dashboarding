@@ -1,27 +1,60 @@
-import  { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Row, Dropdown } from 'react-bootstrap';
-import AddNewDataOriginComponentNonEditableForm from '../components/AddNewDataOriginComponentNonEditableForm.tsx'
+import axios from 'axios';
+import AddNewDataOriginComponentNonEditableForm from '../components/AddNewDataOriginComponentNonEditableForm';
+import { API_URL_DATA_SOURCE } from '../config';
 
-
+interface FormData {
+  source: string;
+  additionalDetails: string;
+  selectedOption: string;
+  [key: string]: string; 
+}
 
 const AddNewDataOriginComponent = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     source: '',
-    details: '',
-    dynatraceUrl: '',
-    apiToken: '',
-    selectedOption: '',
+    additionalDetails: '',
+    selectedOption: ''
   });
 
-  const [showEditableForm, setShowEditableForm] = useState(true);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [dataSourceOptions, setDataSourceOptions] = useState<{ [key: string]: { [key: string]: string } }>({});
+  const [showEditableForm, setShowEditableForm] = useState<boolean>(true);
+  const [selectedDataSourceFields, setSelectedDataSourceFields] = useState<{ [key: string]: string }>({});
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(API_URL_DATA_SOURCE);
+        const sanitizedData = sanitizeData(response.data);
+        setDataSourceOptions(sanitizedData);
+      } catch (error) {
+        console.error('Error fetching data source options:', error);
+      }
+    };
 
-  const handleSelect = (eventKey: any) => {
-    setSelectedOption(eventKey);
-    setFormData({ ...formData, selectedOption: eventKey }); // Update formData with selected option
+    fetchData();
+  }, []);
+
+  const sanitizeData = (data: { [key: string]: { [key: string]: string } }): { [key: string]: { [key: string]: string } } => {
+    const sanitizedData: { [key: string]: { [key: string]: string } } = {};
+    for (const [key, value] of Object.entries(data)) {
+      const sanitizedValue: { [key: string]: string } = {};
+      for (const field in value) {
+        sanitizedValue[field] = '';
+      }
+      sanitizedData[key] = sanitizedValue;
+    }
+    return sanitizedData;
   };
-  
+
+  const handleSelect = (eventKey: string | null) => { 
+    if (eventKey !== null) {
+      const selectedFields = dataSourceOptions[eventKey] || {};
+      setFormData({ source: formData.source, additionalDetails: formData.additionalDetails, selectedOption: eventKey, ...selectedFields });
+      setSelectedDataSourceFields(selectedFields);
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,15 +63,12 @@ const AddNewDataOriginComponent = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Datos del formulario:', formData);
     setShowEditableForm(false);
   };
 
   const handleReturnClick = () => {
     setShowEditableForm(true);
   };
-
-
 
   return (
     <Card style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', maxWidth: '500px', margin: '0 auto' }}>
@@ -55,7 +85,7 @@ const AddNewDataOriginComponent = () => {
               <Form.Label>Source name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your source name"
+                placeholder="Enter source name"
                 name="source"
                 value={formData.source}
                 onChange={handleChange}
@@ -63,13 +93,13 @@ const AddNewDataOriginComponent = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formDetails" className='text-form-style'>
+            <Form.Group controlId="formAdditionalDetails" className='text-form-style'>
               <Form.Label>Additional source details</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Some details of your source"
-                name="details"
-                value={formData.details}
+                placeholder="Enter additional details"
+                name="additionalDetails"
+                value={formData.additionalDetails}
                 onChange={handleChange}
                 className="custom-placeholder"
               />
@@ -79,38 +109,29 @@ const AddNewDataOriginComponent = () => {
               <Form.Label style={{ marginBottom: '20px' }}>Source Type</Form.Label>
               <Dropdown onSelect={handleSelect}>
                 <Dropdown.Toggle variant="light" className='custom-dropdown-toggle'>
-                  {selectedOption ? `${selectedOption}` : 'Select an option'}
+                  {formData.selectedOption ? `${formData.selectedOption}` : 'Select an option'}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white' }}>
-                  <Dropdown.Item eventKey={"Dynatrace"}>Dynatrace</Dropdown.Item>
+                  {Object.keys(dataSourceOptions).map((option, index) => (
+                    <Dropdown.Item key={index} eventKey={option}>{option}</Dropdown.Item>
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
-
-            <Form.Group controlId="formToken" className='text-form-style'>
-              <Form.Label>Dynatrace url</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="dynatraceUrl"
-                name="dynatraceUrl"
-                value={formData.dynatraceUrl}
-                onChange={handleChange}
-                className="custom-placeholder"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formApiToken" className='text-form-style'>
-              <Form.Label>API token</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="API Token"
-                name="apiToken"
-                value={formData.apiToken}
-                onChange={handleChange}
-                className="custom-placeholder"
-              />
-            </Form.Group>
+            {Object.entries(selectedDataSourceFields).map(([key]) => (
+              <Form.Group key={key} controlId={`form${key}`} className='text-form-style'>
+                <Form.Label>{key}</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={`Enter ${key}`}
+                  name={key}
+                  value={formData[key]}
+                  onChange={handleChange}
+                  className="custom-placeholder"
+                />
+              </Form.Group>
+            ))}
 
             <Card.Footer className='card-footer'>
               <Button
@@ -126,11 +147,12 @@ const AddNewDataOriginComponent = () => {
             </Card.Footer>
           </Form>
         ) : (
-          <AddNewDataOriginComponentNonEditableForm formData={{ ...formData, selectedOption }} onEditClick={handleReturnClick} />
+          <AddNewDataOriginComponentNonEditableForm
+            formData={{ ...formData }}
+            onEditClick={handleReturnClick}
+          />
         )}
       </Card.Body>
-
-
     </Card>
   );
 };
