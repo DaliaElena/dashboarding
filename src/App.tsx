@@ -24,6 +24,7 @@ import AnomalyDetection from './pages/AnomalyDetection';
 import Settings from './pages/Settings';
 import Account from './pages/Account';
 import Help from './pages/Help';
+import PipelinesHistory from './pages/PipelinesHistory';
 
 
 export function App({ signOut}: WithAuthenticatorProps) {
@@ -49,6 +50,7 @@ export function App({ signOut}: WithAuthenticatorProps) {
               <Route path="/WorkersHistory" element={<WorkersHistory />} />
               <Route path="/MyDashboards" element={<MyDashboards />} />
               <Route path="/AnomalyDetection" element={<AnomalyDetection />} />
+              <Route path="/PipelinesHistory" element={<PipelinesHistory />} />
               <Route path="/Settings" element={<Settings />} />
               <Route path="/Account" element={<Account />} />
               <Route path="/Help" element={<Help />} />
