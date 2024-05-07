@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -20,19 +20,18 @@ import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/system';
 import { Col, Row, Modal, Button as ButtonBootstrap} from 'react-bootstrap';
 import useDeleteAPI from '../hooks/deleteAPI.tsx';
-import { API_URL_DASHBOARDS } from '../config.tsx';
+import { API_URL_PIPELINES } from '../config.tsx';
 import { JUPYTER_INSTANCE } from '../config.tsx';
 
 interface TableDashboardsProps {
   dataPoints: {
-    name: string;
-    lastConnection: string;
-    url: string;
-    status: string;
+    file_name: string;
+    last_modification: string;
+    size: string;
   }[];
 }
 
-const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
+const TablePipelines: React.FC<TableDashboardsProps> = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,12 +40,24 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     direction: null,
   });
   const { deleteData } = useDeleteAPI();
-
-  // Modal
+  const [apiData, setApiData] = useState<any[]>([]); // Estado para almacenar los datos de la API
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedRowIndices, setSelectedRowIndices] = useState<Set<number>>(new Set());
 
-  // Function to handle row selection
+  const fetchData = async () => {
+    try {
+      const response = await fetch(API_URL_PIPELINES);
+      const data = await response.json();
+      setApiData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Llamar a la función para cargar los datos cuando el componente se monte
+  }, []);
+
   const handleRowSelect = (index: number) => {
     const newSelectedRowIndices = new Set(selectedRowIndices);
   
@@ -59,25 +70,11 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     setSelectedRowIndices(newSelectedRowIndices);
   };
 
-  // Function to handle deleting selected rows
-  const handleDeleteSelected = async () => {
-    const selectedNames = Array.from(selectedRowIndices).map(index => dataPoints[index].name);
-    console.log('Data to be sent for deletion:', selectedNames); 
-    for (const selectedName of selectedNames) {
-      const response = await deleteData(API_URL_DASHBOARDS, selectedName);
-      console.log(`Response for deleting ${selectedName}:`, response);
-    }
-    setShowDeleteModal(false);
-  };
-
-  // Function to show delete modal and update selected row indices
   const handleDeleteModalShow = () => {
     setShowDeleteModal(true);
   };
   
   const handleDeleteModalClose = () => setShowDeleteModal(false);
-
-  // Styled components
 
   const CustomButtonNew = styled(Button)({
     backgroundColor: '#FF9E18',
@@ -104,7 +101,6 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     },
   });
 
-  // Sorting and filtering logic
   const sortData = (a: any, b: any, config: { key: string | null; direction: string | null }) => {
     if (config.direction === 'asc') {
       return a[config.key!] > b[config.key!] ? 1 : -1;
@@ -114,16 +110,25 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
     return 0;
   };
 
-  const sortedAndFilteredData = [...dataPoints]
+  const sortedAndFilteredData = [...apiData]
     .filter(
       (row) =>
-        (row.name && row.name.toLowerCase().includes(searchTerm)) ||
-        (row.status && row.status.toLowerCase().includes(searchTerm)) ||
-        (row.lastConnection && row.lastConnection.toLowerCase().includes(searchTerm)) ||
-        (row.url && row.url.toLowerCase().includes(searchTerm))
+        (row.file_name && row.file_name.toLowerCase().includes(searchTerm)) ||
+        (row.last_modification && row.last_modification.toLowerCase().includes(searchTerm)) ||
+        (row.size && row.size.toLowerCase().includes(searchTerm))
     )
     .sort((a, b) => sortData(a, b, sortConfig));
+    const handleDeleteSelected = async () => {
+      const selectedFileNames = Array.from(selectedRowIndices).map(index => sortedAndFilteredData[index].file_name);
+      console.log('Data to be sent for deletion:', selectedFileNames); 
+      for (const selectedFileName of selectedFileNames) {
+        const response = await deleteData(API_URL_PIPELINES, selectedFileName);
+        console.log(`Response for deleting ${selectedFileName}:`, response);
+      }
+      setShowDeleteModal(false);
+    };
 
+    
   return (
     <div>
       <div style={{ overflowX: 'hidden' }}>
@@ -172,7 +177,7 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   style={{ fontFamily: 'Roboto, sans-serif', color: '#A7A9AC', fontWeight: 600, fontSize: '16px', textAlign: 'left' }}
                   onClick={() => setSortConfig({ key: 'status', direction: sortConfig.key === 'status' && sortConfig.direction === 'asc' ? 'desc' : 'asc' })}
                 >
-                  Status{' '}
+                  Modification{' '}
                   {sortConfig.key === 'status' && (
                     sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                   )}
@@ -181,7 +186,7 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
                   style={{ fontFamily: 'Roboto, sans-serif', color: '#A7A9AC', fontWeight: 600, fontSize: '16px', textAlign: 'left' }}
                   onClick={() => setSortConfig({ key: 'lastConnection', direction: sortConfig.key === 'lastConnection' && sortConfig.direction === 'asc' ? 'desc' : 'asc' })}
                 >
-                  Last Connection{' '}
+                  Size{' '}
                   {sortConfig.key === 'lastConnection' && (
                     sortConfig.direction === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                   )}
@@ -200,22 +205,22 @@ const TablePipelines: React.FC<TableDashboardsProps> = ({ dataPoints }) => {
               {sortedAndFilteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
                 <TableRow key={index}>
                   <TableCell style={{ fontFamily: 'Roboto, sans-serif', color: '#5A6ACF', fontWeight: 400, fontSize: '16px', textAlign: 'left' }}>
-                    <span>{row.name}</span>
+                    <span>{row.file_name}</span>
                   </TableCell>
                   <TableCell style={{ fontFamily: 'Roboto, sans-serif', color: '#58595B', fontWeight: 400, fontSize: '16px', textAlign: 'left' }}>
-                    {row.status}
+                    {row.size}
                   </TableCell>
                   <TableCell style={{ fontFamily: 'Roboto, sans-serif', color: '#58595B', fontWeight: 400, fontSize: '16px', textAlign: 'left' }}>
-                    {row.lastConnection}
+                    {row.last_modification}
                   </TableCell>
                   <TableCell>
-                      <a href={JUPYTER_INSTANCE}>
+                    <a href={JUPYTER_INSTANCE}>
                       <IconButton className='icon-color'>
                         <IconButton className='icon-color'>
                           <EditIcon />
                         </IconButton>
-                        </IconButton>
-                      </a>
+                      </IconButton>
+                    </a>
                     <IconButton className='icon-color' onClick={() => handleDeleteModalShow()}>
                       <DeleteIcon />
                     </IconButton>
