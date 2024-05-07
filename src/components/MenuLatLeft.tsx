@@ -44,6 +44,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = (props) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </ListGroup.Item>
+              <ListGroup.Item> <a href="/PipelinesHistory"><FontAwesomeIcon icon={faChartLine} />My Pipelines</a></ListGroup.Item> 
               <ListGroup.Item> <a href="/MyDashboards"><FontAwesomeIcon icon={faTable} /> My Dashboards</a></ListGroup.Item> 
               <ListGroup.Item> <a href="/AnomalyDetection"><FontAwesomeIcon icon={faChartLine} />Anomaly Detection</a></ListGroup.Item> 
           </ListGroup>
