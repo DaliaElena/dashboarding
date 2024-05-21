@@ -8,7 +8,7 @@ const HelpComponent = () => {
   useEffect(() => {
     const fetchHtml = async () => {
       try {
-        const response = await fetch('https://4wfr3j5pz4quixveyazqmwobvm0rqlmi.lambda-url.us-east-1.on.aws/dbos_info');
+        const response = await fetch('https://45h2iuh7wdpvh5ejghs5uedafe0fjcbz.lambda-url.us-east-1.on.aws/dbos_info');
         if (!response.ok) {
           throw new Error('Failed to fetch HTML content');
         }
