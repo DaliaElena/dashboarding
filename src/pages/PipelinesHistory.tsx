@@ -1,6 +1,6 @@
 import TablePipelines from '../components/TablePipelines.tsx';
 import useAPIGET from '../hooks/getAPI.tsx';
-import { API_URL_DASHBOARDS } from '../config.tsx';
+import { API_URL_PIPELINES } from '../config.tsx';
 
 
   
