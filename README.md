@@ -1,30 +1,73 @@
-# React + TypeScript + Vite
+# Dashboarding App 🚀  
+This project is a **React** application built with **TypeScript** and powered by **Vite**. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+It provides a robust and efficient environment for data visualization and dashboard management.
 
-Currently, two official plugins are available:
+This is a demo https://daliaelena.github.io/dashboarding/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features 🛠️  
+- **Modern Frontend**: React + TypeScript + Vite.
+- **Optimized Performance**: Fast development with Hot Module Replacement (HMR).
+- **ESLint Integration**: Static code analysis with recommended rules.
+- **Reusable Components**: Modular design with hooks and components.
 
-## Expanding the ESLint configuration
+## Project Structure 📂  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```plaintext
+dashboarding-main/
+├── public/                # Static files
+├── src/
+│   ├── assets/            # Images and resources
+│   ├── components/        # Reusable components
+│   ├── hooks/             # Custom hooks
+│   ├── pages/             # Application pages
+│   ├── App.tsx            # Main application component
+│   ├── main.tsx           # React entry point
+│   └── config.tsx         # Additional configurations
+├── package.json           # Dependencies and scripts
+├── tsconfig.json          # TypeScript configuration
+└── vite.config.ts         # Vite configuration
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation 🚀  
+
+1. Clone the repository:
+   ```bash
+   git clone <REPO-URL>
+   cd dashboarding-main
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open the application in your browser: [http://localhost:5173](http://localhost:5173).
+
+## Available Scripts 📜  
+- `npm run dev`: Starts the development environment.  
+- `npm run build`: Builds the project for production.  
+- `npm run lint`: Runs ESLint to check for code quality.  
+- `npm run deploy`: Runs GH-Pages to deploy on https://daliaelena.github.io/dashboarding/.  
+
+## Requirements 📋  
+- Node.js >= 16  
+- npm >= 8  
+
+## Tools Used 🛠️  
+- **React**: Library for building user interfaces.  
+- **TypeScript**: Static type checking.  
+- **Vite**: Modern and fast development environment.  
+- **ESLint**: Linter for code quality assurance.  
+
+## Screenshots 📸  
+*Add images or GIFs showcasing your app in action.*  
+
+---
+
+Happy coding! 🎉
