@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: 'https://DaliaElena.github.io/dashboarding/',
+  base: 'https://daliaelena.github.io/dashboarding/',
   resolve: {
     alias: {
       './runtimeConfig': './runtimeConfig.browser',
