@@ -1,6 +1,4 @@
-import { Amplify } from 'aws-amplify';
-import config from './amplifyconfiguration.json';
-Amplify.configure(config);
+
 
 import { Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
