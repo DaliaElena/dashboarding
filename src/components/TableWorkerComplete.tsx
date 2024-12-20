@@ -21,7 +21,6 @@ import { Col, Row, Modal, Button as ButtonBootstrap } from 'react-bootstrap';
 import Checkbox from '@mui/material/Checkbox';
 import useDeleteAPI from '../hooks/deleteAPI.tsx';
 import { API_URL_WORKERS } from '../config.tsx';
-import { JUPYTER_INSTANCE } from '../config.tsx';
 
 
 interface TableWorkerCompleteProps {
@@ -263,7 +262,7 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
                     {row.origin}
                   </TableCell>
                   <TableCell>
-                    <a href={JUPYTER_INSTANCE}>
+                    <a href="">
                     <IconButton className='icon-color'>
                       <EditIcon />
                     </IconButton>

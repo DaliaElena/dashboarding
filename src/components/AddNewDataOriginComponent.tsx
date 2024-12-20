@@ -77,7 +77,6 @@ const AddNewDataOriginComponent = () => {
       </Card.Header>
       <Card.Body>
         <Row className='text-form-style' style={{ marginTop: '10px' }}>
-          <p>Specify Source Details</p>
         </Row>
         {showEditableForm ? (
           <Form onSubmit={handleSubmit}>

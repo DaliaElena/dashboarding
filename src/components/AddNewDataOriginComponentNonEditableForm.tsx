@@ -45,7 +45,7 @@ const AddNewDataOriginComponentNonEditableForm: React.FC<Props> = ({ formData, o
     <>
       <Card.Body>
         <Row className='text-form-style' style={{ marginTop: '10px' }}>
-          <p>New Data Origin Preview</p>
+          <p>Preview New Data</p>
         </Row>
         <Row className='text-form-style'>
           <Col>
