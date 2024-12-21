@@ -82,8 +82,8 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
   }, [initialDataPoints]);
 
   const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FFFFFF',
-    color: 'gray',
+    backgroundColor: '#ECECEC',
+    color: '#28016F',
     '&:hover': {
       backgroundColor: '#FFFFFF',
     },
@@ -95,10 +95,10 @@ const TableWorkerComplete: React.FC<TableWorkerCompleteProps> = ({ dataPoints: i
   };
 
   const CustomButtonExport = styled(Button)({
-    backgroundColor: '#FF9E18',
+    backgroundColor: '#28016F',
     color: '#FFFFFF',
     '&:hover': {
-      backgroundColor: '#FF9E18',
+      backgroundColor: '#C4AAE0',
     },
   });
 

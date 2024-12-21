@@ -61,8 +61,8 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   const handleDeleteModalClose = () => setShowDeleteModal(false);
 
   const CustomButtonShare = styled(Button)({
-    backgroundColor: '#FFFFFF',
-    color: 'gray',
+    backgroundColor: '#ECECEC',
+    color: '#28016F',
     '&:hover': {
       backgroundColor: '#FFFFFF',
     },
@@ -106,10 +106,10 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
   }
 
   const CustomButtonExport = styled(Button)({
-    backgroundColor: '#FF9E18',
+    backgroundColor: '#28016F',
     color: '#FFFFFF',
     '&:hover': {
-      backgroundColor: '#FF9E18',
+      backgroundColor: '#C4AAE0',
     },
   });
 
