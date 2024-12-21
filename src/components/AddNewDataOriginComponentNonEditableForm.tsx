@@ -35,7 +35,7 @@ const AddNewDataOriginComponentNonEditableForm: React.FC<Props> = ({ formData, o
         }
       );
       console.log('Response:', response.data);
-      window.location.href = '/DataOriginHistory';
+      window.location.href = '/dashboarding/DataOriginHistory';
     } catch (error) {
       console.error('Error:', error);
     }

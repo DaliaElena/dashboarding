@@ -77,7 +77,7 @@ const AddNewDataOriginComponentEditableForm: React.FC = () => {
     })
     .then(data => {
       console.log('PUT request successful:', data);
-      window.location.href = '/DataOriginHistory';
+      window.location.href = '/dashboarding/DataOriginHistory';
     })
     .catch(error => {
       console.error('Error during PUT request:', error);

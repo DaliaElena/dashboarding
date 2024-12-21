@@ -1,7 +1,7 @@
 import { Image, Col, Row} from 'react-bootstrap';
 import ChatBubble from './ChatBubble.tsx';
-import Profilepicture from "../assets/closeup-retrato-profesor-feliz-caucasico-vasos.jpg";
-import Profileimage from "../assets/retrato-hombre-reir.jpg";
+import Profilepicture from "../assets/aiony-haust-3TLl_97HNJo-unsplash.jpg";
+import Profileimage from "../assets/chat.jpg";
 
 
 const MenuLatRight= () => {

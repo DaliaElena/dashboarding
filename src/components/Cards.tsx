@@ -60,13 +60,13 @@ const Cards = () => {
                     <Card className='my-card-gray'>
                         <Card.Body>
                             <Row>
-                                <Card.Title className='card-title-dark'>Total Workers</Card.Title>
+                                <Card.Title className='card-title-light'>Total Workers</Card.Title>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Card.Text className='card-text-style' style={{ color: '#FF9E18' }}>
+                                    <Card.Text className='card-text-style' style={{ color: '#FFFFFF', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                                         {total}
-                                        <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover' />
+                                        <FontAwesomeIcon icon={faBriefcase} className='icon-style-fa nohover'/>
                                     </Card.Text>
                                 </Col>
                             </Row>
@@ -81,7 +81,7 @@ const Cards = () => {
                             </Row>
                             <Row>
                                 <Col>
-                                    <Card.Text className='card-text-style' style={{ color: '#FFFF' }}>
+                                    <Card.Text className='card-text-style' style={{color: '#FFFFFF', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                                         {active}
                                         <FontAwesomeIcon icon={faCheckDouble} className='icon-style-fa' style={{ color: '#FFFF' }} />
                                     </Card.Text>
@@ -94,11 +94,11 @@ const Cards = () => {
                     <Card className='my-card-gray'>
                         <Card.Body>
                             <Row>
-                                <Card.Title className='card-title-dark'>Inactive Workers</Card.Title>
+                                <Card.Title className='card-title-light'>Inactive Workers</Card.Title>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Card.Text className='card-text-style' style={{ color: '#FF9E18' }}>
+                                    <Card.Text className='card-text-style' style={{ color: '#FFFFFF', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                                         {inactive}
                                          <FontAwesomeIcon icon={faMugSaucer} className='icon-style-fa nohover' />
                                     </Card.Text>

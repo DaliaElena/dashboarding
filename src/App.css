@@ -34,7 +34,7 @@
 
 /*Chat bell*/
 .custom-background {
-  background-color: #FFBB4F !important; /* Cambia #ff0000 por el color que desees */
+  background-color: #28016F !important; 
 }
 
 .rounded-chat-counter{
@@ -60,7 +60,7 @@ h2  {
 }
 
 .three-gray:hover {
-  color: #5A6ACF; /* Cambia #000 por el color que desees cuando esté en hover */
+  color: #5A6ACF; /* cuando esté en hover */
 }
 
 .four-gray{
@@ -70,7 +70,7 @@ h2  {
 }
 
 .four-gray:hover {
-  color: #5A6ACF; /* Cambia #000 por el color que desees cuando esté en hover */
+  color: #5A6ACF; /* cuando esté en hover */
 }
 
 .nj-gray-dark{
@@ -133,7 +133,7 @@ h2  {
 }
 
 .svg-inline--fa:hover {
-  color: #f28006;
+  color: #28016F;
   text-decoration: none;
 }
 
@@ -173,7 +173,7 @@ h2  {
 
 /* Agregado para el hover de los iconos */
 .svg-inline--fa:hover {
-  color: #f28006;
+  color: #28016F;
 }
 
 .hover-effect {
@@ -184,7 +184,7 @@ h2  {
 
 .hover-effect:hover {
   color: #5A6ACF;
-  fill: #f28006;
+  fill: #28016F;
 }
 
 .color-text-menu .list-group-item {
@@ -204,7 +204,7 @@ h2  {
 }
 
 .color-text-menu .list-group-item:hover .svg-inline--fa  {
-  color: #f28006; /* Cambia el color del ícono al hacer hover sobre el elemento de la lista */
+  color: #FFB2F0; /* Cambia el color del ícono al hacer hover sobre el elemento de la lista */
 }
 
 .top-space-charts h2{
@@ -228,7 +228,7 @@ h2  {
   overflow: hidden;
   border-radius: 50%;
   margin: 20px auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 0 7px #FF9E18; /* Opcional: Agrega una sombra si lo deseas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 0 7px #C4AAE0; /* Opcional: Agrega una sombra si lo deseas */
 }
 
 .profile-picture-chat {
@@ -298,7 +298,7 @@ h2  {
 }
 
 .icon-color:hover{
-  color: #f28006; 
+  color: #FFB2F0; 
 }
 
 .normal-cell {
@@ -317,15 +317,21 @@ h2  {
 
 
 .my-card-gray {
-  width: auto; /* 20% del ancho de la ventana */
-  height: 13vh; /* 15% de la altura de la ventana */
-  background-color: #F8F8F8; /* Fondo gris claro */
+  width: auto; /* Ajuste automático del ancho */
+  height: 13vh; /* 13% de la altura de la ventana */
+  background: linear-gradient(90deg, #DEC8F6, #9D88B3, #9665CA); /* Gradiente aplicado */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: none; /* Elimina el borde */
+  outline: none; /* Elimina cualquier contorno */
 }
 
 .my-card-orange {
-  width: auto; /* 20% del ancho de la ventana */
-  height: 13vh; /* 15% de la altura de la ventana */
-  background-color: #FFBB4F; /* Fondo naranja claro */
+  width: auto; /* Ajuste automático del ancho */
+  height: 13vh; /* 13% de la altura de la ventana */
+  background: linear-gradient(90deg, #FFFCFE, #FFB2F0, #996B90); /* Nuevo gradiente aplicado */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: none; /* Elimina el borde */
+  outline: none; /* Elimina cualquier contorno */
 }
 
 .card-title-dark{
@@ -336,12 +342,13 @@ h2  {
   text-align: left;
 }
 
-.card-title-light{
+.card-title-light {
   font-size: 15px;
-  color: #ffffff;
+  color: #ffffff; /* Color blanco */
   font-family: 'Roboto';
   font-weight: 500;
   text-align: left;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
 }
 
 .card-text-style{
@@ -359,11 +366,12 @@ h2  {
 }
 
 .nohover:hover{
-color: orange;
+  color: rgb(255, 255, 255)!important; /* Color blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)!important; 
 }
 
 .nohover{
-  color: orange;
+  color: rgb(255, 255, 255); /* Color blanco */
   }
 
   /*FORM DATA ORIGIN*/
@@ -407,14 +415,14 @@ color: orange;
 
   .custom-button-primary
     {color: #ffffff; /* Color del texto */
-    background-color: #FF9E18; /* Color de fondo del botón */
-    border: 1px solid #FF9E18;
+    background-color: #28016F; /* Color de fondo del botón */
+    border: 1px solid #28016F;
   }
  
 
   .custom-button-primary:hover {
-    background-color: #FF9E18; /* Cambia el color de fondo al pasar el mouse */
-    border: 2px solid #ffea00;
+    background-color: #C4AAE0; /* Cambia el color de fondo al pasar el mouse */
+    border: 2px solid #C4AAE0;
 
   }
 
@@ -434,20 +442,20 @@ color: orange;
   
 
   .dropdown-item:active {
-    background-color: #A6ABC8; /* Reemplaza esto con tu color personalizado */
-    color: white; /* Puedes ajustar el color del texto según sea necesario */
+    background-color: #A6ABC8; 
+    color: white; 
   }
 
   .custom-dropdown-toggle {
-    background-color: #BDBDBD; /* Color de fondo base */
-    color: white; /* Color de texto base */
-    border-color: #BDBDBD; /* Color de borde base */
+    background-color: #BDBDBD; 
+    color: white;
+    border-color: #BDBDBD; 
   }
   
   /* Estilo para el hover */
   .custom-dropdown-toggle:hover {
-    background-color: #A6ABC8; /* Reemplaza 'tu_color_hover' con el color deseado al hacer hover */
-    color: white; /* Reemplaza 'tu_color_texto_hover' con el color del texto deseado al hacer hover */
+    background-color: #A6ABC8; 
+    color: white; 
     border-color: #A6ABC8; /* Puedes ajustar el color del borde al hacer hover si es necesario */
   }
 
