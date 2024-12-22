@@ -52,7 +52,7 @@ dashboarding-main/
 ## Available Scripts 📜  
 - `npm run dev`: Starts the development environment.  
 - `npm run build`: Builds the project for production.  
-- `npm run lint`: Runs ESLint to check for code quality.  
+- `npm run test`: Runs test to check for code quality.  
 - `npm run deploy`: Runs GH-Pages to deploy on https://daliaelena.github.io/dashboarding/.  
 
 ## Requirements 📋  
