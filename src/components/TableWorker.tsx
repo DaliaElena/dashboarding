@@ -43,10 +43,10 @@ const TableWorker: React.FC<TableWorkerProps> = ({ dataPoints }) => {
   const sortedAndFilteredData = [...dataPoints]
     .filter(
       (row) =>
-        row.Name.toLowerCase().includes(searchTerm) ||
-        row.status.toLowerCase().includes(searchTerm) ||
-        row.origin.toLowerCase().includes(searchTerm) ||
-        row.lastConnection.toLowerCase().includes(searchTerm)
+        row.Name?.toLowerCase().includes(searchTerm) ||
+        row.status?.toLowerCase().includes(searchTerm) ||
+        row.origin?.toLowerCase().includes(searchTerm) ||
+        row.lastConnection?.toLowerCase().includes(searchTerm)
     )
     .sort((a, b) => sortData(a, b, sortConfig));
 

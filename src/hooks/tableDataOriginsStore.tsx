@@ -4,10 +4,10 @@ interface TableState {
   page: number;
   rowsPerPage: number;
   searchTerm: string;
-  sortConfig: { key: string | null; direction: 'asc' | 'desc' | null };
+  sortConfig: { key: string | null; direction: 'asc' | 'desc' | null };  // Ensure 'null' is allowed here
   setPage: (page: number) => void;
   setSearchTerm: (term: string) => void;
-  setSortConfig: (config: { key: string | null; direction: 'asc' | 'desc' }) => void;
+  setSortConfig: (config: { key: string | null; direction: 'asc' | 'desc' | null }) => void; // Allow 'null' in setSortConfig
 }
 
 export const useTableStore = create<TableState>((set) => ({
