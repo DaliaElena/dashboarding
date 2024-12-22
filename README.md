@@ -64,6 +64,7 @@ dashboarding-main/
 - **TypeScript**: Static type checking.  
 - **Vite**: Modern and fast development environment.  
 
+
 ## Screenshots 📸  
 ![image](https://github.com/user-attachments/assets/9a22202b-bbe6-41f7-9689-c0d2f1ae6a63)
 
