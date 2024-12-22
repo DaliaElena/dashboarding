@@ -429,7 +429,7 @@ const TableDataOriginsComplete: React.FC<TableDataOriginsCompleteProps> = ({ dat
                 </TableCell>
 
                 <TableCell>
-                  <Link to={`/AddNewDataOriginEditable?Name=${row.Name}&origin=${row.origin}&lastConnection=${row.lastConnection}`}>
+                  <Link to={`dashboaring/AddNewDataOriginEditable?Name=${row.Name}&origin=${row.origin}&lastConnection=${row.lastConnection}`}>
                     <IconButton className='icon-color'>
                       <EditIcon />
                     </IconButton>
