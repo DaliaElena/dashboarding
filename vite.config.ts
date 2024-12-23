@@ -11,6 +11,9 @@ export default defineConfig({
       '@pages': new URL('src/pages', import.meta.url).pathname,
     },
   },
+  build: {
+    assetsInlineLimit: 0, 
+  },
 });
 
 
