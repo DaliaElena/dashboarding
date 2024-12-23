@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import MenuLatLeft from './components/MenuLatLeft';
 import MenuTop from './components/MenuTop';
