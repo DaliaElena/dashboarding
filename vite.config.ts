@@ -3,17 +3,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/dashboarding/',
+  base: '/dashboarding/', // Asegúrate de usar la base correcta para GitHub Pages
   resolve: {
     alias: {
-      './runtimeConfig': './runtimeConfig.browser',
-      '@components': new URL('src/components', import.meta.url).pathname,
-      '@pages': new URL('src/pages', import.meta.url).pathname,
+      '@components': '/src/components',
+      '@pages': '/src/pages',
     },
   },
-  build: {
-    assetsInlineLimit: 0, // Desactiva fuentes embebidas
-  },
 });
-
-
