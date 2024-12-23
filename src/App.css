@@ -60,7 +60,7 @@ h2  {
 }
 
 .three-gray:hover {
-  color: #5A6ACF; /* cuando esté en hover */
+  color: #5A6ACF; 
 }
 
 .four-gray{
@@ -70,7 +70,7 @@ h2  {
 }
 
 .four-gray:hover {
-  color: #5A6ACF; /* cuando esté en hover */
+  color: #5A6ACF; 
 }
 
 .nj-gray-dark{
@@ -157,8 +157,8 @@ h2  {
   width: 100%;
   position: relative;
   background-color: white;
-  padding: 0px; /* Ajusta este valor según sea necesario */
-  box-sizing: border-box; /* Esto asegura que el padding no afecte el ancho total */
+  padding: 0px; 
+  box-sizing: border-box;
 }
 
 
@@ -194,7 +194,7 @@ h2  {
 }
 
 .color-text-menu .list-group-item:hover {
-  color: #5A6ACF; /* Cambia el color del texto al hacer hover */
+  color: #5A6ACF; 
   text-decoration: none;
 }
 
@@ -204,7 +204,7 @@ h2  {
 }
 
 .color-text-menu .list-group-item:hover .svg-inline--fa  {
-  color: #FFB2F0; /* Cambia el color del ícono al hacer hover sobre el elemento de la lista */
+  color: #FFB2F0; 
 }
 
 .top-space-charts h2{
@@ -223,21 +223,21 @@ h2  {
 
 
 .profile-picture {
-  width: 80px; /* Ajusta el tamaño según tus necesidades */
+  width: 80px; 
   height: 80px;
   overflow: hidden;
   border-radius: 50%;
   margin: 20px auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 0 7px #C4AAE0; /* Opcional: Agrega una sombra si lo deseas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 0 7px #C4AAE0;
 }
 
 .profile-picture-chat {
-  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  width: 40px; 
   height: 40px;
   overflow: hidden;
-  border-radius: 10px; /* Puedes ajustar este valor según tu preferencia */
+  border-radius: 10px; 
   margin: 10px auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra si lo deseas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-left: 20px;
 }
 
@@ -245,7 +245,7 @@ h2  {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px; /* Ajusta este valor según tu preferencia */
+  border-radius: 10px;
 }
 
 
@@ -254,32 +254,32 @@ h2  {
 
 .container-bubbles {
   display: flex;
-  align-items: center; /* vertically center items */
-  justify-content: center; /* horizontally center items */
+  align-items: center; 
+  justify-content: center;
 }
 
 .text-bubbles {
-  text-align: center; /* center text horizontally */
+  text-align: center;
 }
 .bubbles-icon {
-  text-align: center; /* center text horizontally */
+  text-align: center;
 }
 .bubbles-message {
-  text-align: left; /* center text horizontally */
+  text-align: left; 
   font-family: 'Roboto';
   font-weight: 600;
   color: #A7A9AC;
   font-size: 14px;
 }
 .bubbles-username {
-  text-align: left; /* center text horizontally */
+  text-align: left;
   font-family: 'Roboto';
   font-weight: 700;
   color: #58595B;
   font-size: 16px;
 }
 .bubbles-dateprofile {
-  text-align: center; /* center text horizontally */
+  text-align: center; 
   font-family: 'Roboto';
   font-weight: 500;
   color: #A7A9AC;
@@ -302,7 +302,7 @@ h2  {
 }
 
 .normal-cell {
-  color: #aa00ff; /* Color de texto blanco, ajusta según tus necesidades */
+  color: #aa00ff; 
 }
 
 
@@ -317,21 +317,21 @@ h2  {
 
 
 .my-card-gray {
-  width: auto; /* Ajuste automático del ancho */
-  height: 13vh; /* 13% de la altura de la ventana */
-  background: linear-gradient(90deg, #DEC8F6, #9D88B3, #9665CA); /* Gradiente aplicado */
+  width: auto; 
+  height: 13vh; 
+  background: linear-gradient(90deg, #DEC8F6, #9D88B3, #9665CA); 
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border: none; /* Elimina el borde */
-  outline: none; /* Elimina cualquier contorno */
+  border: none; 
+  outline: none;
 }
 
 .my-card-orange {
-  width: auto; /* Ajuste automático del ancho */
-  height: 13vh; /* 13% de la altura de la ventana */
+  width: auto; 
+  height: 13vh; 
   background: linear-gradient(90deg, #FFFCFE, #FFB2F0, #996B90); /* Nuevo gradiente aplicado */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border: none; /* Elimina el borde */
-  outline: none; /* Elimina cualquier contorno */
+  border: none; 
+  outline: none;
 }
 
 .card-title-dark{
@@ -344,7 +344,7 @@ h2  {
 
 .card-title-light {
   font-size: 15px;
-  color: #ffffff; /* Color blanco */
+  color: #ffffff; 
   font-family: 'Roboto';
   font-weight: 500;
   text-align: left;
@@ -362,16 +362,16 @@ h2  {
 .icon-style-fa{
   font-size: 34px;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajusta los valores según tus preferencias */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nohover:hover{
-  color: rgb(255, 255, 255)!important; /* Color blanco */
+  color: rgb(255, 255, 255)!important; 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)!important; 
 }
 
 .nohover{
-  color: rgb(255, 255, 255); /* Color blanco */
+  color: rgb(255, 255, 255); 
   }
 
   /*FORM DATA ORIGIN*/
@@ -402,26 +402,26 @@ h2  {
   }
 
   .custom-button-secondary
-    {color: #A7A9AC; /* Color del texto */
-    background-color: white; /* Color de fondo del botón */
+    {color: #A7A9AC;
+    background-color: white; 
     border: 1px solid #A7A9AC;
   }
   
   .custom-button-secondary:hover {
-    background-color: #A7A9AC; /* Cambia el color de fondo al pasar el mouse */
+    background-color: #A7A9AC; 
     border: 1px solid #A7A9AC;
 
   }
 
   .custom-button-primary
-    {color: #ffffff; /* Color del texto */
-    background-color: #28016F; /* Color de fondo del botón */
+    {color: #ffffff;
+    background-color: #28016F; 
     border: 1px solid #28016F;
   }
  
 
   .custom-button-primary:hover {
-    background-color: #C4AAE0; /* Cambia el color de fondo al pasar el mouse */
+    background-color: #C4AAE0; 
     border: 2px solid #C4AAE0;
 
   }
@@ -434,8 +434,8 @@ h2  {
   }
   .button-toggle #tbg-btn-z #tbg-btn-2 #tbg-btn-2{
     margin: 14px;
-    color: #A7A9AC; /* Color del texto */
-    background-color: white; /* Color de fondo del botón */
+    color: #A7A9AC;
+    background-color: white; 
     border: 1px solid #A7A9AC;
     border-radius: 10px;
   }
@@ -456,7 +456,7 @@ h2  {
   .custom-dropdown-toggle:hover {
     background-color: #A6ABC8; 
     color: white; 
-    border-color: #A6ABC8; /* Puedes ajustar el color del borde al hacer hover si es necesario */
+    border-color: #A6ABC8; 
   }
 
 /* Para modificar los badge (etiquetas dentro de share) */
@@ -471,25 +471,24 @@ h2  {
 }
 
 .custom-close-button {
-  background-color: #FAF2FF; /* Cambia el color de fondo según sea necesario */
-  color: rgb(0, 0, 0); /* Cambia el color del texto según sea necesario */
-  border: none; /* O quita el borde si no lo necesitas */
-  /* Agrega cualquier otro estilo que desees */
+  background-color: #FAF2FF; 
+  color: rgb(0, 0, 0); 
+  border: none; 
 }
 
 .custom-close-button:hover {
-  background-color: transparent; /* Mantener el fondo transparente en hover */
-  color: gray; /* Mantener el texto transparente en hover */
+  background-color: transparent; 
+  color: gray; 
 }
 
 .custom-close-button:hover {
-  background-color: transparent; /* Mantener el fondo transparente en hover */
-  color: gray; /* Cambiar el color del texto a gris en hover */
+  background-color: transparent; 
+  color: gray; 
 }
 
 .custom-close-button:active {
-  background-color: transparent; /* Mantener el fondo transparente cuando se hace clic */
-  color: gray!important; /* Cambiar el color del texto a gris cuando se hace clic */
+  background-color: transparent; 
+  color: gray!important; 
   --bs-btn-active-bg: transparent;
 }
 

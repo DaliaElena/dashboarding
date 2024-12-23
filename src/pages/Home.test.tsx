@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; // Para mejores matchers
-import Home from './Home'; // Ruta relativa al componente Home
+import '@testing-library/jest-dom'; 
+import Home from './Home'; 
 
 // Mocks para hooks
 jest.mock('../hooks/useHomeStore', () => ({
@@ -9,11 +9,10 @@ jest.mock('../hooks/useHomeStore', () => ({
 
 describe('Home Component', () => {
   beforeEach(() => {
-    jest.clearAllMocks(); // Limpia los mocks antes de cada prueba
+    jest.clearAllMocks(); 
   });
 
   it('muestra "Loading..." mientras los datos están cargando', () => {
-    // Usamos `spyOn` para mockear el comportamiento de `useHomeStore`
     jest.spyOn(require('../hooks/useHomeStore'), 'useHomeStore').mockReturnValue({
       chartData: null,
       workersData: null,
@@ -32,7 +31,6 @@ describe('Home Component', () => {
     const mockWorkersData = [{ id: 1, name: 'Worker 1' }];
     const mockOriginsData = [{ id: 1, origin: 'Origin 1' }];
 
-    // Usamos `spyOn` para mockear el comportamiento de `useHomeStore`
     jest.spyOn(require('../hooks/useHomeStore'), 'useHomeStore').mockReturnValue({
       chartData: mockChartData,
       workersData: mockWorkersData,
