@@ -24,7 +24,7 @@ const MenuLatLeft: FC<MenuLatLeftProps> = () => {
               <ListGroup.Item ><a href="/dashboarding/"><FontAwesomeIcon icon={faHouseChimney} /> Home</a> </ListGroup.Item>
               <ListGroup.Item ><Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    <FontAwesomeIcon icon={faDatabase} /> Data Origiin
+                    <FontAwesomeIcon icon={faDatabase} /> Data Origin
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="/dashboarding/AddNewDataOrigin"><FontAwesomeIcon icon={faSquarePlus} /> Add New Data Origin</Dropdown.Item>
