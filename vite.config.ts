@@ -3,11 +3,13 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/dashboarding/', // Asegúrate de usar la base correcta para GitHub Pages
-  resolve: {
-    alias: {
-      '@components': '/src/components',
-      '@pages': '/src/pages',
+  base: '/dashboarding/', 
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        fallback: '404.html', 
+      },
     },
   },
 });
