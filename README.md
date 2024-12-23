@@ -68,6 +68,3 @@ dashboarding-main/
 ## Screenshots 📸  
 ![image](https://github.com/user-attachments/assets/9a22202b-bbe6-41f7-9689-c0d2f1ae6a63)
 
----
-
-Happy coding! 🎉
