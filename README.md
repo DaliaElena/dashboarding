@@ -1,6 +1,9 @@
 # Dashboarding App 🚀  
 This project is a **React** application built with **TypeScript** and powered by **Vite**. 
 
+## By 👩‍💻
+Dalia Elena Guevara Castillo
+
 It provides a robust and efficient environment for data visualization and dashboard management.
 
 This is a demo https://daliaelena.github.io/dashboarding/
